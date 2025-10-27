@@ -1,0 +1,2112 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Générateur de Fiche de Leçon - Mathématiques 4ème (Togo)</title>
+    <style>
+        :root {
+            --primary-color: #0066cc;
+            --secondary-color: #e6f2ff;
+            --accent-color: #28a745;
+            --warning-color: #856404;
+            --warning-bg: #fff3cd;
+            --border-color: #ddd;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 3px solid var(--primary-color);
+            padding-bottom: 20px;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .header h1 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            font-size: 1.4em;
+        }
+        
+        .header h2 {
+            color: #333;
+            margin-bottom: 5px;
+            font-size: 1.2em;
+        }
+        
+        .generateur-section {
+            background-color: white;
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .generateur-section h2 {
+            color: var(--primary-color);
+            margin-top: 0;
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 10px;
+        }
+        
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: var(--primary-color);
+            font-size: 0.9em;
+        }
+        
+        .form-group select, .form-group input, .form-group textarea {
+            padding: 10px 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+        
+        .form-group select:focus, .form-group input:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px rgba(0,102,204,0.1);
+        }
+        
+        .form-group textarea {
+            resize: vertical;
+            min-height: 80px;
+            font-family: inherit;
+        }
+        
+        .btn {
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .btn-generer {
+            background-color: var(--accent-color);
+            color: white;
+            padding: 12px 24px;
+            font-size: 16px;
+        }
+        
+        .btn-generer:hover {
+            background-color: #218838;
+            transform: translateY(-1px);
+        }
+        
+        .btn-imprimer {
+            background-color: #17a2b8;
+            color: white;
+        }
+        
+        .btn-imprimer:hover {
+            background-color: #138496;
+            transform: translateY(-1px);
+        }
+        
+        .btn-reinitialiser {
+            background-color: #6c757d;
+            color: white;
+        }
+        
+        .btn-reinitialiser:hover {
+            background-color: #545b62;
+            transform: translateY(-1px);
+        }
+        
+        .fiche-preview {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            border: 2px solid var(--border-color);
+            margin-top: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .fiche-preview.hidden {
+            display: none;
+        }
+        
+        .actions-fiche {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .fiche-section {
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 6px;
+            border-left: 3px solid var(--primary-color);
+        }
+        
+        .fiche-section h4 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+        
+        .programme-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .programme-table th, .programme-table td {
+            border: 1px solid var(--border-color);
+            padding: 12px;
+            text-align: left;
+            vertical-align: top;
+        }
+        
+        .programme-table th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+        
+        .guide-section {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-left: 4px solid var(--primary-color);
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .guide-section h3 {
+            margin-top: 0;
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 8px;
+        }
+        
+        .guide-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+            margin-top: 15px;
+        }
+        
+        .guide-column {
+            background-color: white;
+            padding: 15px;
+            border-radius: 6px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            border: 1px solid var(--border-color);
+        }
+        
+        .guide-column h4 {
+            margin-top: 0;
+            color: var(--primary-color);
+            border-bottom: 1px solid #eee;
+            padding-bottom: 8px;
+            font-size: 1em;
+        }
+        
+        .competence {
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-top: 20px;
+            margin-bottom: 10px;
+            padding: 15px;
+            background-color: var(--secondary-color);
+            border-radius: 8px;
+            border-left: 4px solid var(--primary-color);
+        }
+        
+        /* Styles d'impression optimisés */
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+                margin: 0;
+                font-size: 12pt;
+                line-height: 1.4;
+            }
+            
+            .generateur-section, .btn-imprimer, .btn-generer, .actions-fiche {
+                display: none !important;
+            }
+            
+            .fiche-preview {
+                border: none;
+                box-shadow: none;
+                padding: 0;
+                margin: 0;
+                width: 100%;
+            }
+            
+            .fiche-section {
+                page-break-inside: avoid;
+                break-inside: avoid;
+                margin-bottom: 15pt;
+                padding: 12pt;
+                background: #f8f9fa;
+                border-radius: 4pt;
+                border-left: 3pt solid var(--primary-color);
+            }
+            
+            .programme-table {
+                page-break-inside: avoid;
+                break-inside: avoid;
+                width: 100%;
+                font-size: 10pt;
+            }
+            
+            .programme-table th, .programme-table td {
+                padding: 8pt;
+            }
+            
+            .guide-section {
+                page-break-inside: avoid;
+                break-inside: avoid;
+                margin-top: 15pt;
+                padding: 15pt;
+            }
+            
+            .guide-grid {
+                grid-template-columns: 1fr;
+                gap: 10pt;
+            }
+            
+            .guide-column {
+                page-break-inside: avoid;
+                break-inside: avoid;
+                padding: 10pt;
+                margin-bottom: 10pt;
+            }
+            
+            h1, h2, h3, h4 {
+                page-break-after: avoid;
+            }
+            
+            /* Assurer que les tableaux ne se coupent pas */
+            table {
+                page-break-inside: avoid;
+            }
+            
+            /* Éviter les coupures dans les paragraphes */
+            p, li {
+                orphans: 3;
+                widows: 3;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .guide-grid {
+                grid-template-columns: 1fr;
+            }
+            .actions-fiche {
+                flex-direction: column;
+            }
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+        
+        .section-title {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 8px;
+            margin: 25px 0 15px 0;
+        }
+        
+        .lecon-details {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 15px 0;
+            border-left: 3px solid var(--primary-color);
+        }
+        
+        .capacites-contenus {
+            margin: 15px 0;
+        }
+        
+        .capacites-contenus h4 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 5px;
+        }
+        
+        .activite-item {
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px dashed #eee;
+            page-break-inside: avoid;
+        }
+        
+        .activite-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+        }
+        
+        .activite-duree {
+            background-color: var(--secondary-color);
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>MINISTÈRE DES ENSEIGNEMENTS PRIMAIRES, SECONDAIRES, TECHNIQUES ET DE L'ARTISANAT</h1>
+        <h2>RÉPUBLIQUE TOGOLAISE</h2>
+        <h3>DIRECTION DE L'ENSEIGNEMENT SECONDAIRE GÉNÉRAL</h3>
+        <h2>GÉNÉRATEUR DE FICHE DE LEÇON - MATHÉMATIQUES 4ème</h2>
+        <p>PAREC 2021-2022</p>
+    </div>
+
+    <!-- Générateur de fiche de leçon automatique -->
+    <div class="generateur-section">
+        <h2>📄 Générateur Automatique de Fiche de Leçon</h2>
+        <p>Sélectionnez une leçon pour générer automatiquement une fiche pédagogique complète conforme au programme officiel.</p>
+        
+        <form id="ficheForm">
+            <div class="form-group">
+                <label for="leconSelect">Sélectionnez une leçon :</label>
+                <select id="leconSelect" required>
+                    <option value="">Choisissez une leçon</option>
+                    <optgroup label="Configurations de l'espace">
+                        <option value="perspective-cavaliere">Perspective cavalière</option>
+                        <option value="droites-plans-espace">Droites et plans de l'espace, positions relatives</option>
+                        <option value="sphere">Sphère</option>
+                    </optgroup>
+                    <optgroup label="Configurations du plan">
+                        <option value="distance-droites">Distance et droites</option>
+                        <option value="angles-cercles">Angles, cercles</option>
+                        <option value="triangles">Triangles</option>
+                        <option value="polygones-reguliers">Polygones réguliers</option>
+                    </optgroup>
+                    <optgroup label="Applications du plan">
+                        <option value="symetries">Symétrie orthogonale, symétrie centrale</option>
+                        <option value="projection">Projection</option>
+                        <option value="translation">Translation</option>
+                    </optgroup>
+                    <optgroup label="Outil vectoriel, géométrie analytique">
+                        <option value="vecteurs">Vecteurs</option>
+                        <option value="reperage">Repérage</option>
+                    </optgroup>
+                    <optgroup label="Calcul numérique">
+                        <option value="nombres-rationnels">Nombres rationnels</option>
+                        <option value="nombres-decimaux">Nombres décimaux, calcul approché</option>
+                    </optgroup>
+                    <optgroup label="Programme de calcul - calcul littéral">
+                        <option value="expressions-algebriques">Calcul sur les expressions algébriques</option>
+                        <option value="equations-inequations">Équations - Inéquations</option>
+                    </optgroup>
+                    <optgroup label="Organisation des données">
+                        <option value="proportionnalite">Proportionnalité</option>
+                        <option value="statistiques">Statistiques</option>
+                    </optgroup>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="dureeLecon">Durée de la leçon :</label>
+                <input type="text" id="dureeLecon" placeholder="Ex: 4 heures" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="dateLecon">Date prévue :</label>
+                <input type="date" id="dateLecon" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="objectifsPersonnalises">Objectifs personnalisés (optionnel) :</label>
+                <textarea id="objectifsPersonnalises" rows="3" placeholder="Ajoutez vos objectifs spécifiques si nécessaire..."></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label for="strategiesPersonnalisees">Stratégies personnalisées (optionnel) :</label>
+                <textarea id="strategiesPersonnalisees" rows="3" placeholder="Ajoutez vos stratégies pédagogiques spécifiques si nécessaire..."></textarea>
+            </div>
+            
+            <button type="button" class="btn btn-generer" id="btnGenererFiche">🎯 Générer la Fiche Automatiquement</button>
+        </form>
+        
+        <div class="fiche-preview hidden" id="fichePreview">
+            <h2>Fiche Pédagogique - Mathématiques 4e</h2>
+            <div id="contenuFiche"></div>
+            <div class="actions-fiche">
+                <button class="btn btn-imprimer" onclick="imprimerFiche()">🖨️ Imprimer la Fiche</button>
+                <button class="btn btn-reinitialiser" onclick="reinitialiserFiche()">📝 Nouvelle Fiche</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Base de données complète des leçons avec toutes les informations
+        const lecons = {
+            'perspective-cavaliere': {
+                theme: 'Configurations de l\'espace',
+                titre: 'Perspective cavalière',
+                duree: '4 heures',
+                competence: 'Résoudre des problèmes faisant appel aux configurations de l\'espace et du plan, aux applications du plan, à l\'outil vectoriel et à la géométrie analytique.',
+                objectifs: [
+                    'Représenter en perspective cavalière',
+                    'Identifier les règles élémentaires de la perspective cavalière',
+                    'Représenter certains solides : cube, prisme, pavé droit'
+                ],
+                prerequis: [
+                    'Connaissance des solides de base',
+                    'Notions de géométrie dans l\'espace',
+                    'Utilisation des instruments de géométrie'
+                ],
+                materiel: [
+                    'Modèles de solides en 3D',
+                    'Papier, crayons, règles',
+                    'Matériel de projection',
+                    'Fiches d\'exercices'
+                ],
+                strategies: [
+                    'Travail individuel ou en petits groupes',
+                    'Observation et manipulation de solides',
+                    'Découverte des règles de la perspective cavalière',
+                    'Construction de solides à partir de leur patron'
+                ],
+                activites: [
+                    {
+                        duree: '45 minutes',
+                        titre: 'Phase de découverte',
+                        description: 'Observation et manipulation de solides (déjà étudiés) ou de leurs représentations'
+                    },
+                    {
+                        duree: '60 minutes',
+                        titre: 'Phase d\'apprentissage',
+                        description: 'Découverte des règles de la perspective cavalière'
+                    },
+                    {
+                        duree: '45 minutes',
+                        titre: 'Phase d\'application',
+                        description: 'Représentation de solides en perspective cavalière'
+                    },
+                    {
+                        duree: '30 minutes',
+                        titre: 'Phase de synthèse',
+                        description: 'Bilan collectif et élaboration de la trace écrite'
+                    }
+                ],
+                evaluation: [
+                    'Identification d\'un plan vertical de face, d\'un plan vertical de profil, d\'un plan horizontal',
+                    'Représentation de certains solides : cube, prisme, pavé droit'
+                ],
+                capacites: [
+                    {
+                        capacite: 'Représenter en perspective cavalière',
+                        contenu: 'Règles élémentaires de la perspective cavalière, représentation de certains solides : cube, prisme, pavé droit'
+                    }
+                ],
+                guide: {
+                    strategies: 'Travail individuel ou en petits groupes : observation et manipulations de solides (déjà étudiés) ou de leurs représentations, découverte des règles de la perspective cavalière.',
+                    consignes: 'Utiliser les solides déjà étudiés ou leurs représentations pour faire découvrir les règles de la perspective cavalière. Veiller à ce que chaque apprenant représente personnellement un solide en perspective cavalière.',
+                    evaluation: 'Identification : d\'un plan vertical de face, d\'un plan vertical de profil, d\'un plan horizontal. Représentation de certains solides : cube, prisme, pavé droit.'
+                }
+            },
+            'droites-plans-espace': {
+                theme: 'Configurations de l\'espace',
+                titre: 'Droites et plans de l\'espace, positions relatives',
+                duree: '8 heures',
+                competence: 'Résoudre des problèmes faisant appel aux configurations de l\'espace et du plan, aux applications du plan, à l\'outil vectoriel et à la géométrie analytique.',
+                objectifs: [
+                    'Identifier et nommer des droites et des plans',
+                    'Déterminer une droite, un plan',
+                    'Reconnaître les positions relatives d\'une droite et d\'un plan',
+                    'Reconnaître les positions relatives de deux plans',
+                    'Reconnaître les positions relatives de deux droites'
+                ],
+                prerequis: [
+                    'Notions de géométrie dans l\'espace',
+                    'Connaissance des solides',
+                    'Vocabulaire géométrique de base'
+                ],
+                materiel: [
+                    'Modèles de solides en 3D',
+                    'Matériel de projection',
+                    'Fiches d\'exercices',
+                    'Instruments de géométrie'
+                ],
+                strategies: [
+                    'Observation et manipulation en petits groupes',
+                    'Visualisation sur des solides',
+                    'Travail individuel sur des exercices d\'application',
+                    'Approche par résolution de problèmes'
+                ],
+                activites: [
+                    {
+                        duree: '60 minutes',
+                        titre: 'Phase de découverte',
+                        description: 'Notion de droite, de plan de l\'espace. Déterminations d\'une droite, d\'un plan'
+                    },
+                    {
+                        duree: '90 minutes',
+                        titre: 'Phase d\'apprentissage',
+                        description: 'Positions relatives d\'une droite et d\'un plan (droite sécante, perpendiculaire, parallèle)'
+                    },
+                    {
+                        duree: '90 minutes',
+                        titre: 'Phase d\'application',
+                        description: 'Positions relatives de deux plans (plans parallèles, sécants, perpendiculaires)'
+                    },
+                    {
+                        duree: '60 minutes',
+                        titre: 'Phase de consolidation',
+                        description: 'Positions relatives de deux droites (coplanaires, non coplanaires)'
+                    },
+                    {
+                        duree: '30 minutes',
+                        titre: 'Phase de synthèse',
+                        description: 'Bilan collectif et élaboration de la trace écrite'
+                    }
+                ],
+                evaluation: [
+                    'Reconnaissance de droites, de plans de l\'espace',
+                    'Utilisation du vocabulaire approprié pour décrire des configurations',
+                    'Reconnaissance des positions relatives de droites et de plans'
+                ],
+                capacites: [
+                    {
+                        capacite: 'Identifier et nommer des droites et des plans<br>Déterminer une droite, un plan',
+                        contenu: 'Notion de droite, de plan de l\'espace. Déterminations d\'une droite, d\'un plan'
+                    },
+                    {
+                        capacite: 'Reconnaître les positions relatives d\'une droite et d\'un plan',
+                        contenu: 'Droite sécante à un plan. Droite perpendiculaire à un plan. Droite parallèle à un plan. Propriétés.'
+                    },
+                    {
+                        capacite: 'Reconnaître les positions relatives de deux plans',
+                        contenu: 'Plans parallèles. Plans sécants, intersection. Plans perpendiculaires. Propriétés'
+                    },
+                    {
+                        capacite: 'Reconnaître les positions relatives de deux droites',
+                        contenu: 'Droites coplanaires. Droites non coplanaires. Propriétés'
+                    }
+                ],
+                guide: {
+                    strategies: 'Travail individuel ou en petits groupes : observation et manipulations de solides (déjà étudiés) ou de leurs représentations.',
+                    consignes: 'Sur un solide ou sa représentation, faire distinguer et nommer par les élèves des droites, des plans. Faire ressortir l\'importance de la légende ou des codages pour décrypter une figure.',
+                    evaluation: 'Reconnaissance de droites, de plans de l\'espace. Utilisation du vocabulaire approprié pour décrire des configurations. Reconnaissance des positions relatives de droites et de plans.'
+                }
+            },
+            'sphere': {
+                theme: 'Configurations de l\'espace',
+                titre: 'Sphère',
+                duree: '3 heures',
+                competence: 'Résoudre des problèmes faisant appel aux configurations de l\'espace et du plan, aux applications du plan, à l\'outil vectoriel et à la géométrie analytique.',
+                objectifs: [
+                    'Reconnaître/Identifier un solide',
+                    'Décrire un solide',
+                    'Calculer des grandeurs : aire d\'une sphère, volume d\'une boule'
+                ],
+                prerequis: [
+                    'Connaissance des solides de base',
+                    'Notions de géométrie dans l\'espace',
+                    'Formules de calcul d\'aires et de volumes'
+                ],
+                materiel: [
+                    'Modèles de sphères',
+                    'Matériel de projection',
+                    'Fiches d\'exercices',
+                    'Calculatrices'
+                ],
+                strategies: [
+                    'Observation et manipulation en petits groupes',
+                    'Découverte des éléments caractéristiques',
+                    'Application des formules',
+                    'Approche par résolution de problèmes'
+                ],
+                activites: [
+                    {
+                        duree: '45 minutes',
+                        titre: 'Phase de découverte',
+                        description: 'Observation du solide, découverte des éléments caractéristiques'
+                    },
+                    {
+                        duree: '60 minutes',
+                        titre: 'Phase d\'apprentissage',
+                        description: 'Calcul de l\'aire d\'une sphère et du volume d\'une boule'
+                    },
+                    {
+                        duree: '45 minutes',
+                        titre: 'Phase d\'application',
+                        description: 'Résolution de problèmes faisant intervenir la sphère'
+                    },
+                    {
+                        duree: '30 minutes',
+                        titre: 'Phase de synthèse',
+                        description: 'Bilan collectif et élaboration de la trace écrite'
+                    }
+                ],
+                evaluation: [
+                    'Reconnaissance d\'une sphère dans un groupe de solides',
+                    'Calcul des grandeurs par application des formules'
+                ],
+                capacites: [
+                    {
+                        capacite: 'Reconnaître/Identifier un solide<br>Décrire un solide',
+                        contenu: 'Sphère : définition, vocabulaire, caractéristiques du solide'
+                    },
+                    {
+                        capacite: 'Calculer des grandeurs',
+                        contenu: 'Aire d\'une sphère, volume d\'une boule'
+                    }
+                ],
+                guide: {
+                    strategies: 'Travail individuel ou en petits groupes : observation du solide, découverte des éléments caractéristiques.',
+                    consignes: 'Mettre la classe en situation d\'observation réelle du solide (prévoir le matériel individuel et collectif).',
+                    evaluation: 'Reconnaissance d\'une sphère dans un groupe de solides. Calcul des grandeurs par application des formules.'
+                }
+            },
+            'distance-droites': {
+                theme: 'Configurations du plan',
+                titre: 'Distance et droites',
+                duree: '6 heures',
+                competence: 'Résoudre des problèmes faisant appel aux configurations de l\'espace et du plan, aux applications du plan, à l\'outil vectoriel et à la géométrie analytique.',
+                objectifs: [
+                    'Déterminer la distance d\'un point à une droite',
+                    'Déterminer la distance de deux droites',
+                    'Construire l\'ensemble des points situés à égale distance d\'une droite donnée',
+                    'Construire l\'ensemble des points situés à égale distance de deux droites données'
+                ],
+                prerequis: [
+                    'Notions de distance',
+                    'Propriétés des droites parallèles et perpendiculaires',
+                    'Construction géométrique élémentaire'
+                ],
+                materiel: [
+                    'Instruments de géométrie (règle, équerre, compas)',
+                    'Matériel de projection',
+                    'Fiches d\'exercices'
+                ],
+                strategies: [
+                    'Observation et manipulation en petits groupes',
+                    'Méthode démonstrative',
+                    'Travail individuel sur des constructions',
+                    'Approche par résolution de problèmes'
+                ],
+                activites: [
+                    {
+                        duree: '60 minutes',
+                        titre: 'Phase de découverte',
+                        description: 'Distance d\'un point à une droite, distance de deux droites'
+                    },
+                    {
+                        duree: '90 minutes',
+                        titre: 'Phase d\'apprentissage',
+                        description: 'Ensemble des points situés à égale distance d\'une droite donnée'
+                    },
+                    {
+                        duree: '90 minutes',
+                        titre: 'Phase d\'application',
+                        description: 'Ensemble des points situés à égale distance de deux droites données : axe médian, bissectrice'
+                    },
+                    {
+                        duree: '60 minutes',
+                        titre: 'Phase de consolidation',
+                        description: 'Justification/démonstration de propriétés'
+                    },
+                    {
+                        duree: '30 minutes',
+                        titre: 'Phase de synthèse',
+                        description: 'Bilan collectif et élaboration de la trace écrite'
+                    }
+                ],
+                evaluation: [
+                    'Détermination de la distance d\'un point à une droite, de deux droites',
+                    'Détermination de l\'ensemble des points situés à une même distance d\'une droite donnée',
+                    'Détermination de l\'ensemble des points situés à égale distance de deux droites données'
+                ],
+                capacites: [
+                    {
+                        capacite: 'Déterminer la distance d\'un point à une droite',
+                        contenu: 'Distance d\'un point à une droite, propriétés'
+                    },
+                    {
+                        capacite: 'Déterminer la distance de deux droites',
+                        contenu: 'Distance de deux droites, propriétés'
+                    },
+                    {
+                        capacite: 'Construire',
+                        contenu: 'Ensemble des points situés à égale distance d\'une droite donnée, ensemble des points situés à égale distance de deux droites données : axe médian de deux droites parallèles, caractérisation de la bissectrice d\'un angle (droites sécantes), propriétés'
+                    },
+                    {
+                        capacite: 'Justifier/démontrer une propriété, un programme de construction...',
+                        contenu: 'Appartenance d\'un point à une droite (axe médian, bissectrice), nature d\'une droite (axe médian, bissectrice)'
+                    }
+                ],
+                guide: {
+                    strategies: 'Observation et manipulation en petits groupes (Lieu de la situation problème). Méthode démonstrative ; faire faire (travail individuel).',
+                    consignes: 'Faire ressortir que : la distance d\'un point à une droite est la plus courte distance de ce point à un point de la droite, la distance de deux droites est la plus courte distance entre un point de l\'une des droites et un point de l\'autre.',
+                    evaluation: 'Détermination : de la distance d\'un point à une droite, de deux droites, de l\'ensemble des points situés à une même distance d\'une droite donnée, de l\'ensemble des points situés à égale distance de deux droites données.'
+                }
+            },
+            'angles-cercles': {
+                theme: 'Configurations du plan',
+                titre: 'Angles, cercles',
+                duree: '10 heures',
+                competence: 'Résoudre des problèmes faisant appel aux configurations de l\'espace et du plan, aux applications du plan, à l\'outil vectoriel et à la géométrie analytique.',
+                objectifs: [
+                    'Reconnaître/Identifier une configuration',
+                    'Reconnaître les positions relatives d\'une droite et d\'un cercle, de deux cercles',
+                    'Construire la tangente à un cercle',
+                    'Justifier/démontrer une propriété, un programme de construction...'
+                ],
+                prerequis: [
+                    'Notions d\'angles',
+                    'Vocabulaire du cercle',
+                    'Propriétés des droites parallèles et sécantes'
+                ],
+                materiel: [
+                    'Compas, règles, rapporteurs',
+                    'Matériel de projection',
+                    'Fiches d\'exercices'
+                ],
+                strategies: [
+                    'Observation et manipulation en petits groupes',
+                    'Méthode démonstrative',
+                    'Travail individuel sur des constructions',
+                    'Approche par résolution de problèmes'
+                ],
+                activites: [
+                    {
+                        duree: '90 minutes',
+                        titre: 'Phase de découverte',
+                        description: 'Angles formés par deux droites parallèles et une sécante (alternes-internes, alternes-externes, correspondants)'
+                    },
+                    {
+                        duree: '120 minutes',
+                        titre: 'Phase d\'apprentissage',
+                        description: 'Angle au centre d\'un cercle, arc de cercle intercepté'
+                    },
+                    {
+                        duree: '120 minutes',
+                        titre: 'Phase d\'application',
+                        description: 'Positions relatives d\'une droite et d\'un cercle, de deux cercles'
+                    },
+                    {
+                        duree: '90 minutes',
+                        titre: 'Phase de consolidation',
+                        description: 'Construction d\'une tangente à un cercle passant par un point donné'
+                    },
+                    {
+                        duree: '60 minutes',
+                        titre: 'Phase de synthèse',
+                        description: 'Bilan collectif et élaboration de la trace écrite'
+                    }
+                ],
+                evaluation: [
+                    'Identification d\'une configuration : angles alternes-internes, alternes-externes, correspondants, angles au centre d\'un cercle, arc de cercle intercepté',
+                    'Reconnaissance des positions relatives d\'une droite et d\'un cercle, de deux cercles',
+                    'Utilisation du vocabulaire approprié pour décrire des configurations'
+                ],
+                capacites: [
+                    {
+                        capacite: 'Reconnaître/Identifier une configuration',
+                        contenu: 'Angles formés par deux droites parallèles et une sécante (alternes-internes, alternes-externes, correspondants), angle au centre d\'un cercle, arc de cercle intercepté'
+                    },
+                    {
+                        capacite: 'Reconnaître les positions relatives d\'une droite et d\'un cercle, de deux cercles',
+                        contenu: 'Positions relatives d\'une droite et d\'un cercle : droite sécante à un cercle, droite tangente à un cercle, droite et cercle disjoints. Positions relatives de deux cercles : cercles sécants, cercles tangents, cercles disjoints'
+                    },
+                    {
+                        capacite: 'Construire la tangente à un cercle',
+                        contenu: 'Construction d\'une tangente à un cercle passant par un point donné : du cercle, extérieur au cercle'
+                    },
+                    {
+                        capacite: 'Justifier/démontrer une propriété, un programme de construction...',
+                        contenu: 'Égalité angulaire, nature de deux angles (alternes-internes, alternes-externes, correspondants), parallélisme de deux droites'
+                    }
+                ],
+                guide: {
+                    strategies: 'Observation et manipulation en petits groupes. Méthode démonstrative, faire faire (travail individuel).',
+                    consignes: 'Renforcer et clarifier les notions d\'angles déjà installées en classe de 5e. Faire nommer : des angles alternes-internes, alternes-externes, correspondants, des angles au centre d\'un cercle. Faire utiliser du vocabulaire approprié pour décrire des configurations.',
+                    evaluation: 'Identification d\'une configuration : angles alternes-internes, alternes-externes, correspondants, angles au centre d\'un cercle, arc de cercle intercepté. Reconnaissance des positions relatives d\'une droite et d\'un cercle, de deux cercles. Utilisation du vocabulaire approprié pour décrire des configurations.'
+                }
+            },
+            'triangles': {
+                theme: 'Configurations du plan',
+                titre: 'Triangles',
+                duree: '8 heures',
+                competence: 'Résoudre des problèmes faisant appel aux configurations de l\'espace et du plan, aux applications du plan, à l\'outil vectoriel et à la géométrie analytique.',
+                objectifs: [
+                    'Reconnaître/Identifier une configuration',
+                    'Construire un triangle',
+                    'Calculer des grandeurs',
+                    'Justifier/démontrer une propriété, un programme de construction...'
+                ],
+                prerequis: [
+                    'Propriétés des triangles',
+                    'Construction géométrique élémentaire',
+                    'Calcul de périmètres et d\'aires'
+                ],
+                materiel: [
+                    'Instruments de géométrie (règle, compas, équerre)',
+                    'Matériel de projection',
+                    'Fiches d\'exercices',
+                    'Calculatrices'
+                ],
+                strategies: [
+                    'Observation et manipulation en petits groupes',
+                    'Méthode démonstrative',
+                    'Travail individuel sur des constructions',
+                    'Approche par résolution de problèmes'
+                ],
+                activites: [
+                    {
+                        duree: '90 minutes',
+                        titre: 'Phase de découverte',
+                        description: 'Triangle rectangle : théorème de Pythagore, réciproque du théorème de Pythagore'
+                    },
+                    {
+                        duree: '120 minutes',
+                        titre: 'Phase d\'apprentissage',
+                        description: 'Triangle rectangle et cercle circonscrit, médiatrice d\'un segment'
+                    },
+                    {
+                        duree: '120 minutes',
+                        titre: 'Phase d\'application',
+                        description: 'Triangle rectangle et cercle inscrit, bissectrice d\'un angle'
+                    },
+                    {
+                        duree: '90 minutes',
+                        titre: 'Phase de consolidation',
+                        description: 'Triangle isocèle, triangle équilatéral : propriétés'
+                    },
+                    {
+                        duree: '60 minutes',
+                        titre: 'Phase de synthèse',
+                        description: 'Bilan collectif et élaboration de la trace écrite'
+                    }
+                ],
+                evaluation: [
+                    'Identification d\'une configuration : triangle rectangle, triangle isocèle, triangle équilatéral',
+                    'Calculs : longueur d\'un côté, aire d\'un triangle',
+                    'Utilisation du vocabulaire approprié pour décrire des configurations'
+                ],
+                capacites: [
+                    {
+                        capacite: 'Reconnaître/Identifier une configuration',
+                        contenu: 'Triangle rectangle : théorème de Pythagore, réciproque du théorème de Pythagore, triangle rectangle et cercle circonscrit, médiatrice d\'un segment, triangle rectangle et cercle inscrit, bissectrice d\'un angle, triangle isocèle, triangle équilatéral : propriétés'
+                    },
+                    {
+                        capacite: 'Construire un triangle',
+                        contenu: 'Triangle rectangle, triangle isocèle, triangle équilatéral'
+                    },
+                    {
+                        capacite: 'Calculer des grandeurs',
+                        contenu: 'Longueur d\'un côté, aire d\'un triangle'
+                    },
+                    {
+                        capacite: 'Justifier/démontrer une propriété, un programme de construction...',
+                        contenu: 'Nature d\'un triangle, appartenance d\'un point à une droite (médiatrice, bissectrice), nature d\'une droite (médiatrice, bissectrice)'
+                    }
+                ],
+                guide: {
+                    strategies: 'Observation et manipulation en petits groupes. Méthode démonstrative, faire faire (travail individuel).',
+                    consignes: 'Renforcer et clarifier les notions de triangle déjà installées en classe de 5e. Faire nommer : un triangle rectangle, un triangle isocèle, un triangle équilatéral. Faire utiliser du vocabulaire approprié pour décrire des configurations.',
+                    evaluation: 'Identification d\'une configuration : triangle rectangle, triangle isocèle, triangle équilatéral. Calculs : longueur d\'un côté, aire d\'un triangle. Utilisation du vocabulaire approprié pour décrire des configurations.'
+                }
+            },
+            'polygones-reguliers': {
+                theme: 'Configurations du plan',
+                titre: 'Polygones réguliers',
+                duree: '4 heures',
+                competence: 'Résoudre des problèmes faisant appel aux configurations de l\'espace et du plan, aux applications du plan, à l\'outil vectoriel et à la géométrie analytique.',
+                objectifs: [
+                    'Reconnaître/Identifier une configuration',
+                    'Construire un polygone régulier',
+                    'Calculer des grandeurs'
+                ],
+                prerequis: [
+                    'Connaissance des polygones',
+                    'Construction géométrique élémentaire',
+                    'Calcul de périmètres et d\'aires'
+                ],
+                materiel: [
+                    'Instruments de géométrie (règle, compas, équerre)',
+                    'Matériel de projection',
+                    'Fiches d\'exercices',
+                    'Calculatrices'
+                ],
+                strategies: [
+                    'Observation et manipulation en petits groupes',
+                    'Méthode démonstrative',
+                    'Travail individuel sur des constructions',
+                    'Approche par résolution de problèmes'
+                ],
+                activites: [
+                    {
+                        duree: '45 minutes',
+                        titre: 'Phase de découverte',
+                        description: 'Polygone régulier : définition, vocabulaire, caractéristiques'
+                    },
+                    {
+                        duree: '60 minutes',
+                        titre: 'Phase d\'apprentissage',
+                        description: 'Construction d\'un polygone régulier'
+                    },
+                    {
+                        duree: '60 minutes',
+                        titre: 'Phase d\'application',
+                        description: 'Calcul du périmètre et de l\'aire d\'un polygone régulier'
+                    },
+                    {
+                        duree: '45 minutes',
+                        titre: 'Phase de consolidation',
+                        description: 'Résolution de problèmes faisant intervenir les polygones réguliers'
+                    },
+                    {
+                        duree: '30 minutes',
+                        titre: 'Phase de synthèse',
+                        description: 'Bilan collectif et élaboration de la trace écrite'
+                    }
+                ],
+                evaluation: [
+                    'Identification d\'un polygone régulier',
+                    'Construction d\'un polygone régulier',
+                    'Calcul du périmètre et de l\'aire d\'un polygone régulier'
+                ],
+                capacites: [
+                    {
+                        capacite: 'Reconnaître/Identifier une configuration',
+                        contenu: 'Polygone régulier : définition, vocabulaire, caractéristiques'
+                    },
+                    {
+                        capacite: 'Construire un polygone régulier',
+                        contenu: 'Polygone régulier'
+                    },
+                    {
+                        capacite: 'Calculer des grandeurs',
+                        contenu: 'Périmètre d\'un polygone régulier, aire d\'un polygone régulier'
+                    }
+                ],
+                guide: {
+                    strategies: 'Observation et manipulation en petits groupes. Méthode démonstrative, faire faire (travail individuel).',
+                    consignes: 'Renforcer et clarifier les notions de polygone déjà installées en classe de 5e. Faire nommer : un polygone régulier, ses éléments caractéristiques.',
+                    evaluation: 'Identification d\'un polygone régulier. Construction d\'un polygone régulier. Calcul du périmètre et de l\'aire d\'un polygone régulier.'
+                }
+            },
+            'symetries': {
+                theme: 'Applications du plan',
+                titre: 'Symétrie orthogonale, symétrie centrale',
+                duree: '6 heures',
+                competence: 'Résoudre des problèmes faisant appel aux configurations de l\'espace et du plan, aux applications du plan, à l\'outil vectoriel et à la géométrie analytique.',
+                objectifs: [
+                    'Reconnaître/Identifier une application du plan',
+                    'Construire l\'image d\'une figure par une symétrie orthogonale ou centrale',
+                    'Justifier/démontrer une propriété, un programme de construction...'
+                ],
+                prerequis: [
+                    'Notions de symétrie axiale et centrale',
+                    'Construction géométrique élémentaire',
+                    'Vocabulaire géométrique de base'
+                ],
+                materiel: [
+                    'Instruments de géométrie (règle, compas, équerre)',
+                    'Matériel de projection',
+                    'Fiches d\'exercices'
+                ],
+                strategies: [
+                    'Observation et manipulation en petits groupes',
+                    'Méthode démonstrative',
+                    'Travail individuel sur des constructions',
+                    'Approche par résolution de problèmes'
+                ],
+                activites: [
+                    {
+                        duree: '60 minutes',
+                        titre: 'Phase de découverte',
+                        description: 'Rappel des symétries orthogonales et centrales étudiées en classe de 5e'
+                    },
+                    {
+                        duree: '90 minutes',
+                        titre: 'Phase d\'apprentissage',
+                        description: 'Construction de l\'image d\'une figure par une symétrie orthogonale'
+                    },
+                    {
+                        duree: '90 minutes',
+                        titre: 'Phase d\'application',
+                        description: 'Construction de l\'image d\'une figure par une symétrie centrale'
+                    },
+                    {
+                        duree: '60 minutes',
+                        titre: 'Phase de consolidation',
+                        description: 'Justification de propriétés géométriques à l\'aide des symétries'
+                    },
+                    {
+                        duree: '30 minutes',
+                        titre: 'Phase de synthèse',
+                        description: 'Bilan collectif et élaboration de la trace écrite'
+                    }
+                ],
+                evaluation: [
+                    'Identification d\'une symétrie orthogonale, d\'une symétrie centrale',
+                    'Construction de l\'image d\'une figure par une symétrie orthogonale ou centrale',
+                    'Utilisation des symétries pour justifier des propriétés géométriques'
+                ],
+                capacites: [
+                    {
+                        capacite: 'Reconnaître/Identifier une application du plan',
+                        contenu: 'Symétrie orthogonale, symétrie centrale'
+                    },
+                    {
+                        capacite: 'Construire l\'image d\'une figure par une symétrie orthogonale ou centrale',
+                        contenu: 'Symétrie orthogonale, symétrie centrale'
+                    },
+                    {
+                        capacite: 'Justifier/démontrer une propriété, un programme de construction...',
+                        contenu: 'Égalité de longueurs, égalité d\'angles, parallélisme de droites, perpendicularité de droites, nature d\'une figure'
+                    }
+                ],
+                guide: {
+                    strategies: 'Observation et manipulation en petits groupes. Méthode démonstrative, faire faire (travail individuel).',
+                    consignes: 'Renforcer et clarifier les notions de symétrie orthogonale et de symétrie centrale déjà installées en classe de 5e.',
+                    evaluation: 'Identification d\'une symétrie orthogonale, d\'une symétrie centrale. Construction de l\'image d\'une figure par une symétrie orthogonale ou centrale. Utilisation des symétries pour justifier des propriétés géométriques.'
+                }
+            },
+            'projection': {
+                theme: 'Applications du plan',
+                titre: 'Projection',
+                duree: '4 heures',
+                competence: 'Résoudre des problèmes faisant appel aux configurations de l\'espace et du plan, aux applications du plan, à l\'outil vectoriel et à la géométrie analytique.',
+                objectifs: [
+                    'Reconnaître/Identifier une application du plan',
+                    'Construire l\'image d\'une figure par une projection orthogonale'
+                ],
+                prerequis: [
+                    'Notions de projection',
+                    'Construction géométrique élémentaire',
+                    'Vocabulaire géométrique de base'
+                ],
+                materiel: [
+                    'Instruments de géométrie (règle, équerre)',
+                    'Matériel de projection',
+                    'Fiches d\'exercices'
+                ],
+                strategies: [
+                    'Observation et manipulation en petits groupes',
+                    'Méthode démonstrative',
+                    'Travail individuel sur des constructions',
+                    'Approche par résolution de problèmes'
+                ],
+                activites: [
+                    {
+                        duree: '45 minutes',
+                        titre: 'Phase de découverte',
+                        description: 'Projection orthogonale sur une droite'
+                    },
+                    {
+                        duree: '60 minutes',
+                        titre: 'Phase d\'apprentissage',
+                        description: 'Construction de l\'image d\'une figure par une projection orthogonale'
+                    },
+                    {
+                        duree: '60 minutes',
+                        titre: 'Phase d\'application',
+                        description: 'Résolution de problèmes faisant intervenir la projection orthogonale'
+                    },
+                    {
+                        duree: '45 minutes',
+                        titre: 'Phase de consolidation',
+                        description: 'Utilisation de la projection orthogonale pour justifier des propriétés géométriques'
+                    },
+                    {
+                        duree: '30 minutes',
+                        titre: 'Phase de synthèse',
+                        description: 'Bilan collectif et élaboration de la trace écrite'
+                    }
+                ],
+                evaluation: [
+                    'Identification d\'une projection orthogonale',
+                    'Construction de l\'image d\'une figure par une projection orthogonale'
+                ],
+                capacites: [
+                    {
+                        capacite: 'Reconnaître/Identifier une application du plan',
+                        contenu: 'Projection orthogonale sur une droite'
+                    },
+                    {
+                        capacite: 'Construire l\'image d\'une figure par une projection orthogonale',
+                        contenu: 'Projection orthogonale sur une droite'
+                    }
+                ],
+                guide: {
+                    strategies: 'Observation et manipulation en petits groupes. Méthode démonstrative, faire faire (travail individuel).',
+                    consignes: 'Renforcer et clarifier les notions de projection orthogonale déjà installées en classe de 5e.',
+                    evaluation: 'Identification d\'une projection orthogonale. Construction de l\'image d\'une figure par une projection orthogonale.'
+                }
+            },
+            'translation': {
+                theme: 'Applications du plan',
+                titre: 'Translation',
+                duree: '4 heures',
+                competence: 'Résoudre des problèmes faisant appel aux configurations de l\'espace et du plan, aux applications du plan, à l\'outil vectoriel et à la géométrie analytique.',
+                objectifs: [
+                    'Reconnaître/Identifier une application du plan',
+                    'Construire l\'image d\'une figure par une translation',
+                    'Justifier/démontrer une propriété, un programme de construction...'
+                ],
+                prerequis: [
+                    'Notions de translation',
+                    'Construction géométrique élémentaire',
+                    'Vocabulaire géométrique de base'
+                ],
+                materiel: [
+                    'Instruments de géométrie (règle, compas)',
+                    'Matériel de projection',
+                    'Fiches d\'exercices'
+                ],
+                strategies: [
+                    'Observation et manipulation en petits groupes',
+                    'Méthode démonstrative',
+                    'Travail individuel sur des constructions',
+                    'Approche par résolution de problèmes'
+                ],
+                activites: [
+                    {
+                        duree: '45 minutes',
+                        titre: 'Phase de découverte',
+                        description: 'Translation : définition, vocabulaire, caractéristiques'
+                    },
+                    {
+                        duree: '60 minutes',
+                        titre: 'Phase d\'apprentissage',
+                        description: 'Construction de l\'image d\'une figure par une translation'
+                    },
+                    {
+                        duree: '60 minutes',
+                        titre: 'Phase d\'application',
+                        description: 'Utilisation de la translation pour justifier des propriétés géométriques'
+                    },
+                    {
+                        duree: '45 minutes',
+                        titre: 'Phase de consolidation',
+                        description: 'Résolution de problèmes faisant intervenir la translation'
+                    },
+                    {
+                        duree: '30 minutes',
+                        titre: 'Phase de synthèse',
+                        description: 'Bilan collectif et élaboration de la trace écrite'
+                    }
+                ],
+                evaluation: [
+                    'Identification d\'une translation',
+                    'Construction de l\'image d\'une figure par une translation',
+                    'Utilisation de la translation pour justifier des propriétés géométriques'
+                ],
+                capacites: [
+                    {
+                        capacite: 'Reconnaître/Identifier une application du plan',
+                        contenu: 'Translation : définition, vocabulaire, caractéristiques'
+                    },
+                    {
+                        capacite: 'Construire l\'image d\'une figure par une translation',
+                        contenu: 'Translation'
+                    },
+                    {
+                        capacite: 'Justifier/démontrer une propriété, un programme de construction...',
+                        contenu: 'Égalité de longueurs, égalité d\'angles, parallélisme de droites, nature d\'une figure'
+                    }
+                ],
+                guide: {
+                    strategies: 'Observation et manipulation en petits groupes. Méthode démonstrative, faire faire (travail individuel).',
+                    consignes: 'Renforcer et clarifier les notions de translation déjà installées en classe de 5e.',
+                    evaluation: 'Identification d\'une translation. Construction de l\'image d\'une figure par une translation. Utilisation de la translation pour justifier des propriétés géométriques.'
+                }
+            },
+            'vecteurs': {
+                theme: 'Outil vectoriel, géométrie analytique',
+                titre: 'Vecteurs',
+                duree: '6 heures',
+                competence: 'Résoudre des problèmes faisant appel aux configurations de l\'espace et du plan, aux applications du plan, à l\'outil vectoriel et à la géométrie analytique.',
+                objectifs: [
+                    'Reconnaître/Identifier un vecteur',
+                    'Représenter un vecteur',
+                    'Calculer des grandeurs',
+                    'Justifier/démontrer une propriété, un programme de construction...'
+                ],
+                prerequis: [
+                    'Notions de translation',
+                    'Construction géométrique élémentaire',
+                    'Vocabulaire géométrique de base'
+                ],
+                materiel: [
+                    'Instruments de géométrie (règle, compas)',
+                    'Matériel de projection',
+                    'Fiches d\'exercices'
+                ],
+                strategies: [
+                    'Observation et manipulation en petits groupes',
+                    'Méthode démonstrative',
+                    'Travail individuel sur des constructions',
+                    'Approche par résolution de problèmes'
+                ],
+                activites: [
+                    {
+                        duree: '60 minutes',
+                        titre: 'Phase de découverte',
+                        description: 'Vecteur : définition, vocabulaire, caractéristiques'
+                    },
+                    {
+                        duree: '90 minutes',
+                        titre: 'Phase d\'apprentissage',
+                        description: 'Représentation d\'un vecteur'
+                    },
+                    {
+                        duree: '90 minutes',
+                        titre: 'Phase d\'application',
+                        description: 'Calcul de la norme d\'un vecteur'
+                    },
+                    {
+                        duree: '60 minutes',
+                        titre: 'Phase de consolidation',
+                        description: 'Utilisation des vecteurs pour justifier des propriétés géométriques'
+                    },
+                    {
+                        duree: '30 minutes',
+                        titre: 'Phase de synthèse',
+                        description: 'Bilan collectif et élaboration de la trace écrite'
+                    }
+                ],
+                evaluation: [
+                    'Identification d\'un vecteur',
+                    'Représentation d\'un vecteur',
+                    'Calcul de la norme d\'un vecteur',
+                    'Utilisation des vecteurs pour justifier des propriétés géométriques'
+                ],
+                capacites: [
+                    {
+                        capacite: 'Reconnaître/Identifier un vecteur',
+                        contenu: 'Vecteur : définition, vocabulaire, caractéristiques'
+                    },
+                    {
+                        capacite: 'Représenter un vecteur',
+                        contenu: 'Vecteur'
+                    },
+                    {
+                        capacite: 'Calculer des grandeurs',
+                        contenu: 'Norme d\'un vecteur'
+                    },
+                    {
+                        capacite: 'Justifier/démontrer une propriété, un programme de construction...',
+                        contenu: 'Égalité de vecteurs, parallélisme de droites, nature d\'une figure'
+                    }
+                ],
+                guide: {
+                    strategies: 'Observation et manipulation en petits groupes. Méthode démonstrative, faire faire (travail individuel).',
+                    consignes: 'Renforcer et clarifier les notions de vecteur déjà installées en classe de 5e.',
+                    evaluation: 'Identification d\'un vecteur. Représentation d\'un vecteur. Calcul de la norme d\'un vecteur. Utilisation des vecteurs pour justifier des propriétés géométriques.'
+                }
+            },
+            'reperage': {
+                theme: 'Outil vectoriel, géométrie analytique',
+                titre: 'Repérage',
+                duree: '6 heures',
+                competence: 'Résoudre des problèmes faisant appel aux configurations de l\'espace et du plan, aux applications du plan, à l\'outil vectoriel et à la géométrie analytique.',
+                objectifs: [
+                    'Reconnaître/Identifier un repère',
+                    'Lire les coordonnées d\'un point',
+                    'Calculer des grandeurs',
+                    'Justifier/démontrer une propriété, un programme de construction...'
+                ],
+                prerequis: [
+                    'Notions de repérage',
+                    'Construction géométrique élémentaire',
+                    'Vocabulaire géométrique de base'
+                ],
+                materiel: [
+                    'Instruments de géométrie (règle, compas)',
+                    'Matériel de projection',
+                    'Fiches d\'exercices',
+                    'Calculatrices'
+                ],
+                strategies: [
+                    'Observation et manipulation en petits groupes',
+                    'Méthode démonstrative',
+                    'Travail individuel sur des constructions',
+                    'Approche par résolution de problèmes'
+                ],
+                activites: [
+                    {
+                        duree: '60 minutes',
+                        titre: 'Phase de découverte',
+                        description: 'Repère : définition, vocabulaire, caractéristiques'
+                    },
+                    {
+                        duree: '90 minutes',
+                        titre: 'Phase d\'apprentissage',
+                        description: 'Lecture des coordonnées d\'un point'
+                    },
+                    {
+                        duree: '90 minutes',
+                        titre: 'Phase d\'application',
+                        description: 'Calcul de la distance entre deux points'
+                    },
+                    {
+                        duree: '60 minutes',
+                        titre: 'Phase de consolidation',
+                        description: 'Utilisation du repérage pour justifier des propriétés géométriques'
+                    },
+                    {
+                        duree: '30 minutes',
+                        titre: 'Phase de synthèse',
+                        description: 'Bilan collectif et élaboration de la trace écrite'
+                    }
+                ],
+                evaluation: [
+                    'Identification d\'un repère',
+                    'Lecture des coordonnées d\'un point',
+                    'Calcul de la distance entre deux points',
+                    'Utilisation du repérage pour justifier des propriétés géométriques'
+                ],
+                capacites: [
+                    {
+                        capacite: 'Reconnaître/Identifier un repère',
+                        contenu: 'Repère : définition, vocabulaire, caractéristiques'
+                    },
+                    {
+                        capacite: 'Lire les coordonnées d\'un point',
+                        contenu: 'Coordonnées d\'un point'
+                    },
+                    {
+                        capacite: 'Calculer des grandeurs',
+                        contenu: 'Distance entre deux points'
+                    },
+                    {
+                        capacite: 'Justifier/démontrer une propriété, un programme de construction...',
+                        contenu: 'Égalité de longueurs, parallélisme de droites, nature d\'une figure'
+                    }
+                ],
+                guide: {
+                    strategies: 'Observation et manipulation en petits groupes. Méthode démonstrative, faire faire (travail individuel).',
+                    consignes: 'Renforcer et clarifier les notions de repérage déjà installées en classe de 5e.',
+                    evaluation: 'Identification d\'un repère. Lecture des coordonnées d\'un point. Calcul de la distance entre deux points. Utilisation du repérage pour justifier des propriétés géométriques.'
+                }
+            },
+            'nombres-rationnels': {
+                theme: 'Calcul numérique',
+                titre: 'Nombres rationnels',
+                duree: '8 heures',
+                competence: 'Résoudre des problèmes faisant appel aux programmes de calcul, au calcul numérique et à l\'organisation des données.',
+                objectifs: [
+                    'Reconnaître/Identifier un nombre rationnel',
+                    'Calculer des sommes, produits, quotients de nombres rationnels',
+                    'Comparer des nombres rationnels',
+                    'Utiliser les nombres rationnels dans des situations concrètes'
+                ],
+                prerequis: [
+                    'Opérations sur les nombres entiers et décimaux',
+                    'Calcul fractionnaire',
+                    'Notions de proportionnalité'
+                ],
+                materiel: [
+                    'Matériel de projection',
+                    'Fiches d\'exercices',
+                    'Calculatrices'
+                ],
+                strategies: [
+                    'Travail individuel ou en petits groupes',
+                    'Méthode démonstrative',
+                    'Approche par résolution de problèmes',
+                    'Manipulation de nombres rationnels'
+                ],
+                activites: [
+                    {
+                        duree: '90 minutes',
+                        titre: 'Phase de découverte',
+                        description: 'Rappel des nombres rationnels étudiés en classe de 5e'
+                    },
+                    {
+                        duree: '120 minutes',
+                        titre: 'Phase d\'apprentissage',
+                        description: 'Calcul de sommes, produits, quotients de nombres rationnels'
+                    },
+                    {
+                        duree: '120 minutes',
+                        titre: 'Phase d\'application',
+                        description: 'Comparaison de nombres rationnels'
+                    },
+                    {
+                        duree: '90 minutes',
+                        titre: 'Phase de consolidation',
+                        description: 'Utilisation des nombres rationnels dans des situations concrètes'
+                    },
+                    {
+                        duree: '60 minutes',
+                        titre: 'Phase de synthèse',
+                        description: 'Bilan collectif et élaboration de la trace écrite'
+                    }
+                ],
+                evaluation: [
+                    'Reconnaissance d\'un nombre rationnel',
+                    'Calcul de sommes, produits, quotients de nombres rationnels',
+                    'Comparaison de nombres rationnels',
+                    'Utilisation des nombres rationnels dans des situations concrètes'
+                ],
+                capacites: [
+                    {
+                        capacite: 'Reconnaître/Identifier un nombre rationnel',
+                        contenu: 'Nombre rationnel : définition, vocabulaire, caractéristiques'
+                    },
+                    {
+                        capacite: 'Calculer des sommes, produits, quotients de nombres rationnels',
+                        contenu: 'Somme, produit, quotient de nombres rationnels'
+                    },
+                    {
+                        capacite: 'Comparer des nombres rationnels',
+                        contenu: 'Comparaison de nombres rationnels'
+                    }
+                ],
+                guide: {
+                    strategies: 'Travail individuel ou en petits groupes. Méthode démonstrative, faire faire (travail individuel).',
+                    consignes: 'Renforcer et clarifier les notions de nombres rationnels déjà installées en classe de 5e.',
+                    evaluation: 'Reconnaissance d\'un nombre rationnel. Calcul de sommes, produits, quotients de nombres rationnels. Comparaison de nombres rationnels. Utilisation des nombres rationnels dans des situations concrètes.'
+                }
+            },
+            'nombres-decimaux': {
+                theme: 'Calcul numérique',
+                titre: 'Nombres décimaux, calcul approché',
+                duree: '6 heures',
+                competence: 'Résoudre des problèmes faisant appel aux programmes de calcul, au calcul numérique et à l\'organisation des données.',
+                objectifs: [
+                    'Reconnaître/Identifier un nombre décimal',
+                    'Calculer des sommes, produits, quotients de nombres décimaux',
+                    'Calculer des valeurs approchées, des arrondis, des troncatures',
+                    'Utiliser les nombres décimaux dans des situations concrètes'
+                ],
+                prerequis: [
+                    'Opérations sur les nombres entiers et décimaux',
+                    'Calcul fractionnaire',
+                    'Notions de proportionnalité'
+                ],
+                materiel: [
+                    'Matériel de projection',
+                    'Fiches d\'exercices',
+                    'Calculatrices'
+                ],
+                strategies: [
+                    'Travail individuel ou en petits groupes',
+                    'Méthode démonstrative',
+                    'Approche par résolution de problèmes',
+                    'Manipulation de nombres décimaux'
+                ],
+                activites: [
+                    {
+                        duree: '60 minutes',
+                        titre: 'Phase de découverte',
+                        description: 'Rappel des nombres décimaux étudiés en classe de 5e'
+                    },
+                    {
+                        duree: '90 minutes',
+                        titre: 'Phase d\'apprentissage',
+                        description: 'Calcul de sommes, produits, quotients de nombres décimaux'
+                    },
+                    {
+                        duree: '90 minutes',
+                        titre: 'Phase d\'application',
+                        description: 'Calcul de valeurs approchées, d\'arrondis, de troncatures'
+                    },
+                    {
+                        duree: '60 minutes',
+                        titre: 'Phase de consolidation',
+                        description: 'Utilisation des nombres décimaux dans des situations concrètes'
+                    },
+                    {
+                        duree: '30 minutes',
+                        titre: 'Phase de synthèse',
+                        description: 'Bilan collectif et élaboration de la trace écrite'
+                    }
+                ],
+                evaluation: [
+                    'Reconnaissance d\'un nombre décimal',
+                    'Calcul de sommes, produits, quotients de nombres décimaux',
+                    'Calcul de valeurs approchées, d\'arrondis, de troncatures',
+                    'Utilisation des nombres décimaux dans des situations concrètes'
+                ],
+                capacites: [
+                    {
+                        capacite: 'Reconnaître/Identifier un nombre décimal',
+                        contenu: 'Nombre décimal : définition, vocabulaire, caractéristiques'
+                    },
+                    {
+                        capacite: 'Calculer des sommes, produits, quotients de nombres décimaux',
+                        contenu: 'Somme, produit, quotient de nombres décimaux'
+                    },
+                    {
+                        capacite: 'Calculer des valeurs approchées, des arrondis, des troncatures',
+                        contenu: 'Valeur approchée, arrondi, troncature'
+                    }
+                ],
+                guide: {
+                    strategies: 'Travail individuel ou en petits groupes. Méthode démonstrative, faire faire (travail individuel).',
+                    consignes: 'Renforcer et clarifier les notions de nombres décimaux déjà installées en classe de 5e.',
+                    evaluation: 'Reconnaissance d\'un nombre décimal. Calcul de sommes, produits, quotients de nombres décimaux. Calcul de valeurs approchées, d\'arrondis, de troncatures. Utilisation des nombres décimaux dans des situations concrètes.'
+                }
+            },
+            'expressions-algebriques': {
+                theme: 'Programme de calcul - calcul littéral',
+                titre: 'Calcul sur les expressions algébriques',
+                duree: '8 heures',
+                competence: 'Résoudre des problèmes faisant appel aux programmes de calcul, au calcul numérique et à l\'organisation des données.',
+                objectifs: [
+                    'Reconnaître/Identifier une expression algébrique',
+                    'Calculer des sommes, produits, quotients d\'expressions algébriques',
+                    'Développer et factoriser des expressions algébriques',
+                    'Utiliser les expressions algébriques dans des situations concrètes'
+                ],
+                prerequis: [
+                    'Calcul littéral élémentaire',
+                    'Opérations sur les nombres',
+                    'Règles de calcul algébrique'
+                ],
+                materiel: [
+                    'Matériel de projection',
+                    'Fiches d\'exercices',
+                    'Calculatrices'
+                ],
+                strategies: [
+                    'Travail individuel ou en petits groupes',
+                    'Méthode démonstrative',
+                    'Approche par résolution de problèmes',
+                    'Manipulation d\'expressions algébriques'
+                ],
+                activites: [
+                    {
+                        duree: '90 minutes',
+                        titre: 'Phase de découverte',
+                        description: 'Rappel des expressions algébriques étudiées en classe de 5e'
+                    },
+                    {
+                        duree: '120 minutes',
+                        titre: 'Phase d\'apprentissage',
+                        description: 'Calcul de sommes, produits, quotients d\'expressions algébriques'
+                    },
+                    {
+                        duree: '120 minutes',
+                        titre: 'Phase d\'application',
+                        description: 'Développement et factorisation d\'expressions algébriques'
+                    },
+                    {
+                        duree: '90 minutes',
+                        titre: 'Phase de consolidation',
+                        description: 'Utilisation des expressions algébriques dans des situations concrètes'
+                    },
+                    {
+                        duree: '60 minutes',
+                        titre: 'Phase de synthèse',
+                        description: 'Bilan collectif et élaboration de la trace écrite'
+                    }
+                ],
+                evaluation: [
+                    'Reconnaissance d\'une expression algébrique',
+                    'Calcul de sommes, produits, quotients d\'expressions algébriques',
+                    'Développement et factorisation d\'expressions algébriques',
+                    'Utilisation des expressions algébriques dans des situations concrètes'
+                ],
+                capacites: [
+                    {
+                        capacite: 'Reconnaître/Identifier une expression algébrique',
+                        contenu: 'Expression algébrique : définition, vocabulaire, caractéristiques'
+                    },
+                    {
+                        capacite: 'Calculer des sommes, produits, quotients d\'expressions algébriques',
+                        contenu: 'Somme, produit, quotient d\'expressions algébriques'
+                    },
+                    {
+                        capacite: 'Développer et factoriser des expressions algébriques',
+                        contenu: 'Développement, factorisation d\'expressions algébriques'
+                    }
+                ],
+                guide: {
+                    strategies: 'Travail individuel ou en petits groupes. Méthode démonstrative, faire faire (travail individuel).',
+                    consignes: 'Renforcer et clarifier les notions d\'expressions algébriques déjà installées en classe de 5e.',
+                    evaluation: 'Reconnaissance d\'une expression algébrique. Calcul de sommes, produits, quotients d\'expressions algébriques. Développement et factorisation d\'expressions algébriques. Utilisation des expressions algébriques dans des situations concrètes.'
+                }
+            },
+            'equations-inequations': {
+                theme: 'Programme de calcul - calcul littéral',
+                titre: 'Équations - Inéquations',
+                duree: '8 heures',
+                competence: 'Résoudre des problèmes faisant appel aux programmes de calcul, au calcul numérique et à l\'organisation des données.',
+                objectifs: [
+                    'Reconnaître/Identifier une équation, une inéquation',
+                    'Résoudre une équation, une inéquation',
+                    'Représenter les solutions d\'une équation, d\'une inéquation',
+                    'Utiliser les équations et inéquations dans des situations concrètes'
+                ],
+                prerequis: [
+                    'Calcul algébrique',
+                    'Opérations sur les nombres',
+                    'Règles de calcul algébrique'
+                ],
+                materiel: [
+                    'Matériel de projection',
+                    'Fiches d\'exercices',
+                    'Calculatrices'
+                ],
+                strategies: [
+                    'Travail individuel ou en petits groupes',
+                    'Méthode démonstrative',
+                    'Approche par résolution de problèmes',
+                    'Manipulation d\'équations et d\'inéquations'
+                ],
+                activites: [
+                    {
+                        duree: '90 minutes',
+                        titre: 'Phase de découverte',
+                        description: 'Rappel des équations et inéquations étudiées en classe de 5e'
+                    },
+                    {
+                        duree: '120 minutes',
+                        titre: 'Phase d\'apprentissage',
+                        description: 'Résolution d\'équations et d\'inéquations'
+                    },
+                    {
+                        duree: '120 minutes',
+                        titre: 'Phase d\'application',
+                        description: 'Représentation des solutions d\'équations et d\'inéquations'
+                    },
+                    {
+                        duree: '90 minutes',
+                        titre: 'Phase de consolidation',
+                        description: 'Utilisation des équations et inéquations dans des situations concrètes'
+                    },
+                    {
+                        duree: '60 minutes',
+                        titre: 'Phase de synthèse',
+                        description: 'Bilan collectif et élaboration de la trace écrite'
+                    }
+                ],
+                evaluation: [
+                    'Reconnaissance d\'une équation, d\'une inéquation',
+                    'Résolution d\'équations et d\'inéquations',
+                    'Représentation des solutions d\'équations et d\'inéquations',
+                    'Utilisation des équations et inéquations dans des situations concrètes'
+                ],
+                capacites: [
+                    {
+                        capacite: 'Reconnaître/Identifier une équation, une inéquation',
+                        contenu: 'Équation : définition, vocabulaire, caractéristiques. Inéquation : définition, vocabulaire, caractéristiques'
+                    },
+                    {
+                        capacite: 'Résoudre une équation, une inéquation',
+                        contenu: 'Équation, inéquation'
+                    },
+                    {
+                        capacite: 'Représenter les solutions d\'une équation, d\'une inéquation',
+                        contenu: 'Solutions d\'une équation, d\'une inéquation'
+                    }
+                ],
+                guide: {
+                    strategies: 'Travail individuel ou en petits groupes. Méthode démonstrative, faire faire (travail individuel).',
+                    consignes: 'Renforcer et clarifier les notions d\'équations et d\'inéquations déjà installées en classe de 5e.',
+                    evaluation: 'Reconnaissance d\'une équation, d\'une inéquation. Résolution d\'équations et d\'inéquations. Représentation des solutions d\'équations et d\'inéquations. Utilisation des équations et inéquations dans des situations concrètes.'
+                }
+            },
+            'proportionnalite': {
+                theme: 'Organisation des données',
+                titre: 'Proportionnalité',
+                duree: '6 heures',
+                competence: 'Résoudre des problèmes faisant appel aux programmes de calcul, au calcul numérique et à l\'organisation des données.',
+                objectifs: [
+                    'Reconnaître/Identifier une situation de proportionnalité',
+                    'Calculer des grandeurs proportionnelles',
+                    'Représenter graphiquement une situation de proportionnalité',
+                    'Utiliser la proportionnalité dans des situations concrètes'
+                ],
+                prerequis: [
+                    'Notions de proportionnalité',
+                    'Calcul de pourcentages',
+                    'Représentations graphiques élémentaires'
+                ],
+                materiel: [
+                    'Matériel de projection',
+                    'Fiches d\'exercices',
+                    'Calculatrices'
+                ],
+                strategies: [
+                    'Travail individuel ou en petits groupes',
+                    'Méthode démonstrative',
+                    'Approche par résolution de problèmes concrets',
+                    'Manipulation de données proportionnelles'
+                ],
+                activites: [
+                    {
+                        duree: '60 minutes',
+                        titre: 'Phase de découverte',
+                        description: 'Rappel des situations de proportionnalité étudiées en classe de 5e'
+                    },
+                    {
+                        duree: '90 minutes',
+                        titre: 'Phase d\'apprentissage',
+                        description: 'Calcul de grandeurs proportionnelles'
+                    },
+                    {
+                        duree: '90 minutes',
+                        titre: 'Phase d\'application',
+                        description: 'Représentation graphique d\'une situation de proportionnalité'
+                    },
+                    {
+                        duree: '60 minutes',
+                        titre: 'Phase de consolidation',
+                        description: 'Utilisation de la proportionnalité dans des situations concrètes'
+                    },
+                    {
+                        duree: '30 minutes',
+                        titre: 'Phase de synthèse',
+                        description: 'Bilan collectif et élaboration de la trace écrite'
+                    }
+                ],
+                evaluation: [
+                    'Reconnaissance d\'une situation de proportionnalité',
+                    'Calcul de grandeurs proportionnelles',
+                    'Représentation graphique d\'une situation de proportionnalité',
+                    'Utilisation de la proportionnalité dans des situations concrètes'
+                ],
+                capacites: [
+                    {
+                        capacite: 'Reconnaître/Identifier une situation de proportionnalité',
+                        contenu: 'Situation de proportionnalité : définition, vocabulaire, caractéristiques'
+                    },
+                    {
+                        capacite: 'Calculer des grandeurs proportionnelles',
+                        contenu: 'Grandeurs proportionnelles'
+                    },
+                    {
+                        capacite: 'Représenter graphiquement une situation de proportionnalité',
+                        contenu: 'Représentation graphique d\'une situation de proportionnalité'
+                    }
+                ],
+                guide: {
+                    strategies: 'Travail individuel ou en petits groupes. Méthode démonstrative, faire faire (travail individuel).',
+                    consignes: 'Renforcer et clarifier les notions de proportionnalité déjà installées en classe de 5e.',
+                    evaluation: 'Reconnaissance d\'une situation de proportionnalité. Calcul de grandeurs proportionnelles. Représentation graphique d\'une situation de proportionnalité. Utilisation de la proportionnalité dans des situations concrètes.'
+                }
+            },
+            'statistiques': {
+                theme: 'Organisation des données',
+                titre: 'Statistiques',
+                duree: '6 heures',
+                competence: 'Résoudre des problèmes faisant appel aux programmes de calcul, au calcul numérique et à l\'organisation des données.',
+                objectifs: [
+                    'Reconnaître/Identifier une série statistique',
+                    'Calculer des paramètres statistiques',
+                    'Représenter graphiquement une série statistique',
+                    'Interpréter des données statistiques'
+                ],
+                prerequis: [
+                    'Notions de base en statistique',
+                    'Calcul de moyenne',
+                    'Représentations graphiques élémentaires'
+                ],
+                materiel: [
+                    'Matériel de projection',
+                    'Fiches d\'exercices',
+                    'Calculatrices'
+                ],
+                strategies: [
+                    'Travail individuel ou en petits groupes',
+                    'Méthode démonstrative',
+                    'Approche par résolution de problèmes concrets',
+                    'Manipulation de données statistiques'
+                ],
+                activites: [
+                    {
+                        duree: '60 minutes',
+                        titre: 'Phase de découverte',
+                        description: 'Rappel des séries statistiques étudiées en classe de 5e'
+                    },
+                    {
+                        duree: '90 minutes',
+                        titre: 'Phase d\'apprentissage',
+                        description: 'Calcul de paramètres statistiques'
+                    },
+                    {
+                        duree: '90 minutes',
+                        titre: 'Phase d\'application',
+                        description: 'Représentation graphique d\'une série statistique'
+                    },
+                    {
+                        duree: '60 minutes',
+                        titre: 'Phase de consolidation',
+                        description: 'Interprétation de données statistiques'
+                    },
+                    {
+                        duree: '30 minutes',
+                        titre: 'Phase de synthèse',
+                        description: 'Bilan collectif et élaboration de la trace écrite'
+                    }
+                ],
+                evaluation: [
+                    'Reconnaissance d\'une série statistique',
+                    'Calcul de paramètres statistiques',
+                    'Représentation graphique d\'une série statistique',
+                    'Interprétation de données statistiques'
+                ],
+                capacites: [
+                    {
+                        capacite: 'Reconnaître/Identifier une série statistique',
+                        contenu: 'Série statistique : définition, vocabulaire, caractéristiques'
+                    },
+                    {
+                        capacite: 'Calculer des paramètres statistiques',
+                        contenu: 'Paramètres statistiques'
+                    },
+                    {
+                        capacite: 'Représenter graphiquement une série statistique',
+                        contenu: 'Représentation graphique d\'une série statistique'
+                    }
+                ],
+                guide: {
+                    strategies: 'Travail individuel ou en petits groupes. Méthode démonstrative, faire faire (travail individuel).',
+                    consignes: 'Renforcer et clarifier les notions de statistiques déjà installées en classe de 5e.',
+                    evaluation: 'Reconnaissance d\'une série statistique. Calcul de paramètres statistiques. Représentation graphique d\'une série statistique. Interprétation de données statistiques.'
+                }
+            }
+        };
+
+        // Éléments du DOM
+        const leconSelect = document.getElementById('leconSelect');
+        const dureeLecon = document.getElementById('dureeLecon');
+        const dateLecon = document.getElementById('dateLecon');
+        const objectifsPersonnalises = document.getElementById('objectifsPersonnalises');
+        const strategiesPersonnalisees = document.getElementById('strategiesPersonnalisees');
+        const btnGenererFiche = document.getElementById('btnGenererFiche');
+        const fichePreview = document.getElementById('fichePreview');
+        const contenuFiche = document.getElementById('contenuFiche');
+
+        // Fonction pour générer la fiche automatiquement
+        function genererFicheAutomatique() {
+            const leconId = leconSelect.value;
+            
+            if (!leconId) {
+                alert('Veuillez sélectionner une leçon.');
+                return;
+            }
+            
+            const lecon = lecons[leconId];
+            const duree = dureeLecon.value || lecon.duree;
+            const date = dateLecon.value;
+            const objectifsPerso = objectifsPersonnalises.value;
+            const strategiesPerso = strategiesPersonnalisees.value;
+            
+            const dateCreation = new Date().toLocaleDateString('fr-FR', {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+            
+            const datePrevue = date ? new Date(date).toLocaleDateString('fr-FR') : 'À déterminer';
+
+            const ficheHTML = `
+                <div class="fiche-section">
+                    <div style="text-align: center; border-bottom: 3px solid var(--primary-color); padding-bottom: 20px; margin-bottom: 25px;">
+                        <h3 style="color: var(--primary-color); margin-bottom: 10px;">RÉPUBLIQUE TOGOLAISE</h3>
+                        <h4 style="color: #333; margin-bottom: 5px;">Ministère des Enseignements Primaire, Secondaire, Technique et de l'Artisanat</h4>
+                        <h4 style="color: #333; margin-bottom: 15px;">Direction de l'Enseignement Secondaire Général</h4>
+                        <h2 style="color: var(--primary-color); border-top: 2px solid var(--primary-color); border-bottom: 2px solid var(--primary-color); padding: 10px 0; margin: 15px 0;">FICHE PÉDAGOGIQUE DE LEÇON</h2>
+                        <p style="font-style: italic; color: #666;">Fiche générée le ${dateCreation} | Date prévue: ${datePrevue}</p>
+                    </div>
+
+                    <table class="programme-table">
+                        <tr>
+                            <td style="background-color: var(--secondary-color); font-weight: bold; width: 25%;">Discipline</td>
+                            <td>Mathématiques</td>
+                        </tr>
+                        <tr>
+                            <td style="background-color: var(--secondary-color); font-weight: bold;">Niveau</td>
+                            <td>Classe de 4ème</td>
+                        </tr>
+                        <tr>
+                            <td style="background-color: var(--secondary-color); font-weight: bold;">Thème</td>
+                            <td>${lecon.theme}</td>
+                        </tr>
+                        <tr>
+                            <td style="background-color: var(--secondary-color); font-weight: bold;">Leçon</td>
+                            <td><strong>${lecon.titre}</strong></td>
+                        </tr>
+                        <tr>
+                            <td style="background-color: var(--secondary-color); font-weight: bold;">Durée</td>
+                            <td>${duree}</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="fiche-section">
+                    <h4>I. COMPÉTENCE VISÉE</h4>
+                    <div style="background: white; padding: 15px; border-radius: 4px; border-left: 3px solid var(--primary-color);">
+                        <p style="margin: 0; line-height: 1.6;">${lecon.competence}</p>
+                    </div>
+                </div>
+
+                <div class="fiche-section">
+                    <h4>II. OBJECTIFS SPÉCIFIQUES</h4>
+                    <div style="background: white; padding: 15px; border-radius: 4px; border-left: 3px solid var(--accent-color);">
+                        ${lecon.objectifs.map(obj => `<p style="margin: 8px 0; line-height: 1.6;">• ${obj}</p>`).join('')}
+                        ${objectifsPerso ? `<p style="margin: 8px 0; line-height: 1.6; font-weight: bold;">Objectifs personnalisés :</p>${objectifsPerso.split('\n').map(line => `<p style="margin: 8px 0; line-height: 1.6;">• ${line}</p>`).join('')}` : ''}
+                    </div>
+                </div>
+
+                <div class="fiche-section">
+                    <h4>III. PRÉREQUIS ET MATÉRIEL</h4>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                        <div>
+                            <h5 style="color: var(--primary-color); margin-bottom: 10px;">Prérequis :</h5>
+                            <div style="background: white; padding: 12px; border-radius: 4px; min-height: 80px;">
+                                ${lecon.prerequis.map(pre => `<p style="margin: 5px 0;">• ${pre}</p>`).join('')}
+                            </div>
+                        </div>
+                        <div>
+                            <h5 style="color: var(--primary-color); margin-bottom: 10px;">Matériel :</h5>
+                            <div style="background: white; padding: 12px; border-radius: 4px; min-height: 80px;">
+                                ${lecon.materiel.map(mat => `<p style="margin: 5px 0;">• ${mat}</p>`).join('')}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="fiche-section">
+                    <h4>IV. CAPACITÉS ET CONTENUS</h4>
+                    <div class="capacites-contenus">
+                        <table class="programme-table">
+                            <tr>
+                                <th style="width: 40%;">Capacités</th>
+                                <th>Contenus</th>
+                            </tr>
+                            ${lecon.capacites.map(cap => `
+                                <tr>
+                                    <td>${cap.capacite}</td>
+                                    <td>${cap.contenu}</td>
+                                </tr>
+                            `).join('')}
+                        </table>
+                    </div>
+                </div>
+
+                <div class="fiche-section">
+                    <h4>V. STRATÉGIES PÉDAGOGIQUES</h4>
+                    <div style="background: white; padding: 15px; border-radius: 4px; border-left: 3px solid var(--accent-color);">
+                        ${lecon.strategies.map(strat => `<p style="margin: 8px 0; line-height: 1.6;">• ${strat}</p>`).join('')}
+                        ${strategiesPerso ? `<p style="margin: 8px 0; line-height: 1.6; font-weight: bold;">Stratégies personnalisées :</p>${strategiesPerso.split('\n').map(line => `<p style="margin: 8px 0; line-height: 1.6;">• ${line}</p>`).join('')}` : ''}
+                    </div>
+                </div>
+
+                <div class="fiche-section">
+                    <h4>VI. DÉROULEMENT DE LA LEÇON</h4>
+                    <div style="background: white; padding: 15px; border-radius: 4px; border-left: 3px solid var(--accent-color);">
+                        ${lecon.activites.map(activite => `
+                            <div class="activite-item">
+                                <div class="activite-header">
+                                    <strong style="color: var(--primary-color);">${activite.titre}</strong>
+                                    <span class="activite-duree">${activite.duree}</span>
+                                </div>
+                                <p style="margin: 0; line-height: 1.6;">${activite.description}</p>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+
+                <div class="fiche-section">
+                    <h4>VII. ÉVALUATION</h4>
+                    <div style="background: white; padding: 15px; border-radius: 4px; border-left: 3px solid var(--accent-color);">
+                        ${lecon.evaluation.map(eval => `<p style="margin: 8px 0; line-height: 1.6;">• ${eval}</p>`).join('')}
+                    </div>
+                </div>
+
+                <div class="fiche-section">
+                    <h4>VIII. GUIDE PÉDAGOGIQUE</h4>
+                    <div class="guide-section">
+                        <h5 style="color: var(--primary-color); margin-bottom: 10px;">Stratégies :</h5>
+                        <p style="margin-bottom: 15px;">${lecon.guide.strategies}</p>
+                        
+                        <h5 style="color: var(--primary-color); margin-bottom: 10px;">Consignes :</h5>
+                        <p style="margin-bottom: 15px;">${lecon.guide.consignes}</p>
+                        
+                        <h5 style="color: var(--primary-color); margin-bottom: 10px;">Évaluation :</h5>
+                        <p style="margin-bottom: 15px;">${lecon.guide.evaluation}</p>
+                    </div>
+                </div>
+
+                <div style="margin-top: 30px; padding: 15px; background-color: var(--warning-bg); border: 1px solid var(--warning-color); border-radius: 4px; color: var(--warning-color);">
+                    <p style="margin: 0; font-weight: bold;">⚠️ Remarque : Cette fiche a été générée automatiquement. Veuillez vérifier et adapter le contenu selon le contexte de votre classe.</p>
+                </div>
+            `;
+            
+            contenuFiche.innerHTML = ficheHTML;
+            fichePreview.classList.remove('hidden');
+            
+            // Faire défiler jusqu'à la fiche générée
+            fichePreview.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Fonction pour imprimer la fiche
+        function imprimerFiche() {
+            window.print();
+        }
+
+        // Fonction pour réinitialiser le formulaire
+        function reinitialiserFiche() {
+            document.getElementById('ficheForm').reset();
+            fichePreview.classList.add('hidden');
+        }
+
+        // Écouteurs d'événements
+        btnGenererFiche.addEventListener('click', genererFicheAutomatique);
+        
+        // Remplir automatiquement la durée si une leçon est sélectionnée
+        leconSelect.addEventListener('change', function() {
+            const leconId = this.value;
+            if (leconId && lecons[leconId]) {
+                dureeLecon.value = lecons[leconId].duree;
+            }
+        });
+        
+        // Définir la date d'aujourd'hui par défaut
+        const aujourdhui = new Date();
+        dateLecon.value = aujourdhui.toISOString().split('T')[0];
+    </script>
+</body>
+</html>
