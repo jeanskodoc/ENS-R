@@ -17,6 +17,9 @@
             --history-color: #9b59b6;
             --science-color: #2ecc71;
             --english-color: #f39c12;
+            --ai-color: #9c27b0;
+            --error-color: #e74c3c;
+            --success-color: #2ecc71;
         }
         
         * {
@@ -262,6 +265,29 @@
             transform: translateY(-2px);
         }
         
+        .btn-ai {
+            background-color: var(--ai-color);
+            color: white;
+            margin-bottom: 15px;
+        }
+        
+        .btn-ai:hover {
+            background-color: #7b1fa2;
+            transform: translateY(-2px);
+        }
+        
+        .btn-login {
+            background-color: var(--primary-color);
+            color: white;
+            width: auto;
+            padding: 10px 20px;
+            margin: 10px 0;
+        }
+        
+        .btn-login:hover {
+            background-color: #0052a3;
+        }
+        
         .features-section {
             background-color: white;
             padding: 30px;
@@ -411,6 +437,127 @@
             background-color: var(--secondary-color);
             border-radius: 0 8px 8px 0;
         }
+        
+        /* Styles pour l'authentification */
+        .auth-section {
+            background-color: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        
+        .auth-section h2 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+        
+        .auth-form {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px rgba(0, 102, 204, 0.2);
+        }
+        
+        .error-message {
+            color: var(--error-color);
+            margin-top: 10px;
+            font-weight: 600;
+            display: none;
+        }
+        
+        .success-message {
+            color: var(--success-color);
+            margin-top: 10px;
+            font-weight: 600;
+            display: none;
+        }
+        
+        .auth-status {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 6px;
+            font-weight: 600;
+            display: none;
+        }
+        
+        .auth-status.success {
+            background-color: rgba(46, 204, 113, 0.1);
+            border: 1px solid var(--success-color);
+            color: var(--success-color);
+        }
+        
+        .auth-status.error {
+            background-color: rgba(231, 76, 60, 0.1);
+            border: 1px solid var(--error-color);
+            color: var(--error-color);
+        }
+        
+        .protected {
+            position: relative;
+        }
+        
+        .protected::after {
+            content: "🔒 Accès protégé";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: var(--ai-color);
+            border-radius: 6px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+        
+        .protected:hover::after {
+            opacity: 1;
+        }
+        
+        .btn-disabled {
+            pointer-events: none;
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        
+        .btn-enabled {
+            pointer-events: auto;
+            opacity: 1;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -425,6 +572,41 @@
         <div class="intro-section">
             <h2>Bienvenue sur la plateforme de génération de fiches pédagogiques</h2>
             <p>Cet outil vous permet de créer rapidement des fiches de leçon complètes et conformes aux programmes officiels pour toutes les matières du collège. Sélectionnez une matière et un niveau pour générer automatiquement une fiche pédagogique structurée avec tous les éléments nécessaires à un enseignement de qualité.</p>
+        </div>
+        
+        <div class="auth-section">
+            <h2>🔐 Authentification Requise</h2>
+            <p>Pour accéder aux fonctionnalités de synthèse avec IA et aux générateurs de fiches, veuillez vous authentifier :</p>
+            
+            <div class="auth-form">
+                <div class="form-group">
+                    <label for="username">Identifiant :</label>
+                    <input type="text" id="username" placeholder="Entrez votre identifiant">
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Mot de passe :</label>
+                    <input type="password" id="password" placeholder="Entrez votre mot de passe">
+                </div>
+                
+                <button class="btn btn-login" id="login-btn">Se connecter</button>
+                
+                <div class="error-message" id="error-message">
+                    Identifiant ou mot de passe incorrect. Veuillez réessayer.
+                </div>
+                
+                <div class="success-message" id="success-message">
+                    Authentification réussie ! Accès à toutes les fonctionnalités activé.
+                </div>
+            </div>
+            
+            <div class="auth-status success" id="auth-status-success">
+                ✅ Vous êtes authentifié avec succès. Toutes les fonctionnalités sont maintenant accessibles.
+            </div>
+            
+            <div class="auth-status error" id="auth-status-error">
+                ❌ Authentification requise pour accéder aux fonctionnalités.
+            </div>
         </div>
         
         <div class="concepteur-section">
@@ -446,9 +628,11 @@
         <div class="maths-highlight">
             <h3>🎯 Accès direct au générateur de Mathématiques 3ème</h3>
             <p>Le générateur de fiches pour les mathématiques en classe de 3ème est maintenant disponible avec toutes les leçons du programme officiel.</p>
-            <a href="generateurm3.html" class="btn btn-maths">
-                <span class="icon">➡️</span> Accéder au Générateur Maths 3ème
-            </a>
+            <div class="protected">
+                <a href="generateurm3.html" class="btn btn-maths btn-disabled" id="maths-3eme">
+                    <span class="icon">➡️</span> Accéder au Générateur Maths 3ème
+                </a>
+            </div>
         </div>
         
         <div class="matieres-section">
@@ -459,21 +643,34 @@
                         <h3>Mathématiques</h3>
                     </div>
                     <div class="matiere-content">
+                        <div class="protected">
+                            <a href="synthese.html" class="btn btn-ai btn-disabled" id="ai-maths">
+                                <span class="icon">🤖</span> Synthèse avec IA
+                            </a>
+                        </div>
                         <p>Générateur de fiches pour l'enseignement des mathématiques au collège, couvrant l'algèbre, la géométrie, l'analyse et les statistiques.</p>
                         <div class="niveaux">
                             <h4>Niveaux disponibles :</h4>
-                            <a href="generateurm3.html" class="btn btn-maths">
-                                <span class="icon">➡️</span> Classe de 3ème
-                            </a>
-                            <button class="btn btn-primary" disabled>
-                                <span class="icon">⏳</span> 6ème (Bientôt)
-                            </button>
-                            <button class="btn btn-primary" disabled>
-                                <span class="icon">⏳</span> 5ème (Bientôt)
-                            </button>
-                            <button class="btn btn-primary" disabled>
-                                <span class="icon">⏳</span> 4ème (Bientôt)
-                            </button>
+                            <div class="protected">
+                                <a href="generateurm3.html" class="btn btn-maths btn-disabled" id="maths-3eme-card">
+                                    <span class="icon">➡️</span> Classe de 3ème
+                                </a>
+                            </div>
+                            <div class="protected">
+                                <button class="btn btn-primary btn-disabled" id="maths-6eme">
+                                    <span class="icon">⏳</span> 6ème (Bientôt)
+                                </button>
+                            </div>
+                            <div class="protected">
+                                <button class="btn btn-primary btn-disabled" id="maths-5eme">
+                                    <span class="icon">⏳</span> 5ème (Bientôt)
+                                </button>
+                            </div>
+                            <div class="protected">
+                                <button class="btn btn-primary btn-disabled" id="maths-4eme">
+                                    <span class="icon">⏳</span> 4ème (Bientôt)
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -483,21 +680,34 @@
                         <h3>Français</h3>
                     </div>
                     <div class="matiere-content">
+                        <div class="protected">
+                            <a href="synthese.html" class="btn btn-ai btn-disabled" id="ai-francais">
+                                <span class="icon">🤖</span> Synthèse avec IA
+                            </a>
+                        </div>
                         <p>Créez des fiches pour l'enseignement du français : grammaire, conjugaison, orthographe, littérature et expression écrite.</p>
                         <div class="niveaux">
                             <h4>Niveaux disponibles :</h4>
-                            <button class="btn btn-francais" disabled>
-                                <span class="icon">⏳</span> 6ème (Bientôt)
-                            </button>
-                            <button class="btn btn-francais" disabled>
-                                <span class="icon">⏳</span> 5ème (Bientôt)
-                            </button>
-                            <button class="btn btn-francais" disabled>
-                                <span class="icon">⏳</span> 4ème (Bientôt)
-                            </button>
-                            <button class="btn btn-francais" disabled>
-                                <span class="icon">⏳</span> 3ème (Bientôt)
-                            </button>
+                            <div class="protected">
+                                <button class="btn btn-francais btn-disabled" id="francais-6eme">
+                                    <span class="icon">⏳</span> 6ème (Bientôt)
+                                </button>
+                            </div>
+                            <div class="protected">
+                                <button class="btn btn-francais btn-disabled" id="francais-5eme">
+                                    <span class="icon">⏳</span> 5ème (Bientôt)
+                                </button>
+                            </div>
+                            <div class="protected">
+                                <button class="btn btn-francais btn-disabled" id="francais-4eme">
+                                    <span class="icon">⏳</span> 4ème (Bientôt)
+                                </button>
+                            </div>
+                            <div class="protected">
+                                <button class="btn btn-francais btn-disabled" id="francais-3eme">
+                                    <span class="icon">⏳</span> 3ème (Bientôt)
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -507,21 +717,34 @@
                         <h3>Histoire-Géographie</h3>
                     </div>
                     <div class="matiere-content">
+                        <div class="protected">
+                            <a href="synthese.html" class="btn btn-ai btn-disabled" id="ai-histoire">
+                                <span class="icon">🤖</span> Synthèse avec IA
+                            </a>
+                        </div>
                         <p>Générateur de fiches pour l'histoire, la géographie et l'éducation civique selon les programmes officiels.</p>
                         <div class="niveaux">
                             <h4>Niveaux disponibles :</h4>
-                            <button class="btn btn-histoire" disabled>
-                                <span class="icon">⏳</span> 6ème (Bientôt)
-                            </button>
-                            <button class="btn btn-histoire" disabled>
-                                <span class="icon">⏳</span> 5ème (Bientôt)
-                            </button>
-                            <button class="btn btn-histoire" disabled>
-                                <span class="icon">⏳</span> 4ème (Bientôt)
-                            </button>
-                            <button class="btn btn-histoire" disabled>
-                                <span class="icon">⏳</span> 3ème (Bientôt)
-                            </button>
+                            <div class="protected">
+                                <button class="btn btn-histoire btn-disabled" id="histoire-6eme">
+                                    <span class="icon">⏳</span> 6ème (Bientôt)
+                                </button>
+                            </div>
+                            <div class="protected">
+                                <button class="btn btn-histoire btn-disabled" id="histoire-5eme">
+                                    <span class="icon">⏳</span> 5ème (Bientôt)
+                                </button>
+                            </div>
+                            <div class="protected">
+                                <button class="btn btn-histoire btn-disabled" id="histoire-4eme">
+                                    <span class="icon">⏳</span> 4ème (Bientôt)
+                                </button>
+                            </div>
+                            <div class="protected">
+                                <button class="btn btn-histoire btn-disabled" id="histoire-3eme">
+                                    <span class="icon">⏳</span> 3ème (Bientôt)
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -531,21 +754,34 @@
                         <h3>Sciences</h3>
                     </div>
                     <div class="matiere-content">
+                        <div class="protected">
+                            <a href="synthese.html" class="btn btn-ai btn-disabled" id="ai-sciences">
+                                <span class="icon">🤖</span> Synthèse avec IA
+                            </a>
+                        </div>
                         <p>Fiches pédagogiques pour les sciences physiques, SVT et technologie adaptées à chaque niveau du collège.</p>
                         <div class="niveaux">
                             <h4>Niveaux disponibles :</h4>
-                            <button class="btn btn-sciences" disabled>
-                                <span class="icon">⏳</span> 6ème (Bientôt)
-                            </button>
-                            <button class="btn btn-sciences" disabled>
-                                <span class="icon">⏳</span> 5ème (Bientôt)
-                            </button>
-                            <button class="btn btn-sciences" disabled>
-                                <span class="icon">⏳</span> 4ème (Bientôt)
-                            </button>
-                            <button class="btn btn-sciences" disabled>
-                                <span class="icon">⏳</span> 3ème (Bientôt)
-                            </button>
+                            <div class="protected">
+                                <button class="btn btn-sciences btn-disabled" id="sciences-6eme">
+                                    <span class="icon">⏳</span> 6ème (Bientôt)
+                                </button>
+                            </div>
+                            <div class="protected">
+                                <button class="btn btn-sciences btn-disabled" id="sciences-5eme">
+                                    <span class="icon">⏳</span> 5ème (Bientôt)
+                                </button>
+                            </div>
+                            <div class="protected">
+                                <button class="btn btn-sciences btn-disabled" id="sciences-4eme">
+                                    <span class="icon">⏳</span> 4ème (Bientôt)
+                                </button>
+                            </div>
+                            <div class="protected">
+                                <button class="btn btn-sciences btn-disabled" id="sciences-3eme">
+                                    <span class="icon">⏳</span> 3ème (Bientôt)
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -555,21 +791,34 @@
                         <h3>Anglais</h3>
                     </div>
                     <div class="matiere-content">
+                        <div class="protected">
+                            <a href="synthese.html" class="btn btn-ai btn-disabled" id="ai-anglais">
+                                <span class="icon">🤖</span> Synthèse avec IA
+                            </a>
+                        </div>
                         <p>Créez des fiches pour l'enseignement de l'anglais : grammaire, vocabulaire, compréhension et expression.</p>
                         <div class="niveaux">
                             <h4>Niveaux disponibles :</h4>
-                            <button class="btn btn-anglais" disabled>
-                                <span class="icon">⏳</span> 6ème (Bientôt)
-                            </button>
-                            <button class="btn btn-anglais" disabled>
-                                <span class="icon">⏳</span> 5ème (Bientôt)
-                            </button>
-                            <button class="btn btn-anglais" disabled>
-                                <span class="icon">⏳</span> 4ème (Bientôt)
-                            </button>
-                            <button class="btn btn-anglais" disabled>
-                                <span class="icon">⏳</span> 3ème (Bientôt)
-                            </button>
+                            <div class="protected">
+                                <button class="btn btn-anglais btn-disabled" id="anglais-6eme">
+                                    <span class="icon">⏳</span> 6ème (Bientôt)
+                                </button>
+                            </div>
+                            <div class="protected">
+                                <button class="btn btn-anglais btn-disabled" id="anglais-5eme">
+                                    <span class="icon">⏳</span> 5ème (Bientôt)
+                                </button>
+                            </div>
+                            <div class="protected">
+                                <button class="btn btn-anglais btn-disabled" id="anglais-4eme">
+                                    <span class="icon">⏳</span> 4ème (Bientôt)
+                                </button>
+                            </div>
+                            <div class="protected">
+                                <button class="btn btn-anglais btn-disabled" id="anglais-3eme">
+                                    <span class="icon">⏳</span> 3ème (Bientôt)
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -615,6 +864,95 @@
     </div>
 
     <script>
+        // Variables d'authentification
+        const CORRECT_USERNAME = "KOLA";
+        const CORRECT_PASSWORD = "KOLA1@";
+        let isAuthenticated = false;
+        
+        // Éléments DOM
+        const loginBtn = document.getElementById('login-btn');
+        const usernameInput = document.getElementById('username');
+        const passwordInput = document.getElementById('password');
+        const errorMessage = document.getElementById('error-message');
+        const successMessage = document.getElementById('success-message');
+        const authStatusSuccess = document.getElementById('auth-status-success');
+        const authStatusError = document.getElementById('auth-status-error');
+        
+        // Récupérer TOUS les boutons protégés
+        const allProtectedButtons = document.querySelectorAll('.btn-ai, .btn-maths, .btn-francais, .btn-histoire, .btn-sciences, .btn-anglais, .btn-primary');
+        const allProtectedElements = document.querySelectorAll('.protected');
+        
+        // Fonction d'authentification
+        function authenticate() {
+            const username = usernameInput.value.trim();
+            const password = passwordInput.value;
+            
+            if (username === CORRECT_USERNAME && password === CORRECT_PASSWORD) {
+                // Authentification réussie
+                isAuthenticated = true;
+                errorMessage.style.display = 'none';
+                successMessage.style.display = 'block';
+                authStatusSuccess.style.display = 'block';
+                authStatusError.style.display = 'none';
+                
+                // Activer TOUS les boutons
+                activateAllButtons();
+                
+                // Masquer le message de succès après 3 secondes
+                setTimeout(() => {
+                    successMessage.style.display = 'none';
+                }, 3000);
+                
+            } else {
+                // Authentification échouée
+                isAuthenticated = false;
+                errorMessage.style.display = 'block';
+                successMessage.style.display = 'none';
+                authStatusSuccess.style.display = 'none';
+                authStatusError.style.display = 'block';
+                
+                // Désactiver TOUS les boutons
+                deactivateAllButtons();
+            }
+        }
+        
+        // Activer TOUS les boutons
+        function activateAllButtons() {
+            allProtectedButtons.forEach(button => {
+                button.classList.remove('btn-disabled');
+                button.classList.add('btn-enabled');
+            });
+            
+            allProtectedElements.forEach(element => {
+                element.classList.remove('protected');
+            });
+        }
+        
+        // Désactiver TOUS les boutons
+        function deactivateAllButtons() {
+            allProtectedButtons.forEach(button => {
+                button.classList.add('btn-disabled');
+                button.classList.remove('btn-enabled');
+            });
+            
+            allProtectedElements.forEach(element => {
+                element.classList.add('protected');
+            });
+        }
+        
+        // Initialiser l'état de TOUS les boutons
+        deactivateAllButtons();
+        
+        // Événement de connexion
+        loginBtn.addEventListener('click', authenticate);
+        
+        // Permettre la connexion avec la touche Entrée
+        passwordInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                authenticate();
+            }
+        });
+        
         // Animation pour les cartes de matière
         document.addEventListener('DOMContentLoaded', function() {
             const cards = document.querySelectorAll('.matiere-card');
