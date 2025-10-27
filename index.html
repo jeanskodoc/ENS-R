@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Générateur de Fiches Pédagogiques - Collège</title>
+    <style>
+        :root {
+            --primary-color: #0066cc;
+            --secondary-color: #e6f2ff;
+            --accent-color: #28a745;
+            --warning-color: #856404;
+            --warning-bg: #fff3cd;
+            --border-color: #ddd;
+            --math-color: #e74c3c;
+            --french-color: #3498db;
+            --history-color: #9b59b6;
+            --science-color: #2ecc71;
+            --english-color: #f39c12;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+            background-color: #f8f9fa;
+            background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 3px solid var(--primary-color);
+            padding-bottom: 20px;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+        }
+        
+        .header h1 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            font-size: 2.2em;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .header h2 {
+            color: #333;
+            margin-bottom: 5px;
+            font-size: 1.4em;
+        }
+        
+        .header p {
+            color: #666;
+            font-size: 1.1em;
+            max-width: 800px;
+            margin: 15px auto 0;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .intro-section {
+            background-color: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        
+        .intro-section h2 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-size: 1.8em;
+        }
+        
+        .intro-section p {
+            color: #555;
+            font-size: 1.1em;
+            line-height: 1.7;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .matieres-section {
+            margin-bottom: 40px;
+        }
+        
+        .matieres-section h2 {
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: 25px;
+            font-size: 1.8em;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 10px;
+            display: inline-block;
+        }
+        
+        .matieres-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+        
+        .matiere-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        
+        .matiere-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+        }
+        
+        .matiere-header {
+            padding: 20px;
+            color: white;
+            text-align: center;
+        }
+        
+        .matiere-maths {
+            background-color: var(--math-color);
+        }
+        
+        .matiere-francais {
+            background-color: var(--french-color);
+        }
+        
+        .matiere-histoire {
+            background-color: var(--history-color);
+        }
+        
+        .matiere-sciences {
+            background-color: var(--science-color);
+        }
+        
+        .matiere-anglais {
+            background-color: var(--english-color);
+        }
+        
+        .matiere-header h3 {
+            font-size: 1.5em;
+            margin: 0;
+        }
+        
+        .matiere-content {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .matiere-content p {
+            color: #555;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+        
+        .niveaux {
+            margin-top: 15px;
+        }
+        
+        .niveaux h4 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        
+        .btn {
+            border: none;
+            padding: 12px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            text-decoration: none;
+            width: 100%;
+            margin-top: 10px;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: #0052a3;
+            transform: translateY(-2px);
+        }
+        
+        .btn-maths {
+            background-color: var(--math-color);
+            color: white;
+        }
+        
+        .btn-maths:hover {
+            background-color: #c0392b;
+            transform: translateY(-2px);
+        }
+        
+        .btn-francais {
+            background-color: var(--french-color);
+            color: white;
+        }
+        
+        .btn-francais:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+        }
+        
+        .btn-histoire {
+            background-color: var(--history-color);
+            color: white;
+        }
+        
+        .btn-histoire:hover {
+            background-color: #8e44ad;
+            transform: translateY(-2px);
+        }
+        
+        .btn-sciences {
+            background-color: var(--science-color);
+            color: white;
+        }
+        
+        .btn-sciences:hover {
+            background-color: #27ae60;
+            transform: translateY(-2px);
+        }
+        
+        .btn-anglais {
+            background-color: var(--english-color);
+            color: white;
+        }
+        
+        .btn-anglais:hover {
+            background-color: #e67e22;
+            transform: translateY(-2px);
+        }
+        
+        .features-section {
+            background-color: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .features-section h2 {
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: 25px;
+            font-size: 1.8em;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .feature-card {
+            background: var(--secondary-color);
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            border-left: 4px solid var(--primary-color);
+        }
+        
+        .feature-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+        
+        .feature-card p {
+            color: #555;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            color: #666;
+            font-size: 0.9em;
+            border-top: 1px solid var(--border-color);
+        }
+        
+        @media (max-width: 768px) {
+            .matieres-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 1.8em;
+            }
+            
+            .header p {
+                font-size: 1em;
+            }
+        }
+        
+        .maths-highlight {
+            background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 100%);
+            border: 2px solid var(--math-color);
+            border-radius: 12px;
+            padding: 25px;
+            margin: 30px 0;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .maths-highlight h3 {
+            color: var(--math-color);
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+        
+        .maths-highlight p {
+            color: #555;
+            margin-bottom: 20px;
+            font-size: 1.1em;
+        }
+        
+        .icon {
+            font-size: 1.2em;
+        }
+        
+        .concepteur-section {
+            background-color: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin: 30px 0;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            text-align: center;
+            border-left: 5px solid var(--math-color);
+        }
+        
+        .concepteur-section h3 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+        
+        .concepteur-info {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 15px;
+        }
+        
+        .concepteur-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--math-color), #ff8a80);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2em;
+            color: white;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        .concepteur-details {
+            text-align: left;
+        }
+        
+        .concepteur-details h4 {
+            color: var(--math-color);
+            margin-bottom: 5px;
+            font-size: 1.3em;
+        }
+        
+        .concepteur-details p {
+            color: #666;
+            margin: 3px 0;
+        }
+        
+        .concepteur-quote {
+            font-style: italic;
+            color: #555;
+            margin-top: 15px;
+            padding: 10px 20px;
+            border-left: 3px solid var(--math-color);
+            background-color: var(--secondary-color);
+            border-radius: 0 8px 8px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📚 Générateur de Fiches Pédagogiques</h1>
+            <h2>Ministère des Enseignements Primaire, Secondaire, Technique et de l'Artisanat</h2>
+            <p>République Togolaise - Direction de l'Enseignement Secondaire Général</p>
+            <p>Outil officiel de création de fiches de leçon conformes aux programmes PAREC</p>
+        </div>
+        
+        <div class="intro-section">
+            <h2>Bienvenue sur la plateforme de génération de fiches pédagogiques</h2>
+            <p>Cet outil vous permet de créer rapidement des fiches de leçon complètes et conformes aux programmes officiels pour toutes les matières du collège. Sélectionnez une matière et un niveau pour générer automatiquement une fiche pédagogique structurée avec tous les éléments nécessaires à un enseignement de qualité.</p>
+        </div>
+        
+        <div class="concepteur-section">
+            <h3>👨‍🏫 Concepteur de l'Application</h3>
+            <div class="concepteur-info">
+                <div class="concepteur-avatar">KM</div>
+                <div class="concepteur-details">
+                    <h4>KOLA Maniwah Essohouna</h4>
+                    <p><strong>Enseignant de Mathématiques</strong></p>
+                    <p>République Togolaise</p>
+                    <p>Spécialiste en technologies éducatives</p>
+                </div>
+            </div>
+            <div class="concepteur-quote">
+                "L'innovation pédagogique au service de l'enseignement des mathématiques pour tous"
+            </div>
+        </div>
+        
+        <div class="maths-highlight">
+            <h3>🎯 Accès direct au générateur de Mathématiques 3ème</h3>
+            <p>Le générateur de fiches pour les mathématiques en classe de 3ème est maintenant disponible avec toutes les leçons du programme officiel.</p>
+            <a href="generateurm3.html" class="btn btn-maths">
+                <span class="icon">➡️</span> Accéder au Générateur Maths 3ème
+            </a>
+        </div>
+        
+        <div class="matieres-section">
+            <h2>Matières Disponibles</h2>
+            <div class="matieres-grid">
+                <div class="matiere-card">
+                    <div class="matiere-header matiere-maths">
+                        <h3>Mathématiques</h3>
+                    </div>
+                    <div class="matiere-content">
+                        <p>Générateur de fiches pour l'enseignement des mathématiques au collège, couvrant l'algèbre, la géométrie, l'analyse et les statistiques.</p>
+                        <div class="niveaux">
+                            <h4>Niveaux disponibles :</h4>
+                            <a href="generateurm3.html" class="btn btn-maths">
+                                <span class="icon">➡️</span> Classe de 3ème
+                            </a>
+                            <button class="btn btn-primary" disabled>
+                                <span class="icon">⏳</span> 6ème (Bientôt)
+                            </button>
+                            <button class="btn btn-primary" disabled>
+                                <span class="icon">⏳</span> 5ème (Bientôt)
+                            </button>
+                            <button class="btn btn-primary" disabled>
+                                <span class="icon">⏳</span> 4ème (Bientôt)
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="matiere-card">
+                    <div class="matiere-header matiere-francais">
+                        <h3>Français</h3>
+                    </div>
+                    <div class="matiere-content">
+                        <p>Créez des fiches pour l'enseignement du français : grammaire, conjugaison, orthographe, littérature et expression écrite.</p>
+                        <div class="niveaux">
+                            <h4>Niveaux disponibles :</h4>
+                            <button class="btn btn-francais" disabled>
+                                <span class="icon">⏳</span> 6ème (Bientôt)
+                            </button>
+                            <button class="btn btn-francais" disabled>
+                                <span class="icon">⏳</span> 5ème (Bientôt)
+                            </button>
+                            <button class="btn btn-francais" disabled>
+                                <span class="icon">⏳</span> 4ème (Bientôt)
+                            </button>
+                            <button class="btn btn-francais" disabled>
+                                <span class="icon">⏳</span> 3ème (Bientôt)
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="matiere-card">
+                    <div class="matiere-header matiere-histoire">
+                        <h3>Histoire-Géographie</h3>
+                    </div>
+                    <div class="matiere-content">
+                        <p>Générateur de fiches pour l'histoire, la géographie et l'éducation civique selon les programmes officiels.</p>
+                        <div class="niveaux">
+                            <h4>Niveaux disponibles :</h4>
+                            <button class="btn btn-histoire" disabled>
+                                <span class="icon">⏳</span> 6ème (Bientôt)
+                            </button>
+                            <button class="btn btn-histoire" disabled>
+                                <span class="icon">⏳</span> 5ème (Bientôt)
+                            </button>
+                            <button class="btn btn-histoire" disabled>
+                                <span class="icon">⏳</span> 4ème (Bientôt)
+                            </button>
+                            <button class="btn btn-histoire" disabled>
+                                <span class="icon">⏳</span> 3ème (Bientôt)
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="matiere-card">
+                    <div class="matiere-header matiere-sciences">
+                        <h3>Sciences</h3>
+                    </div>
+                    <div class="matiere-content">
+                        <p>Fiches pédagogiques pour les sciences physiques, SVT et technologie adaptées à chaque niveau du collège.</p>
+                        <div class="niveaux">
+                            <h4>Niveaux disponibles :</h4>
+                            <button class="btn btn-sciences" disabled>
+                                <span class="icon">⏳</span> 6ème (Bientôt)
+                            </button>
+                            <button class="btn btn-sciences" disabled>
+                                <span class="icon">⏳</span> 5ème (Bientôt)
+                            </button>
+                            <button class="btn btn-sciences" disabled>
+                                <span class="icon">⏳</span> 4ème (Bientôt)
+                            </button>
+                            <button class="btn btn-sciences" disabled>
+                                <span class="icon">⏳</span> 3ème (Bientôt)
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="matiere-card">
+                    <div class="matiere-header matiere-anglais">
+                        <h3>Anglais</h3>
+                    </div>
+                    <div class="matiere-content">
+                        <p>Créez des fiches pour l'enseignement de l'anglais : grammaire, vocabulaire, compréhension et expression.</p>
+                        <div class="niveaux">
+                            <h4>Niveaux disponibles :</h4>
+                            <button class="btn btn-anglais" disabled>
+                                <span class="icon">⏳</span> 6ème (Bientôt)
+                            </button>
+                            <button class="btn btn-anglais" disabled>
+                                <span class="icon">⏳</span> 5ème (Bientôt)
+                            </button>
+                            <button class="btn btn-anglais" disabled>
+                                <span class="icon">⏳</span> 4ème (Bientôt)
+                            </button>
+                            <button class="btn btn-anglais" disabled>
+                                <span class="icon">⏳</span> 3ème (Bientôt)
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="features-section">
+            <h2>Fonctionnalités du Générateur</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3>📝 Contenu Complet</h3>
+                    <p>Fiches structurées avec objectifs, prérequis, matériel, stratégies et évaluation</p>
+                </div>
+                <div class="feature-card">
+                    <h3>⚡ Génération Rapide</h3>
+                    <p>Créez des fiches pédagogiques en quelques clics seulement</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🎯 Conforme aux Programmes</h3>
+                    <p>Respect des programmes officiels et des compétences visées</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🖨️ Impression Optimisée</h3>
+                    <p>Fiches conçues pour une impression propre et professionnelle</p>
+                </div>
+                <div class="feature-card">
+                    <h3>📱 Interface Adaptative</h3>
+                    <p>Utilisable sur ordinateur, tablette et smartphone</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🔧 Personnalisation</h3>
+                    <p>Adaptez les fiches selon vos besoins pédagogiques spécifiques</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>Ministère des Enseignements Primaire, Secondaire, Technique et de l'Artisanat - République Togolaise</p>
+            <p>Direction de l'Enseignement Secondaire Général - PAREC 2021-2022</p>
+            <p>Concepteur: KOLA Maniwah Essohouna - Enseignant de Mathématiques</p>
+            <p>© 2023 - Tous droits réservés</p>
+        </div>
+    </div>
+
+    <script>
+        // Animation pour les cartes de matière
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.matiere-card');
+            
+            cards.forEach((card, index) => {
+                // Animation d'apparition progressive
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                
+                setTimeout(() => {
+                    card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, 100 * index);
+            });
+            
+            // Mise en évidence de la section mathématiques
+            const mathsHighlight = document.querySelector('.maths-highlight');
+            mathsHighlight.style.transform = 'scale(1.02)';
+            setTimeout(() => {
+                mathsHighlight.style.transition = 'transform 0.3s ease';
+                mathsHighlight.style.transform = 'scale(1)';
+            }, 500);
+            
+            // Animation pour la section concepteur
+            const concepteurSection = document.querySelector('.concepteur-section');
+            concepteurSection.style.opacity = '0';
+            setTimeout(() => {
+                concepteurSection.style.transition = 'opacity 0.8s ease';
+                concepteurSection.style.opacity = '1';
+            }, 300);
+        });
+    </script>
+</body>
+</html>
