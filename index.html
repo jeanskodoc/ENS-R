@@ -18,6 +18,7 @@
             --science-color: #2ecc71;
             --english-color: #f39c12;
             --ai-color: #9c27b0;
+            --latex-color: #d35400;
             --error-color: #e74c3c;
             --success-color: #2ecc71;
         }
@@ -273,6 +274,17 @@
         
         .btn-ai:hover {
             background-color: #7b1fa2;
+            transform: translateY(-2px);
+        }
+        
+        .btn-latex {
+            background-color: var(--latex-color);
+            color: white;
+            margin-bottom: 15px;
+        }
+        
+        .btn-latex:hover {
+            background-color: #a84300;
             transform: translateY(-2px);
         }
         
@@ -648,6 +660,11 @@
                                 <span class="icon">🤖</span> Synthèse avec IA
                             </a>
                         </div>
+                        <div class="protected">
+                            <a href="Latex.html" class="btn btn-latex btn-disabled" id="latex-maths">
+                                <span class="icon">📄</span> Générer avec LaTeX
+                            </a>
+                        </div>
                         <p>Générateur de fiches pour l'enseignement des mathématiques au collège, couvrant l'algèbre, la géométrie, l'analyse et les statistiques.</p>
                         <div class="niveaux">
                             <h4>Niveaux disponibles :</h4>
@@ -683,6 +700,11 @@
                         <div class="protected">
                             <a href="synthese.html" class="btn btn-ai btn-disabled" id="ai-francais">
                                 <span class="icon">🤖</span> Synthèse avec IA
+                            </a>
+                        </div>
+                        <div class="protected">
+                            <a href="Latex.html" class="btn btn-latex btn-disabled" id="latex-francais">
+                                <span class="icon">📄</span> Générer avec LaTeX
                             </a>
                         </div>
                         <p>Créez des fiches pour l'enseignement du français : grammaire, conjugaison, orthographe, littérature et expression écrite.</p>
@@ -722,6 +744,11 @@
                                 <span class="icon">🤖</span> Synthèse avec IA
                             </a>
                         </div>
+                        <div class="protected">
+                            <a href="Latex.html" class="btn btn-latex btn-disabled" id="latex-histoire">
+                                <span class="icon">📄</span> Générer avec LaTeX
+                            </a>
+                        </div>
                         <p>Générateur de fiches pour l'histoire, la géographie et l'éducation civique selon les programmes officiels.</p>
                         <div class="niveaux">
                             <h4>Niveaux disponibles :</h4>
@@ -759,6 +786,11 @@
                                 <span class="icon">🤖</span> Synthèse avec IA
                             </a>
                         </div>
+                        <div class="protected">
+                            <a href="Latex.html" class="btn btn-latex btn-disabled" id="latex-sciences">
+                                <span class="icon">📄</span> Générer avec LaTeX
+                            </a>
+                        </div>
                         <p>Fiches pédagogiques pour les sciences physiques, SVT et technologie adaptées à chaque niveau du collège.</p>
                         <div class="niveaux">
                             <h4>Niveaux disponibles :</h4>
@@ -794,6 +826,11 @@
                         <div class="protected">
                             <a href="synthese.html" class="btn btn-ai btn-disabled" id="ai-anglais">
                                 <span class="icon">🤖</span> Synthèse avec IA
+                            </a>
+                        </div>
+                        <div class="protected">
+                            <a href="Latex.html" class="btn btn-latex btn-disabled" id="latex-anglais">
+                                <span class="icon">📄</span> Générer avec LaTeX
                             </a>
                         </div>
                         <p>Créez des fiches pour l'enseignement de l'anglais : grammaire, vocabulaire, compréhension et expression.</p>
@@ -852,6 +889,14 @@
                     <h3>🔧 Personnalisation</h3>
                     <p>Adaptez les fiches selon vos besoins pédagogiques spécifiques</p>
                 </div>
+                <div class="feature-card">
+                    <h3>📄 Export LaTeX</h3>
+                    <p>Générez des fiches au format LaTeX pour un traitement avancé</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🤖 Intelligence Artificielle</h3>
+                    <p>Utilisez l'IA pour synthétiser et enrichir vos contenus</p>
+                </div>
             </div>
         </div>
         
@@ -879,7 +924,7 @@
         const authStatusError = document.getElementById('auth-status-error');
         
         // Récupérer TOUS les boutons protégés
-        const allProtectedButtons = document.querySelectorAll('.btn-ai, .btn-maths, .btn-francais, .btn-histoire, .btn-sciences, .btn-anglais, .btn-primary');
+        const allProtectedButtons = document.querySelectorAll('.btn-ai, .btn-maths, .btn-francais, .btn-histoire, .btn-sciences, .btn-anglais, .btn-primary, .btn-latex');
         const allProtectedElements = document.querySelectorAll('.protected');
         
         // Fonction d'authentification
