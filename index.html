@@ -20,6 +20,7 @@
             --ai-color: #9c27b0;
             --latex-color: #d35400;
             --formulas-color: #16a085;
+            --evaluation-color: #8e44ad;
             --error-color: #e74c3c;
             --success-color: #2ecc71;
         }
@@ -297,6 +298,17 @@
         
         .btn-formulas:hover {
             background-color: #138a72;
+            transform: translateY(-2px);
+        }
+        
+        .btn-evaluation {
+            background-color: var(--evaluation-color);
+            color: white;
+            margin-bottom: 15px;
+        }
+        
+        .btn-evaluation:hover {
+            background-color: #7d3c98;
             transform: translateY(-2px);
         }
         
@@ -682,6 +694,11 @@
                                 <span class="icon">∑</span> Éditeur de Formules
                             </a>
                         </div>
+                        <div class="protected">
+                            <a href="evaluation.html" class="btn btn-evaluation btn-disabled" id="evaluation-maths">
+                                <span class="icon">📝</span> Évaluation
+                            </a>
+                        </div>
                         <p>Générateur de fiches pour l'enseignement des mathématiques au collège, couvrant l'algèbre, la géométrie, l'analyse et les statistiques.</p>
                         <div class="niveaux">
                             <h4>Niveaux disponibles :</h4>
@@ -727,6 +744,11 @@
                         <div class="protected">
                             <a href="https://latexeditor.lagrida.com/" target="_blank" class="btn btn-formulas btn-disabled" id="formulas-francais">
                                 <span class="icon">∑</span> Éditeur de Formules
+                            </a>
+                        </div>
+                        <div class="protected">
+                            <a href="evaluation.html" class="btn btn-evaluation btn-disabled" id="evaluation-francais">
+                                <span class="icon">📝</span> Évaluation
                             </a>
                         </div>
                         <p>Créez des fiches pour l'enseignement du français : grammaire, conjugaison, orthographe, littérature et expression écrite.</p>
@@ -776,6 +798,11 @@
                                 <span class="icon">∑</span> Éditeur de Formules
                             </a>
                         </div>
+                        <div class="protected">
+                            <a href="evaluation.html" class="btn btn-evaluation btn-disabled" id="evaluation-histoire">
+                                <span class="icon">📝</span> Évaluation
+                            </a>
+                        </div>
                         <p>Générateur de fiches pour l'histoire, la géographie et l'éducation civique selon les programmes officiels.</p>
                         <div class="niveaux">
                             <h4>Niveaux disponibles :</h4>
@@ -823,6 +850,11 @@
                                 <span class="icon">∑</span> Éditeur de Formules
                             </a>
                         </div>
+                        <div class="protected">
+                            <a href="evaluation.html" class="btn btn-evaluation btn-disabled" id="evaluation-sciences">
+                                <span class="icon">📝</span> Évaluation
+                            </a>
+                        </div>
                         <p>Fiches pédagogiques pour les sciences physiques, SVT et technologie adaptées à chaque niveau du collège.</p>
                         <div class="niveaux">
                             <h4>Niveaux disponibles :</h4>
@@ -868,6 +900,11 @@
                         <div class="protected">
                             <a href="https://latexeditor.lagrida.com/" target="_blank" class="btn btn-formulas btn-disabled" id="formulas-anglais">
                                 <span class="icon">∑</span> Éditeur de Formules
+                            </a>
+                        </div>
+                        <div class="protected">
+                            <a href="evaluation.html" class="btn btn-evaluation btn-disabled" id="evaluation-anglais">
+                                <span class="icon">📝</span> Évaluation
                             </a>
                         </div>
                         <p>Créez des fiches pour l'enseignement de l'anglais : grammaire, vocabulaire, compréhension et expression.</p>
@@ -938,6 +975,10 @@
                     <h3>🤖 Intelligence Artificielle</h3>
                     <p>Utilisez l'IA pour synthétiser et enrichir vos contenus</p>
                 </div>
+                <div class="feature-card">
+                    <h3>📝 Évaluations</h3>
+                    <p>Créez des évaluations adaptées à chaque niveau et matière</p>
+                </div>
             </div>
         </div>
         
@@ -964,8 +1005,8 @@
         const authStatusSuccess = document.getElementById('auth-status-success');
         const authStatusError = document.getElementById('auth-status-error');
         
-        // Récupérer TOUS les boutons protégés
-        const allProtectedButtons = document.querySelectorAll('.btn-ai, .btn-maths, .btn-francais, .btn-histoire, .btn-sciences, .btn-anglais, .btn-primary, .btn-latex, .btn-formulas');
+        // Récupérer TOUS les boutons protégés (incluant les nouveaux boutons d'évaluation)
+        const allProtectedButtons = document.querySelectorAll('.btn-ai, .btn-maths, .btn-francais, .btn-histoire, .btn-sciences, .btn-anglais, .btn-primary, .btn-latex, .btn-formulas, .btn-evaluation');
         const allProtectedElements = document.querySelectorAll('.protected');
         
         // Fonction d'authentification
