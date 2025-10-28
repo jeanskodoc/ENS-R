@@ -497,7 +497,7 @@
             color: var(--border-color);
         }
         
-        /* Éditeur de texte enrichi */
+        /* Éditeur de texte enrichi amélioré */
         .rich-text-editor {
             border: 1px solid var(--border-color);
             border-radius: 8px;
@@ -580,6 +580,8 @@
         .color-blue { background-color: #3498db; }
         .color-green { background-color: #27ae60; }
         .color-black { background-color: #2c3e50; }
+        .color-purple { background-color: #9b59b6; }
+        .color-orange { background-color: #e67e22; }
         
         .editor-content {
             min-height: 150px;
@@ -611,6 +613,54 @@
         
         .editor-content li {
             margin-bottom: 5px;
+        }
+        
+        .editor-content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 10px 0;
+        }
+        
+        .editor-content table, .editor-content th, .editor-content td {
+            border: 1px solid var(--border-color);
+        }
+        
+        .editor-content th, .editor-content td {
+            padding: 8px 12px;
+            text-align: left;
+        }
+        
+        .editor-content th {
+            background-color: var(--light-color);
+            font-weight: 600;
+        }
+        
+        .editor-content blockquote {
+            border-left: 4px solid var(--secondary-color);
+            padding-left: 15px;
+            margin: 10px 0;
+            font-style: italic;
+            color: #555;
+        }
+        
+        .editor-content code {
+            background-color: var(--light-color);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .editor-content pre {
+            background-color: var(--light-color);
+            padding: 12px;
+            border-radius: 6px;
+            overflow-x: auto;
+            margin: 10px 0;
+        }
+        
+        .editor-content pre code {
+            background: none;
+            padding: 0;
         }
         
         .image-modal {
@@ -660,6 +710,72 @@
             box-shadow: 0 3px 6px rgba(0,0,0,0.1);
         }
         
+        .table-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .table-modal-content {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+        
+        .table-modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .table-modal-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--dark-color);
+        }
+        
+        .table-size-selector {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .table-preview {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        
+        .table-preview, .table-preview th, .table-preview td {
+            border: 1px solid var(--border-color);
+        }
+        
+        .table-preview th, .table-preview td {
+            padding: 8px;
+            text-align: center;
+            min-width: 40px;
+            height: 30px;
+        }
+        
+        .table-preview th {
+            background-color: var(--light-color);
+        }
+        
         @media (max-width: 768px) {
             .form-row, .actions {
                 grid-template-columns: 1fr;
@@ -705,6 +821,8 @@
         .text-blue { color: #3498db !important; }
         .text-green { color: #27ae60 !important; }
         .text-black { color: #2c3e50 !important; }
+        .text-purple { color: #9b59b6 !important; }
+        .text-orange { color: #e67e22 !important; }
         
         .section-content b, .section-content strong {
             font-weight: 600;
@@ -723,6 +841,8 @@
         .editor-content span[style*="color: #3498db"] { color: #3498db !important; }
         .editor-content span[style*="color: #27ae60"] { color: #27ae60 !important; }
         .editor-content span[style*="color: #2c3e50"] { color: #2c3e50 !important; }
+        .editor-content span[style*="color: #9b59b6"] { color: #9b59b6 !important; }
+        .editor-content span[style*="color: #e67e22"] { color: #e67e22 !important; }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -891,6 +1011,37 @@
         </div>
     </div>
 
+    <!-- Modal pour l'insertion de tableaux -->
+    <div class="table-modal" id="tableModal">
+        <div class="table-modal-content">
+            <div class="table-modal-header">
+                <h3><i class="fas fa-table"></i> Insérer un tableau</h3>
+                <button class="table-modal-close" id="tableModalClose">&times;</button>
+            </div>
+            <div class="table-size-selector">
+                <div class="form-group">
+                    <label for="tableRows">Nombre de lignes</label>
+                    <input type="number" id="tableRows" min="1" max="10" value="3">
+                </div>
+                <div class="form-group">
+                    <label for="tableColumns">Nombre de colonnes</label>
+                    <input type="number" id="tableColumns" min="1" max="10" value="3">
+                </div>
+            </div>
+            <div id="tablePreviewContainer">
+                <table class="table-preview" id="tablePreview"></table>
+            </div>
+            <div class="actions">
+                <button type="button" id="insertTableBtn" class="btn-success">
+                    <i class="fas fa-plus"></i> Insérer le tableau
+                </button>
+                <button type="button" id="cancelTableBtn" class="btn-outline">
+                    <i class="fas fa-times"></i> Annuler
+                </button>
+            </div>
+        </div>
+    </div>
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Configuration des champs avec éditeur riche
@@ -936,6 +1087,15 @@
             const imagePreviewContainer = document.getElementById('imagePreviewContainer');
             const insertImageBtn = document.getElementById('insertImageBtn');
             const cancelImageBtn = document.getElementById('cancelImageBtn');
+            
+            // Variables pour l'éditeur de tableaux
+            const tableModal = document.getElementById('tableModal');
+            const tableModalClose = document.getElementById('tableModalClose');
+            const tableRows = document.getElementById('tableRows');
+            const tableColumns = document.getElementById('tableColumns');
+            const tablePreview = document.getElementById('tablePreview');
+            const insertTableBtn = document.getElementById('insertTableBtn');
+            const cancelTableBtn = document.getElementById('cancelTableBtn');
             
             let currentLessonId = null;
             let savedLessons = JSON.parse(localStorage.getItem('savedLessons')) || [];
@@ -985,19 +1145,38 @@
                         <button type="button" data-command="bold" title="Gras"><i class="fas fa-bold"></i></button>
                         <button type="button" data-command="italic" title="Italique"><i class="fas fa-italic"></i></button>
                         <button type="button" data-command="underline" title="Souligné"><i class="fas fa-underline"></i></button>
+                        <button type="button" data-command="strikeThrough" title="Barré"><i class="fas fa-strikethrough"></i></button>
                     </div>
                     <div class="toolbar-group">
                         <button type="button" data-command="insertUnorderedList" title="Liste à puces"><i class="fas fa-list-ul"></i></button>
                         <button type="button" data-command="insertOrderedList" title="Liste numérotée"><i class="fas fa-list-ol"></i></button>
+                        <button type="button" data-command="indent" title="Augmenter le retrait"><i class="fas fa-indent"></i></button>
+                        <button type="button" data-command="outdent" title="Réduire le retrait"><i class="fas fa-outdent"></i></button>
+                    </div>
+                    <div class="toolbar-group">
+                        <button type="button" data-command="justifyLeft" title="Aligner à gauche"><i class="fas fa-align-left"></i></button>
+                        <button type="button" data-command="justifyCenter" title="Centrer"><i class="fas fa-align-center"></i></button>
+                        <button type="button" data-command="justifyRight" title="Aligner à droite"><i class="fas fa-align-right"></i></button>
+                        <button type="button" data-command="justifyFull" title="Justifier"><i class="fas fa-align-justify"></i></button>
+                    </div>
+                    <div class="toolbar-group">
+                        <button type="button" class="add-table-btn" title="Insérer un tableau"><i class="fas fa-table"></i></button>
+                        <button type="button" class="add-image-btn" title="Insérer une image"><i class="fas fa-image"></i></button>
+                        <button type="button" class="add-code-btn" title="Insérer du code"><i class="fas fa-code"></i></button>
+                        <button type="button" data-command="formatBlock" data-value="blockquote" title="Citation"><i class="fas fa-quote-right"></i></button>
                     </div>
                     <div class="toolbar-group color-picker">
                         <div class="color-option color-red" data-color="#e74c3c" title="Rouge"></div>
                         <div class="color-option color-blue" data-color="#3498db" title="Bleu"></div>
                         <div class="color-option color-green" data-color="#27ae60" title="Vert"></div>
+                        <div class="color-option color-purple" data-color="#9b59b6" title="Violet"></div>
+                        <div class="color-option color-orange" data-color="#e67e22" title="Orange"></div>
                         <div class="color-option color-black active" data-color="#2c3e50" title="Noir"></div>
                     </div>
                     <div class="toolbar-group">
-                        <button type="button" class="add-image-btn" title="Insérer une image"><i class="fas fa-image"></i></button>
+                        <button type="button" data-command="removeFormat" title="Supprimer le formatage"><i class="fas fa-eraser"></i></button>
+                        <button type="button" data-command="undo" title="Annuler"><i class="fas fa-undo"></i></button>
+                        <button type="button" data-command="redo" title="Refaire"><i class="fas fa-redo"></i></button>
                     </div>
                 `;
                 
@@ -1027,6 +1206,8 @@
                 const hiddenInput = document.getElementById(fieldId);
                 const colorOptions = editorContainer.querySelectorAll('.color-option');
                 const addImageBtn = editorContainer.querySelector('.add-image-btn');
+                const addTableBtn = editorContainer.querySelector('.add-table-btn');
+                const addCodeBtn = editorContainer.querySelector('.add-code-btn');
                 
                 // Gestion des boutons de formatage
                 toolbar.addEventListener('click', function(e) {
@@ -1038,8 +1219,14 @@
                     // Gestion des commandes de formatage
                     if (target.tagName === 'BUTTON') {
                         const command = target.getAttribute('data-command');
+                        const value = target.getAttribute('data-value');
+                        
                         if (command) {
-                            document.execCommand(command, false, null);
+                            if (value) {
+                                document.execCommand(command, false, value);
+                            } else {
+                                document.execCommand(command, false, null);
+                            }
                             editorContent.focus();
                             updateHiddenInput();
                         }
@@ -1065,6 +1252,19 @@
                         currentEditor = fieldId;
                         openImageModal();
                     }
+                    
+                    // Gestion de l'insertion de tableaux
+                    if (target.classList.contains('add-table-btn')) {
+                        currentEditor = fieldId;
+                        openTableModal();
+                    }
+                    
+                    // Gestion de l'insertion de code
+                    if (target.classList.contains('add-code-btn')) {
+                        insertCodeBlock();
+                        editorContent.focus();
+                        updateHiddenInput();
+                    }
                 });
                 
                 // Fonction pour appliquer une couleur au texte sélectionné
@@ -1082,6 +1282,33 @@
                     // Restaurer la sélection
                     selection.removeAllRanges();
                     selection.addRange(range);
+                }
+                
+                // Fonction pour insérer un bloc de code
+                function insertCodeBlock() {
+                    const selection = window.getSelection();
+                    if (selection.rangeCount === 0) return;
+                    
+                    const range = selection.getRangeAt(0);
+                    const codeBlock = document.createElement('pre');
+                    const codeElement = document.createElement('code');
+                    
+                    if (selection.toString()) {
+                        codeElement.textContent = selection.toString();
+                        range.deleteContents();
+                    } else {
+                        codeElement.textContent = 'Votre code ici';
+                    }
+                    
+                    codeBlock.appendChild(codeElement);
+                    range.insertNode(codeBlock);
+                    
+                    // Mettre le curseur à l'intérieur du bloc de code
+                    const newRange = document.createRange();
+                    newRange.setStart(codeElement, 0);
+                    newRange.setEnd(codeElement, 0);
+                    selection.removeAllRanges();
+                    selection.addRange(newRange);
                 }
                 
                 // Mettre à jour le champ caché lorsque le contenu change
@@ -1117,6 +1344,73 @@
             function closeImageModal() {
                 imageModal.style.display = 'none';
                 currentEditor = null;
+            }
+            
+            // Ouvrir le modal d'insertion de tableau
+            function openTableModal() {
+                tableModal.style.display = 'flex';
+                updateTablePreview();
+            }
+            
+            // Fermer le modal d'insertion de tableau
+            function closeTableModal() {
+                tableModal.style.display = 'none';
+                currentEditor = null;
+            }
+            
+            // Mettre à jour l'aperçu du tableau
+            function updateTablePreview() {
+                const rows = parseInt(tableRows.value) || 3;
+                const columns = parseInt(tableColumns.value) || 3;
+                
+                let tableHTML = '';
+                
+                for (let i = 0; i < rows; i++) {
+                    tableHTML += '<tr>';
+                    for (let j = 0; j < columns; j++) {
+                        if (i === 0) {
+                            tableHTML += '<th></th>';
+                        } else {
+                            tableHTML += '<td></td>';
+                        }
+                    }
+                    tableHTML += '</tr>';
+                }
+                
+                tablePreview.innerHTML = tableHTML;
+            }
+            
+            // Insérer un tableau dans l'éditeur
+            function insertTable() {
+                const rows = parseInt(tableRows.value) || 3;
+                const columns = parseInt(tableColumns.value) || 3;
+                
+                let tableHTML = '<table><tbody>';
+                
+                for (let i = 0; i < rows; i++) {
+                    tableHTML += '<tr>';
+                    for (let j = 0; j < columns; j++) {
+                        if (i === 0) {
+                            tableHTML += '<th></th>';
+                        } else {
+                            tableHTML += '<td></td>';
+                        }
+                    }
+                    tableHTML += '</tr>';
+                }
+                
+                tableHTML += '</tbody></table>';
+                
+                if (currentEditor) {
+                    const editorContent = document.getElementById(`${currentEditor}Content`);
+                    document.execCommand('insertHTML', false, tableHTML);
+                    editorContent.focus();
+                    
+                    // Mettre à jour le champ caché
+                    document.getElementById(currentEditor).value = editorContent.innerHTML;
+                }
+                
+                closeTableModal();
             }
             
             // Tab switching
@@ -1229,6 +1523,15 @@
                 
                 closeImageModal();
             });
+            
+            // Événements pour le modal de tableaux
+            tableModalClose.addEventListener('click', closeTableModal);
+            cancelTableBtn.addEventListener('click', closeTableModal);
+            
+            tableRows.addEventListener('input', updateTablePreview);
+            tableColumns.addEventListener('input', updateTablePreview);
+            
+            insertTableBtn.addEventListener('click', insertTable);
             
             function initApp() {
                 initRichTextEditors();
@@ -1486,6 +1789,8 @@
                         .replace(/<\/em>/g, '}')
                         .replace(/<u>/g, '\\underline{')
                         .replace(/<\/u>/g, '}')
+                        .replace(/<s>/g, '\\sout{')
+                        .replace(/<\/s>/g, '}')
                         .replace(/<br>/g, '\\\\')
                         .replace(/<br\/>/g, '\\\\')
                         .replace(/<ul>/g, '\\begin{itemize}')
@@ -1495,6 +1800,20 @@
                         .replace(/<li>/g, '\\item ')
                         .replace(/<\/li>/g, '')
                         .replace(/<img[^>]*src="([^"]*)"[^>]*>/g, '\\includegraphics[width=0.8\\textwidth]{$1}')
+                        .replace(/<table>/g, '\\begin{table}[h]\n\\centering\n\\begin{tabular}')
+                        .replace(/<\/table>/g, '\\end{tabular}\n\\end{table}')
+                        .replace(/<tr>/g, '')
+                        .replace(/<\/tr>/g, ' \\\\\n')
+                        .replace(/<th>/g, '\\textbf{')
+                        .replace(/<\/th>/g, '}')
+                        .replace(/<td>/g, '')
+                        .replace(/<\/td>/g, ' & ')
+                        .replace(/<pre>/g, '\\begin{verbatim}')
+                        .replace(/<\/pre>/g, '\\end{verbatim}')
+                        .replace(/<code>/g, '\\texttt{')
+                        .replace(/<\/code>/g, '}')
+                        .replace(/<blockquote>/g, '\\begin{quote}')
+                        .replace(/<\/blockquote>/g, '\\end{quote}')
                         .replace(/<[^>]*>/g, '')
                         .replace(/\n/g, '\\\\');
                     
@@ -1513,6 +1832,7 @@
 \\usepackage{enumitem}
 \\usepackage{xcolor}
 \\usepackage{hyperref}
+\\usepackage{ulem}
 
 \\titleformat{\\section}{\\large\\bfseries}{}{0em}{}
 \\titleformat{\\subsection}{\\normalsize\\bfseries}{}{0em}{}
