@@ -498,107 +498,45 @@
         }
         
         /* Éditeur de texte enrichi amélioré */
-        .rich-text-editor {
+        .editor-container {
             border: 1px solid var(--border-color);
             border-radius: 8px;
             overflow: hidden;
             box-shadow: 0 2px 4px rgba(0,0,0,0.05);
         }
         
-        .toolbar {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 5px;
-            padding: 12px;
+        .ql-toolbar {
             background-color: var(--light-color);
             border-bottom: 1px solid var(--border-color);
         }
         
-        .toolbar-group {
-            display: flex;
-            gap: 5px;
-            padding-right: 12px;
-            border-right: 1px solid var(--border-color);
-            margin-right: 12px;
-            align-items: center;
-        }
-        
-        .toolbar-group:last-child {
-            border-right: none;
-            margin-right: 0;
-        }
-        
-        .toolbar button {
-            background: white;
-            border: 1px solid var(--border-color);
-            border-radius: 6px;
-            padding: 8px 12px;
-            cursor: pointer;
-            font-size: 0.9rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.2s;
-            color: var(--dark-color);
-        }
-        
-        .toolbar button:hover {
-            background-color: #f0f0f0;
-            border-color: var(--secondary-color);
-        }
-        
-        .toolbar button.active {
-            background-color: var(--secondary-color);
-            color: white;
-            border-color: var(--secondary-color);
-        }
-        
-        .color-picker {
-            display: flex;
-            gap: 5px;
-        }
-        
-        .color-option {
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            cursor: pointer;
-            border: 2px solid transparent;
-            transition: all 0.2s;
-        }
-        
-        .color-option:hover {
-            transform: scale(1.1);
-        }
-        
-        .color-option.active {
-            border-color: var(--dark-color);
-            transform: scale(1.1);
-        }
-        
-        .color-red { background-color: #e74c3c; }
-        .color-blue { background-color: #3498db; }
-        .color-green { background-color: #27ae60; }
-        .color-black { background-color: #2c3e50; }
-        .color-purple { background-color: #9b59b6; }
-        .color-orange { background-color: #e67e22; }
-        
-        .editor-content {
+        .ql-editor {
             min-height: 150px;
-            padding: 15px;
-            outline: none;
-            overflow-y: auto;
-            max-height: 300px;
-            line-height: 1.5;
+            font-size: 15px;
+            line-height: 1.6;
         }
         
-        .editor-content:empty:before {
-            content: attr(data-placeholder);
-            color: #aaa;
-            font-style: italic;
+        .ql-editor table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 10px 0;
         }
         
-        .editor-content img {
+        .ql-editor table, .ql-editor th, .ql-editor td {
+            border: 1px solid var(--border-color);
+        }
+        
+        .ql-editor th, .ql-editor td {
+            padding: 8px 12px;
+            text-align: left;
+        }
+        
+        .ql-editor th {
+            background-color: var(--light-color);
+            font-weight: 600;
+        }
+        
+        .ql-editor img {
             max-width: 100%;
             height: auto;
             border-radius: 6px;
@@ -606,36 +544,7 @@
             display: block;
         }
         
-        .editor-content ul, .editor-content ol {
-            padding-left: 25px;
-            margin: 10px 0;
-        }
-        
-        .editor-content li {
-            margin-bottom: 5px;
-        }
-        
-        .editor-content table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 10px 0;
-        }
-        
-        .editor-content table, .editor-content th, .editor-content td {
-            border: 1px solid var(--border-color);
-        }
-        
-        .editor-content th, .editor-content td {
-            padding: 8px 12px;
-            text-align: left;
-        }
-        
-        .editor-content th {
-            background-color: var(--light-color);
-            font-weight: 600;
-        }
-        
-        .editor-content blockquote {
+        .ql-editor blockquote {
             border-left: 4px solid var(--secondary-color);
             padding-left: 15px;
             margin: 10px 0;
@@ -643,14 +552,14 @@
             color: #555;
         }
         
-        .editor-content code {
+        .ql-editor code {
             background-color: var(--light-color);
             padding: 2px 6px;
             border-radius: 4px;
             font-family: 'Courier New', monospace;
         }
         
-        .editor-content pre {
+        .ql-editor pre {
             background-color: var(--light-color);
             padding: 12px;
             border-radius: 6px;
@@ -658,10 +567,20 @@
             margin: 10px 0;
         }
         
-        .editor-content pre code {
+        .ql-editor pre code {
             background: none;
             padding: 0;
         }
+        
+        /* Styles pour les différentes polices */
+        .ql-font-arial { font-family: Arial, sans-serif; }
+        .ql-font-times { font-family: 'Times New Roman', serif; }
+        .ql-font-courier { font-family: 'Courier New', monospace; }
+        .ql-font-georgia { font-family: Georgia, serif; }
+        .ql-font-verdana { font-family: Verdana, sans-serif; }
+        .ql-font-tahoma { font-family: Tahoma, sans-serif; }
+        .ql-font-impact { font-family: Impact, sans-serif; }
+        .ql-font-comic { font-family: 'Comic Sans MS', cursive; }
         
         .image-modal {
             display: none;
@@ -710,72 +629,6 @@
             box-shadow: 0 3px 6px rgba(0,0,0,0.1);
         }
         
-        .table-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.5);
-            z-index: 1000;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
-        
-        .table-modal-content {
-            background: white;
-            padding: 25px;
-            border-radius: 12px;
-            width: 90%;
-            max-width: 500px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-        }
-        
-        .table-modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-        
-        .table-modal-close {
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: var(--dark-color);
-        }
-        
-        .table-size-selector {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-        
-        .table-preview {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 15px 0;
-        }
-        
-        .table-preview, .table-preview th, .table-preview td {
-            border: 1px solid var(--border-color);
-        }
-        
-        .table-preview th, .table-preview td {
-            padding: 8px;
-            text-align: center;
-            min-width: 40px;
-            height: 30px;
-        }
-        
-        .table-preview th {
-            background-color: var(--light-color);
-        }
-        
         @media (max-width: 768px) {
             .form-row, .actions {
                 grid-template-columns: 1fr;
@@ -795,18 +648,6 @@
                 flex-direction: column;
             }
             
-            .toolbar {
-                flex-direction: column;
-                gap: 10px;
-            }
-            
-            .toolbar-group {
-                border-right: none;
-                margin-right: 0;
-                padding-right: 0;
-                justify-content: flex-start;
-            }
-            
             h1 {
                 font-size: 2rem;
             }
@@ -823,6 +664,8 @@
         .text-black { color: #2c3e50 !important; }
         .text-purple { color: #9b59b6 !important; }
         .text-orange { color: #e67e22 !important; }
+        .text-yellow { color: #f1c40f !important; }
+        .text-brown { color: #a0522d !important; }
         
         .section-content b, .section-content strong {
             font-weight: 600;
@@ -837,14 +680,18 @@
         }
         
         /* Styles pour les couleurs dans l'éditeur */
-        .editor-content span[style*="color: #e74c3c"] { color: #e74c3c !important; }
-        .editor-content span[style*="color: #3498db"] { color: #3498db !important; }
-        .editor-content span[style*="color: #27ae60"] { color: #27ae60 !important; }
-        .editor-content span[style*="color: #2c3e50"] { color: #2c3e50 !important; }
-        .editor-content span[style*="color: #9b59b6"] { color: #9b59b6 !important; }
-        .editor-content span[style*="color: #e67e22"] { color: #e67e22 !important; }
+        .ql-editor span[style*="color: #e74c3c"] { color: #e74c3c !important; }
+        .ql-editor span[style*="color: #3498db"] { color: #3498db !important; }
+        .ql-editor span[style*="color: #27ae60"] { color: #27ae60 !important; }
+        .ql-editor span[style*="color: #2c3e50"] { color: #2c3e50 !important; }
+        .ql-editor span[style*="color: #9b59b6"] { color: #9b59b6 !important; }
+        .ql-editor span[style*="color: #e67e22"] { color: #e67e22 !important; }
+        .ql-editor span[style*="color: #f1c40f"] { color: #f1c40f !important; }
+        .ql-editor span[style*="color: #a0522d"] { color: #a0522d !important; }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Quill.js pour l'éditeur de texte enrichi -->
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
 </head>
 <body>
     <div class="container">
@@ -982,66 +829,8 @@
         </section>
     </div>
 
-    <!-- Modal pour l'insertion d'images -->
-    <div class="image-modal" id="imageModal">
-        <div class="image-modal-content">
-            <div class="image-modal-header">
-                <h3><i class="fas fa-image"></i> Insérer une image</h3>
-                <button class="image-modal-close" id="imageModalClose">&times;</button>
-            </div>
-            <div class="form-group">
-                <label for="imageUrl"><i class="fas fa-link"></i> URL de l'image</label>
-                <input type="text" id="imageUrl" placeholder="https://example.com/image.jpg">
-            </div>
-            <div class="form-group">
-                <label for="imageUpload"><i class="fas fa-upload"></i> Ou télécharger une image</label>
-                <input type="file" id="imageUpload" accept="image/*">
-            </div>
-            <div id="imagePreviewContainer" style="display: none;">
-                <img id="imagePreview" class="image-preview" src="" alt="Aperçu">
-            </div>
-            <div class="actions">
-                <button type="button" id="insertImageBtn" class="btn-success">
-                    <i class="fas fa-plus"></i> Insérer l'image
-                </button>
-                <button type="button" id="cancelImageBtn" class="btn-outline">
-                    <i class="fas fa-times"></i> Annuler
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal pour l'insertion de tableaux -->
-    <div class="table-modal" id="tableModal">
-        <div class="table-modal-content">
-            <div class="table-modal-header">
-                <h3><i class="fas fa-table"></i> Insérer un tableau</h3>
-                <button class="table-modal-close" id="tableModalClose">&times;</button>
-            </div>
-            <div class="table-size-selector">
-                <div class="form-group">
-                    <label for="tableRows">Nombre de lignes</label>
-                    <input type="number" id="tableRows" min="1" max="10" value="3">
-                </div>
-                <div class="form-group">
-                    <label for="tableColumns">Nombre de colonnes</label>
-                    <input type="number" id="tableColumns" min="1" max="10" value="3">
-                </div>
-            </div>
-            <div id="tablePreviewContainer">
-                <table class="table-preview" id="tablePreview"></table>
-            </div>
-            <div class="actions">
-                <button type="button" id="insertTableBtn" class="btn-success">
-                    <i class="fas fa-plus"></i> Insérer le tableau
-                </button>
-                <button type="button" id="cancelTableBtn" class="btn-outline">
-                    <i class="fas fa-times"></i> Annuler
-                </button>
-            </div>
-        </div>
-    </div>
-
+    <!-- Scripts -->
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Configuration des champs avec éditeur riche
@@ -1078,30 +867,10 @@
             const tabs = document.querySelectorAll('.tab');
             const tabContents = document.querySelectorAll('.tab-content');
             
-            // Variables pour l'éditeur d'images
-            const imageModal = document.getElementById('imageModal');
-            const imageModalClose = document.getElementById('imageModalClose');
-            const imageUrl = document.getElementById('imageUrl');
-            const imageUpload = document.getElementById('imageUpload');
-            const imagePreview = document.getElementById('imagePreview');
-            const imagePreviewContainer = document.getElementById('imagePreviewContainer');
-            const insertImageBtn = document.getElementById('insertImageBtn');
-            const cancelImageBtn = document.getElementById('cancelImageBtn');
-            
-            // Variables pour l'éditeur de tableaux
-            const tableModal = document.getElementById('tableModal');
-            const tableModalClose = document.getElementById('tableModalClose');
-            const tableRows = document.getElementById('tableRows');
-            const tableColumns = document.getElementById('tableColumns');
-            const tablePreview = document.getElementById('tablePreview');
-            const insertTableBtn = document.getElementById('insertTableBtn');
-            const cancelTableBtn = document.getElementById('cancelTableBtn');
-            
             let currentLessonId = null;
             let savedLessons = JSON.parse(localStorage.getItem('savedLessons')) || [];
             let savedLessonsVisible = true;
-            let currentEditor = null;
-            let currentColor = '#2c3e50'; // Couleur par défaut (noir)
+            let quillEditors = [];
             
             // Set today's date as default
             const today = new Date().toISOString().split('T')[0];
@@ -1110,14 +879,14 @@
             // Initialiser l'application
             initApp();
             
-            // Initialiser les éditeurs de texte enrichi
+            // Initialiser les éditeurs de texte enrichi avec Quill.js
             function initRichTextEditors() {
                 richTextFieldsConfig.forEach(field => {
                     createRichTextEditor(field);
                 });
             }
             
-            // Créer un éditeur de texte enrichi pour un champ
+            // Créer un éditeur de texte enrichi pour un champ avec Quill.js
             function createRichTextEditor(fieldConfig) {
                 const tabContent = document.getElementById(`${fieldConfig.tab}-tab`);
                 if (!tabContent) return;
@@ -1135,59 +904,8 @@
                 hiddenInput.required = true;
                 
                 const editorContainer = document.createElement('div');
-                editorContainer.className = 'rich-text-editor';
+                editorContainer.className = 'editor-container';
                 editorContainer.id = `${fieldConfig.id}Editor`;
-                
-                const toolbar = document.createElement('div');
-                toolbar.className = 'toolbar';
-                toolbar.innerHTML = `
-                    <div class="toolbar-group">
-                        <button type="button" data-command="bold" title="Gras"><i class="fas fa-bold"></i></button>
-                        <button type="button" data-command="italic" title="Italique"><i class="fas fa-italic"></i></button>
-                        <button type="button" data-command="underline" title="Souligné"><i class="fas fa-underline"></i></button>
-                        <button type="button" data-command="strikeThrough" title="Barré"><i class="fas fa-strikethrough"></i></button>
-                    </div>
-                    <div class="toolbar-group">
-                        <button type="button" data-command="insertUnorderedList" title="Liste à puces"><i class="fas fa-list-ul"></i></button>
-                        <button type="button" data-command="insertOrderedList" title="Liste numérotée"><i class="fas fa-list-ol"></i></button>
-                        <button type="button" data-command="indent" title="Augmenter le retrait"><i class="fas fa-indent"></i></button>
-                        <button type="button" data-command="outdent" title="Réduire le retrait"><i class="fas fa-outdent"></i></button>
-                    </div>
-                    <div class="toolbar-group">
-                        <button type="button" data-command="justifyLeft" title="Aligner à gauche"><i class="fas fa-align-left"></i></button>
-                        <button type="button" data-command="justifyCenter" title="Centrer"><i class="fas fa-align-center"></i></button>
-                        <button type="button" data-command="justifyRight" title="Aligner à droite"><i class="fas fa-align-right"></i></button>
-                        <button type="button" data-command="justifyFull" title="Justifier"><i class="fas fa-align-justify"></i></button>
-                    </div>
-                    <div class="toolbar-group">
-                        <button type="button" class="add-table-btn" title="Insérer un tableau"><i class="fas fa-table"></i></button>
-                        <button type="button" class="add-image-btn" title="Insérer une image"><i class="fas fa-image"></i></button>
-                        <button type="button" class="add-code-btn" title="Insérer du code"><i class="fas fa-code"></i></button>
-                        <button type="button" data-command="formatBlock" data-value="blockquote" title="Citation"><i class="fas fa-quote-right"></i></button>
-                    </div>
-                    <div class="toolbar-group color-picker">
-                        <div class="color-option color-red" data-color="#e74c3c" title="Rouge"></div>
-                        <div class="color-option color-blue" data-color="#3498db" title="Bleu"></div>
-                        <div class="color-option color-green" data-color="#27ae60" title="Vert"></div>
-                        <div class="color-option color-purple" data-color="#9b59b6" title="Violet"></div>
-                        <div class="color-option color-orange" data-color="#e67e22" title="Orange"></div>
-                        <div class="color-option color-black active" data-color="#2c3e50" title="Noir"></div>
-                    </div>
-                    <div class="toolbar-group">
-                        <button type="button" data-command="removeFormat" title="Supprimer le formatage"><i class="fas fa-eraser"></i></button>
-                        <button type="button" data-command="undo" title="Annuler"><i class="fas fa-undo"></i></button>
-                        <button type="button" data-command="redo" title="Refaire"><i class="fas fa-redo"></i></button>
-                    </div>
-                `;
-                
-                const editorContent = document.createElement('div');
-                editorContent.className = 'editor-content';
-                editorContent.id = `${fieldConfig.id}Content`;
-                editorContent.contentEditable = true;
-                editorContent.setAttribute('data-placeholder', `Saisissez votre ${fieldConfig.label.toLowerCase()} ici...`);
-                
-                editorContainer.appendChild(toolbar);
-                editorContainer.appendChild(editorContent);
                 
                 formGroup.appendChild(label);
                 formGroup.appendChild(hiddenInput);
@@ -1195,222 +913,44 @@
                 
                 tabContent.appendChild(formGroup);
                 
-                // Initialiser les événements de l'éditeur
-                initEditorEvents(editorContainer, fieldConfig.id);
-            }
-            
-            // Initialiser les événements pour un éditeur
-            function initEditorEvents(editorContainer, fieldId) {
-                const toolbar = editorContainer.querySelector('.toolbar');
-                const editorContent = editorContainer.querySelector('.editor-content');
-                const hiddenInput = document.getElementById(fieldId);
-                const colorOptions = editorContainer.querySelectorAll('.color-option');
-                const addImageBtn = editorContainer.querySelector('.add-image-btn');
-                const addTableBtn = editorContainer.querySelector('.add-table-btn');
-                const addCodeBtn = editorContainer.querySelector('.add-code-btn');
+                // Configuration personnalisée de la barre d'outils
+                const toolbarOptions = [
+                    [{ 'font': [] }, { 'size': ['small', false, 'large', 'huge'] }],
+                    ['bold', 'italic', 'underline', 'strike'],
+                    [{ 'color': [] }, { 'background': [] }],
+                    [{ 'script': 'sub'}, { 'script': 'super' }],
+                    [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+                    [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                    [{ 'indent': '-1'}, { 'indent': '+1' }],
+                    [{ 'align': [] }],
+                    ['blockquote', 'code-block'],
+                    ['link', 'image'],
+                    ['clean']
+                ];
                 
-                // Gestion des boutons de formatage
-                toolbar.addEventListener('click', function(e) {
-                    const target = e.target.closest('button') || e.target.closest('.color-option');
-                    if (!target) return;
-                    
-                    e.preventDefault();
-                    
-                    // Gestion des commandes de formatage
-                    if (target.tagName === 'BUTTON') {
-                        const command = target.getAttribute('data-command');
-                        const value = target.getAttribute('data-value');
-                        
-                        if (command) {
-                            if (value) {
-                                document.execCommand(command, false, value);
-                            } else {
-                                document.execCommand(command, false, null);
-                            }
-                            editorContent.focus();
-                            updateHiddenInput();
-                        }
-                    }
-                    
-                    // Gestion des couleurs
-                    if (target.classList.contains('color-option')) {
-                        // Retirer la classe active de toutes les options
-                        colorOptions.forEach(opt => opt.classList.remove('active'));
-                        // Ajouter la classe active à l'option cliquée
-                        target.classList.add('active');
-                        // Mettre à jour la couleur courante
-                        currentColor = target.getAttribute('data-color');
-                        
-                        // Appliquer la couleur au texte
-                        applyColorToSelection(currentColor);
-                        editorContent.focus();
-                        updateHiddenInput();
-                    }
-                    
-                    // Gestion de l'insertion d'images
-                    if (target.classList.contains('add-image-btn')) {
-                        currentEditor = fieldId;
-                        openImageModal();
-                    }
-                    
-                    // Gestion de l'insertion de tableaux
-                    if (target.classList.contains('add-table-btn')) {
-                        currentEditor = fieldId;
-                        openTableModal();
-                    }
-                    
-                    // Gestion de l'insertion de code
-                    if (target.classList.contains('add-code-btn')) {
-                        insertCodeBlock();
-                        editorContent.focus();
-                        updateHiddenInput();
-                    }
+                // Initialiser l'éditeur Quill.js
+                const quill = new Quill(`#${fieldConfig.id}Editor`, {
+                    theme: 'snow',
+                    modules: {
+                        toolbar: toolbarOptions
+                    },
+                    placeholder: `Saisissez votre ${fieldConfig.label.toLowerCase()} ici...`
                 });
                 
-                // Fonction pour appliquer une couleur au texte sélectionné
-                function applyColorToSelection(color) {
-                    // Sauvegarder la sélection actuelle
-                    const selection = window.getSelection();
-                    if (selection.rangeCount === 0) return;
-                    
-                    const range = selection.getRangeAt(0);
-                    
-                    // Appliquer la couleur
-                    document.execCommand('styleWithCSS', false, true);
-                    document.execCommand('foreColor', false, color);
-                    
-                    // Restaurer la sélection
-                    selection.removeAllRanges();
-                    selection.addRange(range);
-                }
-                
-                // Fonction pour insérer un bloc de code
-                function insertCodeBlock() {
-                    const selection = window.getSelection();
-                    if (selection.rangeCount === 0) return;
-                    
-                    const range = selection.getRangeAt(0);
-                    const codeBlock = document.createElement('pre');
-                    const codeElement = document.createElement('code');
-                    
-                    if (selection.toString()) {
-                        codeElement.textContent = selection.toString();
-                        range.deleteContents();
-                    } else {
-                        codeElement.textContent = 'Votre code ici';
-                    }
-                    
-                    codeBlock.appendChild(codeElement);
-                    range.insertNode(codeBlock);
-                    
-                    // Mettre le curseur à l'intérieur du bloc de code
-                    const newRange = document.createRange();
-                    newRange.setStart(codeElement, 0);
-                    newRange.setEnd(codeElement, 0);
-                    selection.removeAllRanges();
-                    selection.addRange(newRange);
-                }
-                
                 // Mettre à jour le champ caché lorsque le contenu change
-                function updateHiddenInput() {
-                    hiddenInput.value = editorContent.innerHTML;
-                }
-                
-                editorContent.addEventListener('input', updateHiddenInput);
-                editorContent.addEventListener('blur', updateHiddenInput);
-                
-                // Gérer le collage pour conserver le formatage
-                editorContent.addEventListener('paste', function(e) {
-                    e.preventDefault();
-                    const text = (e.originalEvent || e).clipboardData.getData('text/html') || 
-                                (e.originalEvent || e).clipboardData.getData('text/plain');
-                    document.execCommand('insertHTML', false, text);
-                    updateHiddenInput();
+                quill.on('text-change', function() {
+                    hiddenInput.value = quill.root.innerHTML;
                 });
                 
                 // Initialiser la valeur du champ caché
-                updateHiddenInput();
-            }
-            
-            // Ouvrir le modal d'insertion d'image
-            function openImageModal() {
-                imageModal.style.display = 'flex';
-                imageUrl.value = '';
-                imageUpload.value = '';
-                imagePreviewContainer.style.display = 'none';
-            }
-            
-            // Fermer le modal d'insertion d'image
-            function closeImageModal() {
-                imageModal.style.display = 'none';
-                currentEditor = null;
-            }
-            
-            // Ouvrir le modal d'insertion de tableau
-            function openTableModal() {
-                tableModal.style.display = 'flex';
-                updateTablePreview();
-            }
-            
-            // Fermer le modal d'insertion de tableau
-            function closeTableModal() {
-                tableModal.style.display = 'none';
-                currentEditor = null;
-            }
-            
-            // Mettre à jour l'aperçu du tableau
-            function updateTablePreview() {
-                const rows = parseInt(tableRows.value) || 3;
-                const columns = parseInt(tableColumns.value) || 3;
+                hiddenInput.value = quill.root.innerHTML;
                 
-                let tableHTML = '';
-                
-                for (let i = 0; i < rows; i++) {
-                    tableHTML += '<tr>';
-                    for (let j = 0; j < columns; j++) {
-                        if (i === 0) {
-                            tableHTML += '<th></th>';
-                        } else {
-                            tableHTML += '<td></td>';
-                        }
-                    }
-                    tableHTML += '</tr>';
-                }
-                
-                tablePreview.innerHTML = tableHTML;
-            }
-            
-            // Insérer un tableau dans l'éditeur
-            function insertTable() {
-                const rows = parseInt(tableRows.value) || 3;
-                const columns = parseInt(tableColumns.value) || 3;
-                
-                let tableHTML = '<table><tbody>';
-                
-                for (let i = 0; i < rows; i++) {
-                    tableHTML += '<tr>';
-                    for (let j = 0; j < columns; j++) {
-                        if (i === 0) {
-                            tableHTML += '<th></th>';
-                        } else {
-                            tableHTML += '<td></td>';
-                        }
-                    }
-                    tableHTML += '</tr>';
-                }
-                
-                tableHTML += '</tbody></table>';
-                
-                if (currentEditor) {
-                    const editorContent = document.getElementById(`${currentEditor}Content`);
-                    document.execCommand('insertHTML', false, tableHTML);
-                    editorContent.focus();
-                    
-                    // Mettre à jour le champ caché
-                    document.getElementById(currentEditor).value = editorContent.innerHTML;
-                }
-                
-                closeTableModal();
+                // Stocker la référence de l'éditeur
+                quillEditors.push({
+                    fieldId: fieldConfig.id,
+                    editor: quill,
+                    hiddenInput: hiddenInput
+                });
             }
             
             // Tab switching
@@ -1471,67 +1011,6 @@
                 filterSearch.value = '';
                 filterLessons();
             });
-            
-            // Événements pour le modal d'images
-            imageModalClose.addEventListener('click', closeImageModal);
-            cancelImageBtn.addEventListener('click', closeImageModal);
-            
-            imageUrl.addEventListener('input', function() {
-                if (this.value) {
-                    imagePreview.src = this.value;
-                    imagePreviewContainer.style.display = 'block';
-                } else {
-                    imagePreviewContainer.style.display = 'none';
-                }
-            });
-            
-            imageUpload.addEventListener('change', function(e) {
-                const file = e.target.files[0];
-                if (file) {
-                    const reader = new FileReader();
-                    reader.onload = function(event) {
-                        imagePreview.src = event.target.result;
-                        imagePreviewContainer.style.display = 'block';
-                    };
-                    reader.readAsDataURL(file);
-                }
-            });
-            
-            insertImageBtn.addEventListener('click', function() {
-                let imageSrc = '';
-                
-                if (imageUrl.value) {
-                    imageSrc = imageUrl.value;
-                } else if (imageUpload.files[0]) {
-                    const file = imageUpload.files[0];
-                    imageSrc = URL.createObjectURL(file);
-                }
-                
-                if (imageSrc && currentEditor) {
-                    const editorContent = document.getElementById(`${currentEditor}Content`);
-                    const img = document.createElement('img');
-                    img.src = imageSrc;
-                    img.alt = 'Image insérée';
-                    img.style.maxWidth = '100%';
-                    
-                    document.execCommand('insertHTML', false, img.outerHTML);
-                    editorContent.focus();
-                    
-                    // Mettre à jour le champ caché
-                    document.getElementById(currentEditor).value = editorContent.innerHTML;
-                }
-                
-                closeImageModal();
-            });
-            
-            // Événements pour le modal de tableaux
-            tableModalClose.addEventListener('click', closeTableModal);
-            cancelTableBtn.addEventListener('click', closeTableModal);
-            
-            tableRows.addEventListener('input', updateTablePreview);
-            tableColumns.addEventListener('input', updateTablePreview);
-            
-            insertTableBtn.addEventListener('click', insertTable);
             
             function initApp() {
                 initRichTextEditors();
@@ -1695,12 +1174,12 @@
                 
                 // Fill rich text editors
                 richTextFieldsConfig.forEach(field => {
-                    const editorContent = document.getElementById(`${field.id}Content`);
                     const hiddenInput = document.getElementById(field.id);
+                    const quillEditor = quillEditors.find(q => q.fieldId === field.id);
                     
-                    if (editorContent && hiddenInput) {
-                        editorContent.innerHTML = lesson.data[field.id] || '';
+                    if (hiddenInput && quillEditor) {
                         hiddenInput.value = lesson.data[field.id] || '';
+                        quillEditor.editor.root.innerHTML = lesson.data[field.id] || '';
                     }
                 });
                 
@@ -1739,12 +1218,12 @@
                 
                 // Clear rich text editors
                 richTextFieldsConfig.forEach(field => {
-                    const editorContent = document.getElementById(`${field.id}Content`);
                     const hiddenInput = document.getElementById(field.id);
+                    const quillEditor = quillEditors.find(q => q.fieldId === field.id);
                     
-                    if (editorContent && hiddenInput) {
-                        editorContent.innerHTML = '';
+                    if (hiddenInput && quillEditor) {
                         hiddenInput.value = '';
+                        quillEditor.editor.root.innerHTML = '';
                     }
                 });
                 
