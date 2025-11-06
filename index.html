@@ -20,6 +20,7 @@
             --evaluation-color: #8e44ad;
             --error-color: #e74c3c;
             --success-color: #2ecc71;
+            --bibliotheque-color: #3498db;
         }
         
         * {
@@ -264,6 +265,17 @@
         
         .btn-evaluation:hover {
             background-color: #7d3c98;
+            transform: translateY(-2px);
+        }
+        
+        .btn-bibliotheque {
+            background-color: var(--bibliotheque-color);
+            color: white;
+            margin-bottom: 15px;
+        }
+        
+        .btn-bibliotheque:hover {
+            background-color: #2980b9;
             transform: translateY(-2px);
         }
         
@@ -622,6 +634,11 @@
                                 <span class="icon">📝</span> Évaluation
                             </a>
                         </div>
+                        <div class="protected">
+                            <a href="BIBLIO.html" class="btn btn-bibliotheque btn-disabled" id="bibliotheque-maths">
+                                <span class="icon">📚</span> Bibliothèques
+                            </a>
+                        </div>
                         <p>Générateur de fiches pour l'enseignement des mathématiques au collège, couvrant l'algèbre, la géométrie, l'analyse et les statistiques.</p>
                         <div class="niveaux">
                             <h4>Niveaux disponibles :</h4>
@@ -672,6 +689,11 @@
                         <div class="protected">
                             <a href="evaluation.html" class="btn btn-evaluation btn-disabled" id="evaluation-physics">
                                 <span class="icon">📝</span> Évaluation
+                            </a>
+                        </div>
+                        <div class="protected">
+                            <a href="BIBLIO.html" class="btn btn-bibliotheque btn-disabled" id="bibliotheque-physics">
+                                <span class="icon">📚</span> Bibliothèques
                             </a>
                         </div>
                         <p>Générateur de fiches pour les sciences physiques, la chimie et la technologie selon les programmes officiels.</p>
@@ -746,6 +768,10 @@
                     <h3>📝 Évaluations</h3>
                     <p>Créez des évaluations adaptées à chaque niveau et matière</p>
                 </div>
+                <div class="feature-card">
+                    <h3>📚 Bibliothèques</h3>
+                    <p>Accédez à des ressources documentaires par matière</p>
+                </div>
             </div>
         </div>
         
@@ -773,7 +799,7 @@
         const authStatusError = document.getElementById('auth-status-error');
         
         // Récupérer TOUS les boutons protégés (incluant les nouveaux boutons d'évaluation)
-        const allProtectedButtons = document.querySelectorAll('.btn-ai, .btn-maths, .btn-physics, .btn-primary, .btn-latex, .btn-formulas, .btn-evaluation');
+        const allProtectedButtons = document.querySelectorAll('.btn-ai, .btn-maths, .btn-physics, .btn-primary, .btn-latex, .btn-formulas, .btn-evaluation, .btn-bibliotheque');
         const allProtectedElements = document.querySelectorAll('.protected');
         
         // Fonction d'authentification
