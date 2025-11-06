@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Grenier scientifique - Plateforme Éducative Scientifique</title>
+    <title>Grenier scientifique made in Togo - Plateforme Éducative Scientifique</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* Variables CSS */
@@ -1070,7 +1070,7 @@
             <div class="header-content">
                 <div class="logo">
                     <i class="fas fa-atom"></i>
-                    <div>Grenier scientifique <span>Par KOLA M.Essohouna Enseignant Togolais</span></div>
+                    <div>Grenier scientifique <span>made in Togo</span></div>
                 </div>
                 <nav>
                     <ul>
@@ -1094,7 +1094,7 @@
     <section class="hero-section">
         <div class="container">
             <div class="hero-content">
-                <h1 class="hero-title">Par KOLA M.Essohouna Enseignant Togolais</h1>
+                <h1 class="hero-title">Grenier scientifique made in Togo</h1>
                 <p class="hero-subtitle">Votre plateforme éducative pour l'apprentissage des sciences</p>
                 <p>Collège • Lycée • Université</p>
                 <div class="hero-buttons">
@@ -1184,7 +1184,7 @@
                 <div class="level-card universite">
                     <div class="level-header">
                         <i class="fas fa-university level-icon"></i>
-                        <h3>Universitaire</h3>
+                        <h3>Université</h3>
                     </div>
                     <div class="level-content">
                         <p>Perfectionnez votre expertise avec des ressources avancées et de la recherche.</p>
@@ -1273,8 +1273,11 @@
                                     <option value="physique">Physique</option>
                                     <option value="chimie">Chimie</option>
                                     <option value="technologie">Technologie</option>
-                                    
-                                    
+                                    <option value="svt">SVT</option>
+                                    <option value="philosophie">Philosophie</option>
+                                    <option value="francais">Français</option>
+                                    <option value="anglais">Anglais</option>
+                                    <option value="histoire">Histoire-Géographie</option>
                                 </select>
                             </div>
                         </div>
@@ -1407,7 +1410,11 @@
                         <option value="physique">Physique</option>
                         <option value="chimie">Chimie</option>
                         <option value="technologie">Technologie</option>
-                       
+                        <option value="svt">SVT</option>
+                        <option value="philosophie">Philosophie</option>
+                        <option value="francais">Français</option>
+                        <option value="anglais">Anglais</option>
+                        <option value="histoire">Histoire-Géographie</option>
                     </select>
                 </div>
                 
@@ -1644,15 +1651,15 @@
                 <div class="footer-section">
                     <h3>Contact</h3>
                     <ul>
-                        <li><a href="#"><i class="fas fa-envelope"></i> jeanskodoc22@gmail.com</a></li>
+                        <li><a href="#"><i class="fas fa-envelope"></i> contact@grenier-scientifique.tg</a></li>
                         <li><a href="#" id="whatsappContact"><i class="fab fa-whatsapp"></i> +228 92871605</a></li>
-                        <li><a href="#"><i class="fas fa-map-marker-alt"></i> kara, Togo</a></li>
+                        <li><a href="#"><i class="fas fa-map-marker-alt"></i> Lomé, Togo</a></li>
                     </ul>
                 </div>
             </div>
             
             <div class="copyright">
-                &copy; 2025 Grenier scientifique. Tous droits réservés. | Conçu pour l'éducation scientifique par KOLA Eneignant de maths au Togo
+                &copy; 2023 Grenier scientifique made in Togo. Tous droits réservés. | Conçu pour l'éducation scientifique
             </div>
         </div>
     </footer>
@@ -1660,7 +1667,7 @@
     <script>
         // Base de données complète des ressources avec introductions détaillées
         const resources = [
-            // COLLÈGE - 6ème (existant)
+            // COLLÈGE - 6ème - Mathématiques
             {
                 id: 1,
                 title: "Nombres et Calculs",
@@ -1689,6 +1696,226 @@
                     geogebra: "Cette activité GeoGebra vous familiarisera avec la droite numérique. Vous pourrez visualiser et manipuler les nombres pour mieux comprendre leur positionnement.",
                     fiche: "Cette fiche de révision résume l'essentiel du chapitre sur les nombres et calculs. Idéale pour les révisions avant un contrôle.",
                     experience: "Cette expérience ludique transforme l'apprentissage du calcul en jeu. Défiez-vous et améliorez vos compétences en calcul mental."
+                }
+            },
+            // COLLÈGE - 6ème - Physique
+            {
+                id: 41,
+                title: "Introduction à la Physique",
+                description: "Découverte des concepts fondamentaux de la physique et des grandeurs mesurables.",
+                level: "college",
+                class: "6ème",
+                subject: "physique",
+                type: "video",
+                duration: "40 min",
+                elements: {
+                    cours: "cours_introduction_physique_6eme.pdf",
+                    video: "video_grandeurs_mesurables.mp4",
+                    simulation: "simulation_mesures_physiques",
+                    exercices: "exercices_introduction_physique.pdf",
+                    quiz: "quiz_introduction_physique",
+                    geogebra: "instruments_mesure.ggb",
+                    fiche: "fiche_revision_introduction_physique.pdf",
+                    experience: "atelier_mesures_physiques"
+                },
+                introductions: {
+                    cours: "Ce cours vous introduit aux concepts fondamentaux de la physique. Vous découvrirez les grandeurs mesurables et les instruments de mesure utilisés en sciences.",
+                    video: "Cette vidéo présente les différentes grandeurs physiques et montre comment les mesurer avec précision à l'aide d'instruments adaptés.",
+                    simulation: "Cette simulation vous permet de pratiquer les mesures physiques de façon virtuelle et de comprendre l'importance de la précision en sciences.",
+                    exercices: "Ces exercices vous aideront à maîtriser les conversions d'unités et les calculs de grandeurs physiques.",
+                    quiz: "Ce quiz évaluera votre compréhension des concepts fondamentaux de la physique.",
+                    geogebra: "Cette activité GeoGebra vous permet d'explorer les instruments de mesure et leur fonctionnement.",
+                    fiche: "Cette fiche de révision résume les grandeurs physiques essentielles et leurs unités de mesure.",
+                    experience: "Cet atelier virtuel vous permet de réaliser des mesures physiques et de comprendre leur importance dans la vie quotidienne."
+                }
+            },
+
+            // COLLÈGE - 5ème - Mathématiques
+            {
+                id: 42,
+                title: "Géométrie et Symétrie",
+                description: "Étude des figures géométriques planes et des transformations.",
+                level: "college",
+                class: "5ème",
+                subject: "mathematiques",
+                type: "cours",
+                duration: "50 min",
+                elements: {
+                    cours: "cours_geometrie_symetrie_5eme.pdf",
+                    video: "video_transformations_geometriques.mp4",
+                    simulation: "simulation_symetrie_axiale",
+                    exercices: "exercices_geometrie_symetrie.pdf",
+                    quiz: "quiz_geometrie_symetrie",
+                    geogebra: "symetrie_centrale.ggb",
+                    fiche: "fiche_revision_geometrie_symetrie.pdf",
+                    experience: "exploration_symetrie"
+                },
+                introductions: {
+                    cours: "Ce cours vous présente les figures géométriques planes et leurs propriétés. Vous étudierez les symétries axiales et centrales.",
+                    video: "Cette vidéo explique les transformations géométriques avec des animations pour mieux visualiser les symétries.",
+                    simulation: "Cette simulation interactive vous permet de créer des figures symétriques et de comprendre les propriétés des transformations.",
+                    exercices: "Ces exercices vous aideront à maîtriser la construction de figures géométriques et leurs symétries.",
+                    quiz: "Ce quiz évaluera votre compréhension des propriétés géométriques et des transformations.",
+                    geogebra: "Cette activité GeoGebra vous permet d'explorer les symétries centrales et leurs propriétés.",
+                    fiche: "Cette fiche de révision résume les propriétés essentielles des figures géométriques et des transformations.",
+                    experience: "Cette exploration interactive vous permet de découvrir la beauté des symétries dans la nature et l'art."
+                }
+            },
+            // COLLÈGE - 5ème - Physique
+            {
+                id: 43,
+                title: "Électricité Fondamentale",
+                description: "Introduction aux circuits électriques simples et aux composants de base.",
+                level: "college",
+                class: "5ème",
+                subject: "physique",
+                type: "video",
+                duration: "45 min",
+                elements: {
+                    cours: "cours_electricite_fondamentale_5eme.pdf",
+                    video: "video_circuits_electriques.mp4",
+                    simulation: "simulation_circuits_simples",
+                    exercices: "exercices_electricite_fondamentale.pdf",
+                    quiz: "quiz_electricite_fondamentale",
+                    geogebra: "loi_ohm_simple.ggb",
+                    fiche: "fiche_revision_electricite_fondamentale.pdf",
+                    experience: "laboratoire_electricite_virtuel"
+                },
+                introductions: {
+                    cours: "Ce cours vous introduit aux concepts fondamentaux de l'électricité. Vous étudierez les circuits simples et leurs composants.",
+                    video: "Cette vidéo montre comment construire des circuits électriques simples et explique le rôle de chaque composant.",
+                    simulation: "Cette simulation vous permet de construire virtuellement des circuits électriques et d'observer leur fonctionnement.",
+                    exercices: "Ces exercices vous aideront à comprendre les lois fondamentales de l'électricité.",
+                    quiz: "Ce quiz évaluera votre compréhension des circuits électriques simples.",
+                    geogebra: "Cette activité GeoGebra vous permet d'explorer la relation entre tension, intensité et résistance.",
+                    fiche: "Cette fiche de révision résume les composants électriques essentiels et leurs symboles.",
+                    experience: "Ce laboratoire virtuel vous permet d'expérimenter avec l'électricité en toute sécurité."
+                }
+            },
+
+            // COLLÈGE - 4ème - Mathématiques
+            {
+                id: 44,
+                title: "Calcul Littéral et Équations",
+                description: "Introduction au calcul littéral et résolution d'équations du premier degré.",
+                level: "college",
+                class: "4ème",
+                subject: "mathematiques",
+                type: "cours",
+                duration: "55 min",
+                elements: {
+                    cours: "cours_calcul_litteral_4eme.pdf",
+                    video: "video_resolution_equations.mp4",
+                    simulation: "simulation_calcul_litteral",
+                    exercices: "exercices_calcul_litteral.pdf",
+                    quiz: "quiz_calcul_litteral",
+                    geogebra: "equations_premier_degre.ggb",
+                    fiche: "fiche_revision_calcul_litteral.pdf",
+                    experience: "defi_equations"
+                },
+                introductions: {
+                    cours: "Ce cours vous introduit au calcul littéral et à la résolution d'équations. Vous apprendrez à manipuler des expressions algébriques.",
+                    video: "Cette vidéo explique pas à pas la résolution d'équations du premier degré avec des exemples concrets.",
+                    simulation: "Cette simulation interactive vous permet de résoudre des équations et de visualiser les étapes de calcul.",
+                    exercices: "Ces exercices progressifs vous aideront à maîtriser le calcul littéral et la résolution d'équations.",
+                    quiz: "Ce quiz évaluera votre compréhension du calcul littéral et des équations.",
+                    geogebra: "Cette activité GeoGebra vous permet d'explorer graphiquement les solutions d'équations.",
+                    fiche: "Cette fiche de révision résume les méthodes essentielles de résolution d'équations.",
+                    experience: "Ce défi interactif vous permet de tester vos compétences en résolution d'équations."
+                }
+            },
+            // COLLÈGE - 4ème - Physique
+            {
+                id: 45,
+                title: "Lumière et Vision",
+                description: "Étude de la lumière, de sa propagation et des phénomènes optiques.",
+                level: "college",
+                class: "4ème",
+                subject: "physique",
+                type: "video",
+                duration: "50 min",
+                elements: {
+                    cours: "cours_lumiere_vision_4eme.pdf",
+                    video: "video_propagation_lumiere.mp4",
+                    simulation: "simulation_optique_geometrique",
+                    exercices: "exercices_lumiere_vision.pdf",
+                    quiz: "quiz_lumiere_vision",
+                    geogebra: "refraction_lumiere.ggb",
+                    fiche: "fiche_revision_lumiere_vision.pdf",
+                    experience: "laboratoire_optique_virtuel"
+                },
+                introductions: {
+                    cours: "Ce cours vous présente les propriétés de la lumière et les phénomènes optiques. Vous étudierez la réflexion et la réfraction.",
+                    video: "Cette vidéo illustre la propagation de la lumière et les phénomènes optiques avec des expériences spectaculaires.",
+                    simulation: "Cette simulation vous permet d'étudier le comportement de la lumière à travers différents milieux.",
+                    exercices: "Ces exercices vous aideront à comprendre les lois de l'optique géométrique.",
+                    quiz: "Ce quiz évaluera votre compréhension des propriétés de la lumière.",
+                    geogebra: "Cette activité GeoGebra vous permet d'explorer les lois de la réfraction.",
+                    fiche: "Cette fiche de révision résume les phénomènes optiques essentiels.",
+                    experience: "Ce laboratoire virtuel vous permet de réaliser des expériences d'optique sans matériel spécialisé."
+                }
+            },
+
+            // COLLÈGE - 3ème - Mathématiques
+            {
+                id: 46,
+                title: "Théorème de Pythagore et Trigonométrie",
+                description: "Application du théorème de Pythagore et initiation à la trigonométrie.",
+                level: "college",
+                class: "3ème",
+                subject: "mathematiques",
+                type: "cours",
+                duration: "60 min",
+                elements: {
+                    cours: "cours_pythagore_trigonometrie_3eme.pdf",
+                    video: "video_applications_pythagore.mp4",
+                    simulation: "simulation_trigonometrie",
+                    exercices: "exercices_pythagore_trigonometrie.pdf",
+                    quiz: "quiz_pythagore_trigonometrie",
+                    geogebra: "triangle_rectangle.ggb",
+                    fiche: "fiche_revision_pythagore_trigonometrie.pdf",
+                    experience: "exploration_trigonometrie"
+                },
+                introductions: {
+                    cours: "Ce cours approfondit l'étude du théorème de Pythagore et vous initie à la trigonométrie dans le triangle rectangle.",
+                    video: "Cette vidéo présente des applications concrètes du théorème de Pythagore dans la vie quotidienne.",
+                    simulation: "Cette simulation interactive vous permet de visualiser les relations trigonométriques dans le triangle rectangle.",
+                    exercices: "Ces exercices vous aideront à maîtriser l'application du théorème de Pythagore et les calculs trigonométriques.",
+                    quiz: "Ce quiz évaluera votre compréhension du théorème de Pythagore et de la trigonométrie.",
+                    geogebra: "Cette activité GeoGebra vous permet d'explorer les propriétés des triangles rectangles.",
+                    fiche: "Cette fiche de révision résume les formules essentielles de géométrie et de trigonométrie.",
+                    experience: "Cette exploration interactive vous permet de découvrir les applications de la trigonométrie dans divers domaines."
+                }
+            },
+            // COLLÈGE - 3ème - Physique
+            {
+                id: 47,
+                title: "Énergie et Puissance",
+                description: "Étude des différentes formes d'énergie et des conversions énergétiques.",
+                level: "college",
+                class: "3ème",
+                subject: "physique",
+                type: "video",
+                duration: "55 min",
+                elements: {
+                    cours: "cours_energie_puissance_3eme.pdf",
+                    video: "video_conversions_energetiques.mp4",
+                    simulation: "simulation_chaine_energetique",
+                    exercices: "exercices_energie_puissance.pdf",
+                    quiz: "quiz_energie_puissance",
+                    geogebra: "rendement_energetique.ggb",
+                    fiche: "fiche_revision_energie_puissance.pdf",
+                    experience: "laboratoire_energie_virtuel"
+                },
+                introductions: {
+                    cours: "Ce cours vous présente les différentes formes d'énergie et leurs conversions. Vous étudierez les notions de puissance et de rendement.",
+                    video: "Cette vidéo illustre les conversions énergétiques avec des exemples concrets et des animations.",
+                    simulation: "Cette simulation vous permet d'étudier les chaînes énergétiques et de calculer les rendements.",
+                    exercices: "Ces exercices vous aideront à maîtriser les calculs énergétiques et les conversions d'unités.",
+                    quiz: "Ce quiz évaluera votre compréhension des concepts énergétiques.",
+                    geogebra: "Cette activité GeoGebra vous permet d'explorer les relations entre différentes formes d'énergie.",
+                    fiche: "Cette fiche de révision résume les formes d'énergie essentielles et leurs caractéristiques.",
+                    experience: "Ce laboratoire virtuel vous permet d'étudier les conversions énergétiques dans différents systèmes."
                 }
             },
 
@@ -2210,7 +2437,7 @@
             username: "KOLA",
             name: "Utilisateur Démo",
             email: "demo@grenier-scientifique.tg",
-            phone: "+22892871605",
+            phone: "+22800000000",
             level: "universite",
             password: "KOLA1@",
             active: true,
@@ -2513,7 +2740,11 @@ Téléphone: ${lessonData.contributor.phone}
                             'physique': 'fas fa-atom',
                             'chimie': 'fas fa-flask',
                             'technologie': 'fas fa-cogs',
-                            
+                            'svt': 'fas fa-dna',
+                            'philosophie': 'fas fa-brain',
+                            'francais': 'fas fa-book',
+                            'anglais': 'fas fa-language',
+                            'histoire': 'fas fa-monument'
                         }[subject] || 'fas fa-book';
                         
                         const subjectText = {
@@ -2521,7 +2752,11 @@ Téléphone: ${lessonData.contributor.phone}
                             'physique': 'Physique',
                             'chimie': 'Chimie',
                             'technologie': 'Technologie',
-                           
+                            'svt': 'Sciences de la Vie et de la Terre',
+                            'philosophie': 'Philosophie',
+                            'francais': 'Français',
+                            'anglais': 'Anglais',
+                            'histoire': 'Histoire-Géographie'
                         }[subject] || subject;
                         
                         subjectTitle.innerHTML = `
