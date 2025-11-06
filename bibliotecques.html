@@ -1,0 +1,2928 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grenier scientifique made in Togo - Plateforme Éducative Scientifique</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Variables CSS */
+        :root {
+            --primary: #3498db;
+            --secondary: #2c3e50;
+            --college: #e74c3c;
+            --lycee: #f39c12;
+            --universite: #9b59b6;
+            --success: #2ecc71;
+            --warning: #f1c40f;
+            --danger: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #34495e;
+            --shadow: 0 4px 6px rgba(0,0,0,0.1);
+            --transition: all 0.3s ease;
+        }
+        
+        /* Reset et styles de base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+            width: 100%;
+        }
+        
+        /* En-tête amélioré */
+        header {
+            background: linear-gradient(to right, var(--secondary), var(--primary));
+            color: white;
+            padding: 1rem 0;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            width: 100%;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: clamp(1.5rem, 4vw, 1.8rem);
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+        
+        .logo i {
+            color: var(--light);
+            font-size: clamp(1.8rem, 5vw, 2rem);
+        }
+        
+        .logo span {
+            color: var(--light);
+        }
+        
+        nav {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 5px;
+        }
+        
+        nav ul li {
+            margin: 2px;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-size: clamp(0.8rem, 2vw, 0.9rem);
+            white-space: nowrap;
+        }
+        
+        nav ul li a:hover, nav ul li a.active {
+            background-color: rgba(255,255,255,0.2);
+        }
+        
+        .user-actions {
+            display: flex;
+            gap: 8px;
+            flex-shrink: 0;
+        }
+        
+        .btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: clamp(0.8rem, 2vw, 0.9rem);
+            white-space: nowrap;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+        }
+        
+        .btn-success {
+            background-color: var(--success);
+            color: white;
+        }
+        
+        .btn-success:hover {
+            background-color: #27ae60;
+        }
+        
+        .btn-warning {
+            background-color: var(--warning);
+            color: white;
+        }
+        
+        .btn-warning:hover {
+            background-color: #f39c12;
+        }
+        
+        .btn-danger {
+            background-color: var(--danger);
+            color: white;
+        }
+        
+        .btn-danger:hover {
+            background-color: #c0392b;
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            color: white;
+            border: 1px solid white;
+        }
+        
+        .btn-outline:hover {
+            background-color: white;
+            color: var(--secondary);
+        }
+        
+        .btn-sm {
+            padding: 0.4rem 0.8rem;
+            font-size: 0.9rem;
+        }
+        
+        /* Section hero */
+        .hero-section {
+            padding: 3rem 0;
+            text-align: center;
+            background: linear-gradient(135deg, var(--primary) 0%, #2980b9 100%);
+            color: white;
+            margin-bottom: 2rem;
+            width: 100%;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        .hero-title {
+            font-size: clamp(2rem, 8vw, 3rem);
+            margin-bottom: 1rem;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+        
+        .hero-subtitle {
+            font-size: clamp(1.1rem, 4vw, 1.5rem);
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+            line-height: 1.4;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        /* Section niveaux éducatifs */
+        .levels-section {
+            padding: 2rem 0;
+            width: 100%;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--secondary);
+            position: relative;
+            font-size: clamp(1.5rem, 5vw, 2rem);
+        }
+        
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: var(--primary);
+            margin: 10px auto;
+            border-radius: 2px;
+        }
+        
+        .levels-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .level-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+        }
+        
+        .level-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        }
+        
+        .level-header {
+            padding: 1.5rem;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .college .level-header {
+            background: var(--college);
+        }
+        
+        .lycee .level-header {
+            background: var(--lycee);
+        }
+        
+        .universite .level-header {
+            background: var(--universite);
+        }
+        
+        .level-icon {
+            font-size: 1.8rem;
+        }
+        
+        .level-content {
+            padding: 1.5rem;
+        }
+        
+        .level-content ul {
+            list-style: none;
+            margin-top: 1rem;
+        }
+        
+        .level-content ul li {
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.9rem;
+        }
+        
+        .level-content ul li i {
+            color: var(--success);
+            flex-shrink: 0;
+        }
+        
+        /* Section contenu protégé */
+        .protected-section {
+            padding: 2rem 0;
+            background: white;
+            text-align: center;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            margin: 2rem 0;
+            width: 100%;
+        }
+        
+        .protected-content {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 1.5rem;
+        }
+        
+        .protected-icon {
+            font-size: clamp(3rem, 10vw, 4rem);
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+        
+        .protected-title {
+            font-size: clamp(1.5rem, 5vw, 2rem);
+            margin-bottom: 1rem;
+            color: var(--secondary);
+        }
+        
+        .protected-text {
+            font-size: clamp(1rem, 3vw, 1.1rem);
+            margin-bottom: 1.5rem;
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        /* Section contenu éducatif (masquée par défaut) */
+        .content-section {
+            padding: 2rem 0;
+            display: none;
+            width: 100%;
+        }
+        
+        .content-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .filters-bar {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            align-items: center;
+        }
+        
+        .filter-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex: 1;
+            min-width: 150px;
+        }
+        
+        .filter-group label {
+            font-weight: 500;
+            color: var(--dark);
+            font-size: 0.9rem;
+            white-space: nowrap;
+        }
+        
+        .filter-select {
+            padding: 0.5rem;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            background: white;
+            flex: 1;
+            min-width: 120px;
+        }
+        
+        .search-bar {
+            display: flex;
+            flex: 2;
+            min-width: 200px;
+            max-width: 400px;
+        }
+        
+        .search-bar input {
+            flex: 1;
+            padding: 0.5rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: 4px 0 0 4px;
+            border-right: none;
+            font-size: 0.9rem;
+        }
+        
+        .search-bar button {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+        
+        /* Groupes par classe */
+        .class-group {
+            margin-bottom: 2.5rem;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+        
+        .class-header {
+            padding: 1.2rem 1.5rem;
+            background: linear-gradient(to right, var(--secondary), var(--primary));
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .class-header h3 {
+            font-size: 1.3rem;
+            margin: 0;
+        }
+        
+        .class-content {
+            padding: 1.5rem;
+        }
+        
+        .subject-section {
+            margin-bottom: 2rem;
+        }
+        
+        .subject-title {
+            font-size: 1.2rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .lessons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .lesson-card {
+            background: #f8f9fa;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: var(--transition);
+            border: 1px solid #e9ecef;
+        }
+        
+        .lesson-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .lesson-header {
+            padding: 1rem;
+            background: white;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        .lesson-header h4 {
+            margin: 0;
+            color: var(--secondary);
+            font-size: 1.1rem;
+        }
+        
+        .lesson-meta {
+            display: flex;
+            justify-content: space-between;
+            color: #7f8c8d;
+            font-size: 0.8rem;
+            margin-top: 0.5rem;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+        
+        .lesson-description {
+            padding: 1rem;
+            font-size: 0.9rem;
+            color: #555;
+            line-height: 1.5;
+        }
+        
+        .lesson-elements {
+            padding: 0 1rem 1rem;
+        }
+        
+        .element-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 0.5rem;
+        }
+        
+        .element-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+            padding: 0.5rem;
+            background: white;
+            border: 1px solid #e9ecef;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 0.7rem;
+            text-align: center;
+            min-height: 60px;
+            justify-content: center;
+        }
+        
+        .element-btn:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .element-btn i {
+            font-size: 1rem;
+        }
+        
+        .lesson-actions {
+            display: flex;
+            gap: 8px;
+            margin-top: 1rem;
+            padding: 0 1rem 1rem;
+        }
+
+        /* Modal d'introduction */
+        .intro-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+            z-index: 3000;
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+        }
+        
+        .intro-modal-content {
+            background-color: white;
+            width: 100%;
+            max-width: 600px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        
+        .intro-modal-header {
+            padding: 1.2rem;
+            background: linear-gradient(to right, var(--secondary), var(--primary));
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .intro-modal-body {
+            padding: 1.5rem;
+        }
+        
+        .intro-modal-body h3 {
+            color: var(--secondary);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+        
+        .intro-modal-body p {
+            line-height: 1.6;
+            margin-bottom: 1rem;
+            color: #555;
+        }
+        
+        .close-intro-modal {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Formulaire d'ajout de leçon */
+        .lesson-form {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+        }
+        
+        .form-section {
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .form-section-title {
+            font-size: 1.2rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--dark);
+            font-size: 0.9rem;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+        }
+        
+        textarea.form-control {
+            min-height: 100px;
+            resize: vertical;
+        }
+        
+        .element-links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .element-link-group {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 6px;
+            border: 1px solid #e9ecef;
+        }
+        
+        .element-link-group label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .element-link-group i {
+            color: var(--primary);
+        }
+        
+        /* Section fonctionnalités */
+        .features-section {
+            padding: 2rem 0;
+            background: white;
+            margin-top: 2rem;
+            width: 100%;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .feature-card {
+            text-align: center;
+            padding: 1.5rem 1rem;
+            border-radius: 10px;
+            transition: var(--transition);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .feature-card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: var(--secondary);
+        }
+        
+        .feature-card p {
+            font-size: 0.9rem;
+            color: #666;
+            line-height: 1.4;
+        }
+        
+        /* Modal de connexion */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+        }
+        
+        .modal-content {
+            background-color: white;
+            width: 100%;
+            max-width: 500px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        
+        .modal-header {
+            padding: 1.2rem;
+            background: linear-gradient(to right, var(--secondary), var(--primary));
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .close-modal {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-body {
+            padding: 1.2rem;
+        }
+        
+        .form-footer {
+            text-align: center;
+            margin-top: 1.2rem;
+        }
+        
+        .form-footer a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        .form-footer a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Alertes */
+        .alert {
+            padding: 0.8rem;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+        
+        .alert-success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .alert-warning {
+            background-color: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeaa7;
+        }
+        
+        .alert-info {
+            background-color: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+        
+        /* Pied de page */
+        footer {
+            background: var(--secondary);
+            color: white;
+            padding: 2rem 0 1rem;
+            margin-top: 3rem;
+            width: 100%;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-section h3 {
+            margin-bottom: 1.2rem;
+            font-size: 1.1rem;
+            position: relative;
+            padding-bottom: 8px;
+        }
+        
+        .footer-section h3:after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 30px;
+            height: 2px;
+            background: var(--primary);
+        }
+        
+        .footer-section ul {
+            list-style: none;
+        }
+        
+        .footer-section ul li {
+            margin-bottom: 0.6rem;
+        }
+        
+        .footer-section ul li a {
+            color: #bdc3c7;
+            text-decoration: none;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.9rem;
+        }
+        
+        .footer-section ul li a:hover {
+            color: white;
+            padding-left: 3px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 10px;
+            margin-top: 1rem;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 35px;
+            height: 35px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            color: white;
+            transition: var(--transition);
+        }
+        
+        .social-links a:hover {
+            background: var(--primary);
+            transform: translateY(-2px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid #34495e;
+            color: #bdc3c7;
+            font-size: 0.8rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            nav {
+                order: 3;
+                width: 100%;
+                margin-top: 1rem;
+            }
+            
+            nav ul {
+                justify-content: space-around;
+                width: 100%;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .hero-buttons .btn {
+                width: 100%;
+                max-width: 250px;
+                justify-content: center;
+            }
+            
+            .filters-bar {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .filter-group {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 5px;
+            }
+            
+            .search-bar {
+                max-width: 100%;
+            }
+            
+            .content-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .element-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .modal-content {
+                margin: 20px;
+                width: calc(100% - 40px);
+            }
+            
+            .intro-modal-content {
+                margin: 20px;
+                width = calc(100% - 40px);
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .element-links-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .lessons-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .levels-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero-section {
+                padding: 2rem 0;
+            }
+            
+            .levels-section, .features-section {
+                padding: 1.5rem 0;
+            }
+            
+            .protected-section {
+                padding: 1.5rem 0;
+                margin: 1.5rem 0;
+            }
+        }
+        
+        @media (min-width: 1200px) {
+            .container {
+                padding: 0 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- En-tête -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-atom"></i>
+                    <div>Grenier scientifique <span>made in Togo</span></div>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#" class="active"><i class="fas fa-home"></i> Accueil</a></li>
+                        <li><a href="#presentation"><i class="fas fa-info-circle"></i> Présentation</a></li>
+                        <li><a href="#niveaux"><i class="fas fa-graduation-cap"></i> Niveaux</a></li>
+                        <li><a href="#contenu" id="contentNavLink" style="display: none;"><i class="fas fa-book"></i> Contenu</a></li>
+                        <li><a href="#fonctionnalites"><i class="fas fa-star"></i> Fonctionnalités</a></li>
+                        <li><a href="#contact"><i class="fas fa-envelope"></i> Contact</a></li>
+                    </ul>
+                </nav>
+                <div class="user-actions">
+                    <button class="btn btn-outline" id="loginBtn"><i class="fas fa-sign-in-alt"></i> Connexion</button>
+                    <button class="btn btn-primary" id="registerBtn"><i class="fas fa-user-plus"></i> Inscription</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Section Hero -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Grenier scientifique made in Togo</h1>
+                <p class="hero-subtitle">Votre plateforme éducative pour l'apprentissage des sciences</p>
+                <p>Collège • Lycée • Université</p>
+                <div class="hero-buttons">
+                    <button class="btn btn-success" onclick="openModal('registerModal')">
+                        <i class="fas fa-rocket"></i> Commencer maintenant
+                    </button>
+                    <button class="btn btn-outline" style="background: rgba(255,255,255,0.2);" onclick="showLoginRequired()">
+                        <i class="fas fa-play-circle"></i> Voir la démo
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Présentation -->
+    <section id="presentation" class="levels-section">
+        <div class="container">
+            <h2 class="section-title">Présentation de Grenier scientifique made in Togo</h2>
+            <div class="protected-section">
+                <div class="protected-content">
+                    <i class="fas fa-lock protected-icon"></i>
+                    <h2 class="protected-title">Contenu Protégé</h2>
+                    <p class="protected-text">
+                        Grenier scientifique made in Togo est une plateforme éducative complète dédiée à l'apprentissage des sciences 
+                        pour les niveaux collège, lycée et université. Notre contenu est protégé et accessible 
+                        uniquement aux utilisateurs authentifiés pour garantir la qualité et la sécurité des ressources.
+                    </p>
+                    <div class="hero-buttons">
+                        <button class="btn btn-primary" onclick="openModal('loginModal')">
+                            <i class="fas fa-sign-in-alt"></i> Se connecter
+                        </button>
+                        <button class="btn btn-success" onclick="openModal('registerModal')">
+                            <i class="fas fa-user-plus"></i> Créer un compte
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section niveaux éducatifs -->
+    <section id="niveaux" class="levels-section">
+        <div class="container">
+            <h2 class="section-title">Niveaux Éducatifs</h2>
+            <div class="levels-grid">
+                <!-- Collège -->
+                <div class="level-card college">
+                    <div class="level-header">
+                        <i class="fas fa-school level-icon"></i>
+                        <h3>Collège</h3>
+                    </div>
+                    <div class="level-content">
+                        <p>Découvrez les sciences de façon ludique avec des expériences et simulations adaptées.</p>
+                        <ul>
+                            <li><i class="fas fa-check"></i> Mathématiques</li>
+                            <li><i class="fas fa-check"></i> Physique</li>
+                            <li><i class="fas fa-check"></i> Chimie</li>
+                            <li><i class="fas fa-check"></i> Technologie</li>
+                        </ul>
+                        <button class="btn btn-primary" style="width: 100%; margin-top: 1rem;" onclick="showLoginRequired()">
+                            <i class="fas fa-arrow-right"></i> Découvrir le contenu
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Lycée -->
+                <div class="level-card lycee">
+                    <div class="level-header">
+                        <i class="fas fa-graduation-cap level-icon"></i>
+                        <h3>Lycée</h3>
+                    </div>
+                    <div class="level-content">
+                        <p>Approfondissez vos connaissances scientifiques et préparez-vous aux examens.</p>
+                        <ul>
+                            <li><i class="fas fa-check"></i> 2nd CD, 2nd A</li>
+                            <li><i class="fas fa-check"></i> 1ère A4, C4, D</li>
+                            <li><i class="fas fa-check"></i> Tle A4, C4, D</li>
+                            <li><i class="fas fa-check"></i> Spécialités scientifiques</li>
+                        </ul>
+                        <button class="btn btn-primary" style="width: 100%; margin-top: 1rem;" onclick="showLoginRequired()">
+                            <i class="fas fa-arrow-right"></i> Découvrir le contenu
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Université -->
+                <div class="level-card universite">
+                    <div class="level-header">
+                        <i class="fas fa-university level-icon"></i>
+                        <h3>Universitaire</h3>
+                    </div>
+                    <div class="level-content">
+                        <p>Perfectionnez votre expertise avec des ressources avancées et de la recherche.</p>
+                        <ul>
+                            <li><i class="fas fa-check"></i> Cours spécialisés</li>
+                            <li><i class="fas fa-check"></i> Recherche scientifique</li>
+                            <li><i class="fas fa-check"></i> Simulations complexes</li>
+                            <li><i class="fas fa-check"></i> Préparation aux concours</li>
+                        </ul>
+                        <button class="btn btn-primary" style="width: 100%; margin-top: 1rem;" onclick="showLoginRequired()">
+                            <i class="fas fa-arrow-right"></i> Découvrir le contenu
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section contenu éducatif (masquée par défaut) -->
+    <section id="contenu" class="content-section">
+        <div class="container">
+            <div class="content-header">
+                <h2 class="section-title" style="margin-bottom: 0;">Ressources Scientifiques</h2>
+                <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                    <button class="btn btn-success" id="addCourseBtn">
+                        <i class="fas fa-plus"></i> Ajouter un Cours
+                    </button>
+                    <button class="btn btn-primary" id="addLessonBtn" onclick="showAddLessonForm()">
+                        <i class="fas fa-plus-circle"></i> Nouvelle Leçon
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Formulaire d'ajout de leçon (masqué par défaut) -->
+            <div id="addLessonForm" class="lesson-form" style="display: none;">
+                <h3 style="color: var(--secondary); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 10px;">
+                    <i class="fas fa-book-medical"></i> Proposer une Nouvelle Leçon
+                </h3>
+                
+                <form id="newLessonForm">
+                    <div class="form-section">
+                        <h4 class="form-section-title">
+                            <i class="fas fa-info-circle"></i> Informations Générales
+                        </h4>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="lessonTitle">Titre de la leçon *</label>
+                                <input type="text" id="lessonTitle" class="form-control" required placeholder="Ex: Introduction à la cellule">
+                            </div>
+                            <div class="form-group">
+                                <label for="lessonLevel">Niveau *</label>
+                                <select id="lessonLevel" class="form-control" required>
+                                    <option value="">Sélectionnez un niveau</option>
+                                    <option value="college">Collège</option>
+                                    <option value="lycee">Lycée</option>
+                                    <option value="universite">Université</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="lessonClass">Classe *</label>
+                                <select id="lessonClass" class="form-control" required>
+                                    <option value="">Sélectionnez une classe</option>
+                                    <!-- Classes Collège -->
+                                    <option value="6ème">6ème</option>
+                                    <option value="5ème">5ème</option>
+                                    <option value="4ème">4ème</option>
+                                    <option value="3ème">3ème</option>
+                                    <!-- Classes Lycée -->
+                                    <option value="2nd CD">2nd CD</option>
+                                    <option value="2nd A">2nd A</option>
+                                    <option value="1ère A4">1ère A4</option>
+                                    <option value="1ère C4">1ère C4</option>
+                                    <option value="1ère D">1ère D</option>
+                                    <option value="Tle A4">Tle A4</option>
+                                    <option value="Tle C4">Tle C4</option>
+                                    <option value="Tle D">Tle D</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="lessonSubject">Matière *</label>
+                                <select id="lessonSubject" class="form-control" required>
+                                    <option value="">Sélectionnez une matière</option>
+                                    <option value="mathematiques">Mathématiques</option>
+                                    <option value="physique">Physique</option>
+                                    <option value="chimie">Chimie</option>
+                                    <option value="technologie">Technologie</option>
+                                    <option value="svt">SVT</option>
+                                    <option value="philosophie">Philosophie</option>
+                                    <option value="francais">Français</option>
+                                    <option value="anglais">Anglais</option>
+                                    <option value="histoire">Histoire-Géographie</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="lessonDescription">Description *</label>
+                            <textarea id="lessonDescription" class="form-control" required placeholder="Décrivez brièvement le contenu de la leçon..."></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="lessonDuration">Durée estimée *</label>
+                            <input type="text" id="lessonDuration" class="form-control" required placeholder="Ex: 45 min, 1h 30min, Interactive">
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h4 class="form-section-title">
+                            <i class="fas fa-link"></i> Liens vers les Ressources
+                        </h4>
+                        <p style="color: #666; margin-bottom: 1rem; font-size: 0.9rem;">
+                            Veuillez fournir les liens vers les différentes ressources de votre leçon. Vous pouvez ajouter des liens vers des fichiers PDF, vidéos, simulations, etc.
+                        </p>
+                        
+                        <div class="element-links-grid">
+                            <div class="element-link-group">
+                                <label><i class="fas fa-file-pdf"></i> Cours PDF</label>
+                                <input type="url" class="form-control" id="linkCours" placeholder="https://.../cours.pdf">
+                            </div>
+                            <div class="element-link-group">
+                                <label><i class="fas fa-video"></i> Vidéo explicative</label>
+                                <input type="url" class="form-control" id="linkVideo" placeholder="https://.../video.mp4">
+                            </div>
+                            <div class="element-link-group">
+                                <label><i class="fas fa-flask"></i> Simulation interactive</label>
+                                <input type="url" class="form-control" id="linkSimulation" placeholder="https://.../simulation">
+                            </div>
+                            <div class="element-link-group">
+                                <label><i class="fas fa-tasks"></i> Exercices pratiques</label>
+                                <input type="url" class="form-control" id="linkExercices" placeholder="https://.../exercices.pdf">
+                            </div>
+                            <div class="element-link-group">
+                                <label><i class="fas fa-question-circle"></i> Quiz d'évaluation</label>
+                                <input type="url" class="form-control" id="linkQuiz" placeholder="https://.../quiz">
+                            </div>
+                            <div class="element-link-group">
+                                <label><i class="fas fa-chart-line"></i> Activité GeoGebra</label>
+                                <input type="url" class="form-control" id="linkGeogebra" placeholder="https://.../activite.ggb">
+                            </div>
+                            <div class="element-link-group">
+                                <label><i class="fas fa-file-alt"></i> Fiche de révision</label>
+                                <input type="url" class="form-control" id="linkFiche" placeholder="https://.../fiche.pdf">
+                            </div>
+                            <div class="element-link-group">
+                                <label><i class="fas fa-microscope"></i> Expérience virtuelle</label>
+                                <input type="url" class="form-control" id="linkExperience" placeholder="https://.../experience">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h4 class="form-section-title">
+                            <i class="fas fa-user"></i> Informations Personnelles
+                        </h4>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="contributorName">Votre nom complet *</label>
+                                <input type="text" id="contributorName" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="contributorEmail">Votre email *</label>
+                                <input type="email" id="contributorEmail" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="contributorPhone">Votre téléphone *</label>
+                            <input type="tel" id="contributorPhone" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="additionalNotes">Notes supplémentaires</label>
+                            <textarea id="additionalNotes" class="form-control" placeholder="Informations complémentaires, commentaires, suggestions..."></textarea>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; gap: 1rem; justify-content: flex-end; margin-top: 2rem;">
+                        <button type="button" class="btn btn-outline" onclick="hideAddLessonForm()">
+                            <i class="fas fa-times"></i> Annuler
+                        </button>
+                        <button type="submit" class="btn btn-success">
+                            <i class="fab fa-whatsapp"></i> Envoyer par WhatsApp
+                        </button>
+                    </div>
+                </form>
+            </div>
+            
+            <div class="filters-bar">
+                <div class="filter-group">
+                    <label for="level-filter"><i class="fas fa-filter"></i> Niveau:</label>
+                    <select id="level-filter" class="filter-select" onchange="filterContent(this.value)">
+                        <option value="all">Tous les niveaux</option>
+                        <option value="college">Collège</option>
+                        <option value="lycee">Lycée</option>
+                        <option value="universite">Université</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label for="class-filter"><i class="fas fa-graduation-cap"></i> Classe:</label>
+                    <select id="class-filter" class="filter-select" onchange="filterContent()">
+                        <option value="all">Toutes les classes</option>
+                        <!-- Classes Collège -->
+                        <option value="6ème">6ème</option>
+                        <option value="5ème">5ème</option>
+                        <option value="4ème">4ème</option>
+                        <option value="3ème">3ème</option>
+                        <!-- Classes Lycée -->
+                        <option value="2nd CD">2nd CD</option>
+                        <option value="2nd A">2nd A</option>
+                        <option value="1ère A4">1ère A4</option>
+                        <option value="1ère C4">1ère C4</option>
+                        <option value="1ère D">1ère D</option>
+                        <option value="Tle A4">Tle A4</option>
+                        <option value="Tle C4">Tle C4</option>
+                        <option value="Tle D">Tle D</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label for="subject-filter"><i class="fas fa-book"></i> Matière:</label>
+                    <select id="subject-filter" class="filter-select" onchange="filterContent()">
+                        <option value="all">Toutes les matières</option>
+                        <option value="mathematiques">Mathématiques</option>
+                        <option value="physique">Physique</option>
+                        <option value="chimie">Chimie</option>
+                        <option value="technologie">Technologie</option>
+                        <option value="svt">SVT</option>
+                        <option value="philosophie">Philosophie</option>
+                        <option value="francais">Français</option>
+                        <option value="anglais">Anglais</option>
+                        <option value="histoire">Histoire-Géographie</option>
+                    </select>
+                </div>
+                
+                <div class="search-bar">
+                    <input type="text" id="search-input" placeholder="Rechercher une ressource...">
+                    <button onclick="filterContent()"><i class="fas fa-search"></i></button>
+                </div>
+            </div>
+            
+            <div id="content-container">
+                <!-- Le contenu sera généré dynamiquement par JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Section fonctionnalités -->
+    <section id="fonctionnalites" class="features-section">
+        <div class="container">
+            <h2 class="section-title">Fonctionnalités Principales</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i class="fas fa-graduation-cap feature-icon"></i>
+                    <h3>Apprentissage Adaptatif</h3>
+                    <p>Des parcours personnalisés selon votre niveau et vos objectifs.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <i class="fas fa-vr-cardboard feature-icon"></i>
+                    <h3>Réalité Virtuelle</h3>
+                    <p>Explorez l'infiniment petit ou l'infiniment grand comme si vous y étiez.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <i class="fas fa-chart-line feature-icon"></i>
+                    <h3>Suivi de Progression</h3>
+                    <p>Visualisez vos progrès et identifiez les points à améliorer.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <i class="fas fa-users feature-icon"></i>
+                    <h3>Apprentissage Collaboratif</h3>
+                    <p>Travaillez en groupe sur des projets scientifiques virtuels.</p>
+                </div>
+
+                <div class="feature-card">
+                    <i class="fas fa-flask feature-icon"></i>
+                    <h3>Laboratoires Virtuels</h3>
+                    <p>Réalisez des expériences scientifiques en toute sécurité.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <i class="fas fa-video feature-icon"></i>
+                    <h3>Vidéos Pédagogiques</h3>
+                    <p>Accédez à des centaines de vidéos explicatives de qualité.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <i class="fas fa-file-pdf feature-icon"></i>
+                    <h3>Ressources Complètes</h3>
+                    <p>Cours, exercices, simulations et fiches de révision.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <i class="fas fa-mobile-alt feature-icon"></i>
+                    <h3>Multi-plateformes</h3>
+                    <p>Accédez à vos cours sur tous vos appareils.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section contact -->
+    <section id="contact" class="protected-section" style="background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%); color: white;">
+        <div class="container">
+            <div class="protected-content">
+                <i class="fas fa-comments protected-icon"></i>
+                <h2 class="protected-title">Prêt à Commencer ?</h2>
+                <p class="protected-text">
+                    Rejoignez dès maintenant la communauté Grenier scientifique made in Togo et accédez à des centaines de ressources 
+                    scientifiques de qualité pour tous les niveaux d'enseignement.
+                </p>
+                <div class="hero-buttons">
+                    <button class="btn btn-success" style="background: white; color: var(--primary);" onclick="openModal('registerModal')">
+                        <i class="fas fa-rocket"></i> Commencer l'aventure
+                    </button>
+                    <button class="btn btn-outline" style="border-color: white; color: white;" onclick="openModal('loginModal')">
+                        <i class="fas fa-sign-in-alt"></i> Se connecter
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal d'introduction -->
+    <div class="intro-modal" id="introModal">
+        <div class="intro-modal-content">
+            <div class="intro-modal-header">
+                <h2 id="introModalTitle">Introduction</h2>
+                <button class="close-intro-modal">&times;</button>
+            </div>
+            <div class="intro-modal-body" id="introModalBody">
+                <!-- Le contenu sera généré dynamiquement par JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de connexion -->
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-sign-in-alt"></i> Connexion</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-info">
+                    <i class="fas fa-info-circle"></i> Utilisez vos identifiants personnels pour accéder au contenu.
+                </div>
+                <div class="alert alert-warning" id="loginAlert" style="display: none;">
+                    <i class="fas fa-exclamation-triangle"></i> Votre compte n'est pas encore activé. Veuillez patienter.
+                </div>
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label for="loginEmail">Identifiant ou Email</label>
+                        <input type="text" id="loginEmail" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="loginPassword">Mot de passe</label>
+                        <input type="password" id="loginPassword" class="form-control" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">
+                        <i class="fas fa-sign-in-alt"></i> Se connecter
+                    </button>
+                </form>
+                <div class="form-footer">
+                    <p>Pas encore de compte ? <a href="#" id="switchToRegister">S'inscrire</a></p>
+                    <p style="margin-top: 10px; font-size: 0.8rem; color: #666;">
+                        <strong>Compte de démonstration :</strong><br>
+                        Identifiant: KOLA | Mot de passe: KOLA1@
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal d'inscription -->
+    <div class="modal" id="registerModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-user-plus"></i> Inscription</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-success" id="registerSuccess" style="display: none;">
+                    <i class="fas fa-check-circle"></i> Inscription réussie ! Votre compte sera activé sous 24h.
+                </div>
+                <form id="registerForm">
+                    <div class="form-group">
+                        <label for="registerName">Nom complet</label>
+                        <input type="text" id="registerName" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="registerEmail">Email</label>
+                        <input type="email" id="registerEmail" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="registerPhone">Téléphone</label>
+                        <input type="tel" id="registerPhone" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="registerLevel">Niveau</label>
+                        <select id="registerLevel" class="form-control" required>
+                            <option value="">Sélectionnez votre niveau</option>
+                            <option value="college">Collège</option>
+                            <option value="lycee">Lycée</option>
+                            <option value="universite">Université</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="registerPassword">Mot de passe</label>
+                        <input type="password" id="registerPassword" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="registerConfirmPassword">Confirmer le mot de passe</label>
+                        <input type="password" id="registerConfirmPassword" class="form-control" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">
+                        <i class="fas fa-user-plus"></i> S'inscrire
+                    </button>
+                </form>
+                <div class="form-footer">
+                    <p>Déjà inscrit ? <a href="#" id="switchToLogin">Se connecter</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pied de page -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Grenier scientifique made in Togo</h3>
+                    <p>Votre plateforme éducative pour l'apprentissage des sciences au collège, lycée et université.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#" id="whatsappLink"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Liens Rapides</h3>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Accueil</a></li>
+                        <li><a href="#presentation"><i class="fas fa-chevron-right"></i> Présentation</a></li>
+                        <li><a href="#niveaux"><i class="fas fa-chevron-right"></i> Niveaux</a></li>
+                        <li><a href="#contenu" id="footerContentLink" style="display: none;"><i class="fas fa-chevron-right"></i> Contenu</a></li>
+                        <li><a href="#fonctionnalites"><i class="fas fa-chevron-right"></i> Fonctionnalités</a></li>
+                        <li><a href="#contact"><i class="fas fa-chevron-right"></i> Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Niveaux</h3>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Collège</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Lycée</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Université</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Enseignants</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-envelope"></i> contact@grenier-scientifique.tg</a></li>
+                        <li><a href="#" id="whatsappContact"><i class="fab fa-whatsapp"></i> +228 92871605</a></li>
+                        <li><a href="#"><i class="fas fa-map-marker-alt"></i> Lomé, Togo</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                &copy; 2023 Grenier scientifique made in Togo. Tous droits réservés. | Conçu pour l'éducation scientifique
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Base de données complète des ressources avec introductions détaillées
+        const resources = [
+            // COLLÈGE - 6ème (existant)
+            {
+                id: 1,
+                title: "Nombres et Calculs",
+                description: "Découverte des nombres entiers et décimaux, opérations fondamentales.",
+                level: "college",
+                class: "6ème",
+                subject: "mathematiques",
+                type: "cours",
+                duration: "45 min",
+                elements: {
+                    cours: "cours_nombres_calculs_6eme.pdf",
+                    video: "video_operations_fondamentales.mp4",
+                    simulation: "simulation_calcul_mental",
+                    exercices: "exercices_nombres_6eme.pdf",
+                    quiz: "quiz_nombres_6eme",
+                    geogebra: "droite_numerique.ggb",
+                    fiche: "fiche_revision_nombres.pdf",
+                    experience: "jeux_calcul_mental"
+                },
+                introductions: {
+                    cours: "Ce cours vous introduit aux nombres entiers et décimaux. Vous apprendrez à maîtriser les quatre opérations fondamentales (addition, soustraction, multiplication, division) et à résoudre vos premiers problèmes mathématiques.",
+                    video: "Cette vidéo animée explique visuellement les opérations mathématiques fondamentales. Des exemples concrets vous aideront à comprendre comment appliquer ces concepts dans la vie quotidienne.",
+                    simulation: "Cette simulation interactive vous permet de pratiquer le calcul mental de façon ludique. Testez votre rapidité et améliorez vos compétences en calcul grâce à des exercices progressifs.",
+                    exercices: "Ces exercices progressifs vous aideront à consolider vos connaissances sur les nombres et les opérations. Chaque exercice est accompagné de sa correction détaillée.",
+                    quiz: "Ce quiz évaluera votre compréhension des nombres et des opérations fondamentales. Recevez un feedback immédiat sur vos réponses.",
+                    geogebra: "Cette activité GeoGebra vous familiarisera avec la droite numérique. Vous pourrez visualiser et manipuler les nombres pour mieux comprendre leur positionnement.",
+                    fiche: "Cette fiche de révision résume l'essentiel du chapitre sur les nombres et calculs. Idéale pour les révisions avant un contrôle.",
+                    experience: "Cette expérience ludique transforme l'apprentissage du calcul en jeu. Défiez-vous et améliorez vos compétences en calcul mental."
+                }
+            },
+
+            // LYCÉE - 2nd CD - Mathématiques
+            {
+                id: 17,
+                title: "Algorithmique et Programmation",
+                description: "Initiation à l'algorithmique et à la programmation en Python.",
+                level: "lycee",
+                class: "2nd CD",
+                subject: "mathematiques",
+                type: "cours",
+                duration: "1h 30min",
+                elements: {
+                    cours: "cours_algorithmique_2nd_cd.pdf",
+                    video: "video_programmation_python.mp4",
+                    simulation: "simulation_algorithme",
+                    exercices: "exercices_algorithmique.pdf",
+                    quiz: "quiz_algorithmique",
+                    geogebra: "algorithmes_visuels.ggb",
+                    fiche: "fiche_revision_algorithmique.pdf",
+                    experience: "atelier_programmation_python"
+                },
+                introductions: {
+                    cours: "Ce cours vous initie à l'algorithmique et à la programmation en Python. Vous apprendrez les structures de base de la programmation et à résoudre des problèmes algorithmiques simples.",
+                    video: "Cette vidéo vous guide pas à pas dans l'apprentissage de la programmation Python, avec des exemples concrets et des exercices pratiques.",
+                    simulation: "Cette simulation vous permet de visualiser l'exécution d'algorithmes et de comprendre le fonctionnement des structures de programmation.",
+                    exercices: "Ces exercices progressifs vous aideront à maîtriser les concepts fondamentaux de l'algorithmique et de la programmation.",
+                    quiz: "Ce quiz évaluera votre compréhension des concepts algorithmiques et votre capacité à résoudre des problèmes simples.",
+                    geogebra: "Cette activité GeoGebra vous permet de visualiser graphiquement l'exécution d'algorithmes et de comprendre leur fonctionnement.",
+                    fiche: "Cette fiche de révision résume les concepts essentiels de l'algorithmique et de la programmation Python.",
+                    experience: "Cet atelier virtuel vous permet de pratiquer la programmation Python et de créer vos premiers programmes."
+                }
+            },
+            // LYCÉE - 2nd CD - Physique
+            {
+                id: 18,
+                title: "Électricité et Numérique",
+                description: "Fondements de l'électricité et initiation aux systèmes numériques.",
+                level: "lycee",
+                class: "2nd CD",
+                subject: "physique",
+                type: "video",
+                duration: "1h 15min",
+                elements: {
+                    cours: "cours_electricite_numerique_2nd_cd.pdf",
+                    video: "video_systemes_numeriques.mp4",
+                    simulation: "simulation_circuits_logiques",
+                    exercices: "exercices_electricite_numerique.pdf",
+                    quiz: "quiz_electricite_numerique",
+                    geogebra: "portes_logiques.ggb",
+                    fiche: "fiche_revision_electricite_numerique.pdf",
+                    experience: "laboratoire_numerique_virtuel"
+                },
+                introductions: {
+                    cours: "Ce cours combine les bases de l'électricité avec une initiation aux systèmes numériques. Vous étudierez les circuits logiques et leur application dans les systèmes informatiques.",
+                    video: "Cette vidéo explique le fonctionnement des systèmes numériques et montre comment les circuits logiques traitent l'information.",
+                    simulation: "Cette simulation vous permet de construire et tester des circuits logiques pour comprendre leur fonctionnement.",
+                    exercices: "Ces exercices vous aideront à maîtriser les concepts d'électricité et de systèmes numériques.",
+                    quiz: "Ce quiz évaluera votre compréhension des circuits logiques et des systèmes numériques.",
+                    geogebra: "Cette activité GeoGebra vous permet d'explorer le fonctionnement des portes logiques et leur combinaison.",
+                    fiche: "Cette fiche de révision résume les concepts essentiels de l'électricité et des systèmes numériques.",
+                    experience: "Ce laboratoire virtuel vous permet d'expérimenter avec les circuits logiques et les systèmes numériques."
+                }
+            },
+
+            // LYCÉE - 2nd A - Mathématiques
+            {
+                id: 19,
+                title: "Fonctions et Représentations Graphiques",
+                description: "Étude approfondie des fonctions et de leurs représentations graphiques.",
+                level: "lycee",
+                class: "2nd A",
+                subject: "mathematiques",
+                type: "cours",
+                duration: "1h 45min",
+                elements: {
+                    cours: "cours_fonctions_2nd_a.pdf",
+                    video: "video_representations_graphiques.mp4",
+                    simulation: "simulation_fonctions_complexes",
+                    exercices: "exercices_fonctions_2nd_a.pdf",
+                    quiz: "quiz_fonctions_2nd_a",
+                    geogebra: "fonctions_avancees.ggb",
+                    fiche: "fiche_revision_fonctions_2nd_a.pdf",
+                    experience: "exploration_fonctions_mathematiques"
+                },
+                introductions: {
+                    cours: "Ce cours approfondit l'étude des fonctions mathématiques avec un focus sur leurs propriétés et leurs représentations graphiques. Vous étudierez les fonctions de référence et leurs transformations.",
+                    video: "Cette vidéo explique en détail les différentes représentations graphiques des fonctions et comment interpréter leurs caractéristiques.",
+                    simulation: "Cette simulation interactive vous permet d'explorer les propriétés des fonctions et de visualiser leurs transformations.",
+                    exercices: "Ces exercices progressifs vous aideront à maîtriser l'analyse complète des fonctions mathématiques.",
+                    quiz: "Ce quiz évaluera votre compréhension des fonctions et de leurs propriétés.",
+                    geogebra: "Cette activité GeoGebra vous permet de manipuler les paramètres des fonctions et d'observer leurs effets sur les graphiques.",
+                    fiche: "Cette fiche de révision résume les méthodes d'analyse des fonctions et leurs propriétés.",
+                    experience: "Cette expérience interactive vous permet d'explorer les fonctions mathématiques de façon approfondie."
+                }
+            },
+            // LYCÉE - 2nd A - Physique
+            {
+                id: 20,
+                title: "Mécanique du Point",
+                description: "Étude du mouvement et des forces appliquées à un point matériel.",
+                level: "lycee",
+                class: "2nd A",
+                subject: "physique",
+                type: "video",
+                duration: "1h 30min",
+                elements: {
+                    cours: "cours_mecanique_point_2nd_a.pdf",
+                    video: "video_mouvement_forces.mp4",
+                    simulation: "simulation_mecanique_point",
+                    exercices: "exercices_mecanique_point.pdf",
+                    quiz: "quiz_mecanique_point",
+                    geogebra: "mouvement_projectile.ggb",
+                    fiche: "fiche_revision_mecanique_point.pdf",
+                    experience: "laboratoire_mecanique_virtuel"
+                },
+                introductions: {
+                    cours: "Ce cours vous présente les principes fondamentaux de la mécanique du point. Vous étudierez les lois du mouvement, les forces et leurs applications.",
+                    video: "Cette vidéo illustre les concepts de la mécanique du point avec des expériences et des animations 3D pour mieux comprendre les lois du mouvement.",
+                    simulation: "Cette simulation vous permet d'étudier le mouvement de points matériels sous l'action de différentes forces.",
+                    exercices: "Ces exercices vous aideront à appliquer les lois de la mécanique pour résoudre des problèmes de mouvement.",
+                    quiz: "Ce quiz évaluera votre compréhension des principes de la mécanique du point.",
+                    geogebra: "Cette activité GeoGebra vous permet d'explorer le mouvement des projectiles et de comprendre les lois qui le régissent.",
+                    fiche: "Cette fiche de révision résume les lois essentielles de la mécanique du point.",
+                    experience: "Ce laboratoire virtuel vous permet de réaliser des expériences de mécanique et de vérifier les lois du mouvement."
+                }
+            },
+
+            // LYCÉE - 1ère A4 - Mathématiques
+            {
+                id: 21,
+                title: "Analyse Mathématique Avancée",
+                description: "Étude approfondie des limites, dérivées et intégrales.",
+                level: "lycee",
+                class: "1ère A4",
+                subject: "mathematiques",
+                type: "cours",
+                duration: "2h",
+                elements: {
+                    cours: "cours_analyse_1ere_a4.pdf",
+                    video: "video_limites_derivees_integrales.mp4",
+                    simulation: "simulation_analyse_avancee",
+                    exercices: "exercices_analyse_1ere_a4.pdf",
+                    quiz: "quiz_analyse_1ere_a4",
+                    geogebra: "calcul_differentiel_integral.ggb",
+                    fiche: "fiche_revision_analyse_1ere_a4.pdf",
+                    experience: "exploration_analyse_mathematique"
+                },
+                introductions: {
+                    cours: "Ce cours approfondit l'analyse mathématique avec l'étude des limites, des dérivées et des intégrales. Vous apprendrez à résoudre des problèmes complexes d'analyse.",
+                    video: "Cette vidéo explique les concepts avancés de l'analyse mathématique avec des démonstrations détaillées et des exemples concrets.",
+                    simulation: "Cette simulation interactive vous permet d'explorer les concepts d'analyse mathématique de façon visuelle et intuitive.",
+                    exercices: "Ces exercices avancés vous aideront à maîtriser les techniques de l'analyse mathématique.",
+                    quiz: "Ce quiz évaluera votre compréhension des concepts avancés de l'analyse mathématique.",
+                    geogebra: "Cette activité GeoGebra vous permet de visualiser les concepts d'analyse mathématique et de comprendre leur signification géométrique.",
+                    fiche: "Cette fiche de révision résume les théorèmes et méthodes essentiels de l'analyse mathématique.",
+                    experience: "Cette expérience interactive vous permet d'explorer les concepts d'analyse mathématique de façon approfondie."
+                }
+            },
+            // LYCÉE - 1ère A4 - Physique
+            {
+                id: 22,
+                title: "Physique Quantique Introduction",
+                description: "Introduction aux concepts fondamentaux de la physique quantique.",
+                level: "lycee",
+                class: "1ère A4",
+                subject: "physique",
+                type: "video",
+                duration: "1h 45min",
+                elements: {
+                    cours: "cours_physique_quantique_1ere_a4.pdf",
+                    video: "video_concepts_quantiques.mp4",
+                    simulation: "simulation_physique_quantique",
+                    exercices: "exercices_physique_quantique.pdf",
+                    quiz: "quiz_physique_quantique",
+                    geogebra: "modeles_atomiques.ggb",
+                    fiche: "fiche_revision_physique_quantique.pdf",
+                    experience: "laboratoire_quantique_virtuel"
+                },
+                introductions: {
+                    cours: "Ce cours vous introduit aux concepts fondamentaux de la physique quantique. Vous découvrirez les principes qui régissent le monde microscopique.",
+                    video: "Cette vidéo explore les concepts contre-intuitifs de la physique quantique avec des animations et des explications accessibles.",
+                    simulation: "Cette simulation vous permet d'explorer les phénomènes quantiques et de comprendre le comportement des particules subatomiques.",
+                    exercices: "Ces exercices vous aideront à appréhender les concepts de base de la physique quantique.",
+                    quiz: "Ce quiz évaluera votre compréhension des principes fondamentaux de la physique quantique.",
+                    geogebra: "Cette activité GeoGebra vous permet de visualiser les modèles atomiques et de comprendre l'organisation des électrons.",
+                    fiche: "Cette fiche de révision résume les concepts essentiels de la physique quantique.",
+                    experience: "Ce laboratoire virtuel vous permet d'explorer les phénomènes quantiques sans équipement spécialisé."
+                }
+            },
+
+            // LYCÉE - 1ère C4 - Mathématiques
+            {
+                id: 33,
+                title: "Géométrie dans l'Espace",
+                description: "Étude des figures géométriques dans l'espace tridimensionnel.",
+                level: "lycee",
+                class: "1ère C4",
+                subject: "mathematiques",
+                type: "cours",
+                duration: "1h 50min",
+                elements: {
+                    cours: "cours_geometrie_espace_1ere_c4.pdf",
+                    video: "video_representations_3d.mp4",
+                    simulation: "simulation_geometrie_espace",
+                    exercices: "exercices_geometrie_espace.pdf",
+                    quiz: "quiz_geometrie_espace",
+                    geogebra: "solides_geometriques.ggb",
+                    fiche: "fiche_revision_geometrie_espace.pdf",
+                    experience: "exploration_geometrie_3d"
+                },
+                introductions: {
+                    cours: "Ce cours vous introduit à la géométrie dans l'espace. Vous étudierez les positions relatives de droites et de plans, ainsi que les propriétés des solides géométriques.",
+                    video: "Cette vidéo présente les différentes représentations des figures dans l'espace et montre comment résoudre des problèmes de géométrie 3D.",
+                    simulation: "Cette simulation vous permet de manipuler des figures géométriques dans l'espace et de visualiser leurs propriétés.",
+                    exercices: "Ces exercices vous aideront à maîtriser les concepts de géométrie dans l'espace.",
+                    quiz: "Ce quiz évaluera votre compréhension des positions relatives dans l'espace.",
+                    geogebra: "Cette activité GeoGebra vous permet de construire et manipuler des solides géométriques en 3D.",
+                    fiche: "Cette fiche de révision résume les théorèmes essentiels de la géométrie dans l'espace.",
+                    experience: "Cette expérience interactive vous permet d'explorer la géométrie dans l'espace de façon immersive."
+                }
+            },
+            // LYCÉE - 1ère C4 - Physique
+            {
+                id: 34,
+                title: "Électromagnétisme Fondamental",
+                description: "Introduction aux phénomènes électromagnétiques et leurs applications.",
+                level: "lycee",
+                class: "1ère C4",
+                subject: "physique",
+                type: "video",
+                duration: "1h 40min",
+                elements: {
+                    cours: "cours_electromagnetisme_1ere_c4.pdf",
+                    video: "video_champs_electromagnetiques.mp4",
+                    simulation: "simulation_electromagnetisme",
+                    exercices: "exercices_electromagnetisme.pdf",
+                    quiz: "quiz_electromagnetisme",
+                    geogebra: "champs_magnetiques.ggb",
+                    fiche: "fiche_revision_electromagnetisme.pdf",
+                    experience: "laboratoire_electromagnetisme"
+                },
+                introductions: {
+                    cours: "Ce cours vous présente les principes fondamentaux de l'électromagnétisme. Vous étudierez les champs électriques et magnétiques, ainsi que leurs interactions.",
+                    video: "Cette vidéo illustre les phénomènes électromagnétiques avec des expériences et des animations pour mieux comprendre ces concepts abstraits.",
+                    simulation: "Cette simulation vous permet de visualiser les champs électromagnétiques et d'étudier leurs propriétés.",
+                    exercices: "Ces exercices vous aideront à appliquer les lois de l'électromagnétisme pour résoudre des problèmes.",
+                    quiz: "Ce quiz évaluera votre compréhension des concepts de l'électromagnétisme.",
+                    geogebra: "Cette activité GeoGebra vous permet d'explorer les propriétés des champs magnétiques.",
+                    fiche: "Cette fiche de révision résume les lois essentielles de l'électromagnétisme.",
+                    experience: "Ce laboratoire virtuel vous permet de réaliser des expériences d'électromagnétisme et de vérifier les lois fondamentales."
+                }
+            },
+
+            // LYCÉE - 1ère D - Mathématiques
+            {
+                id: 35,
+                title: "Probabilités et Statistiques",
+                description: "Introduction aux concepts de probabilités et d'analyse statistique.",
+                level: "lycee",
+                class: "1ère D",
+                subject: "mathematiques",
+                type: "cours",
+                duration: "1h 55min",
+                elements: {
+                    cours: "cours_probabilites_1ere_d.pdf",
+                    video: "video_analyse_statistique.mp4",
+                    simulation: "simulation_probabilites",
+                    exercices: "exercices_probabilites.pdf",
+                    quiz: "quiz_probabilites",
+                    geogebra: "distributions_probabilites.ggb",
+                    fiche: "fiche_revision_probabilites.pdf",
+                    experience: "exploration_statistiques"
+                },
+                introductions: {
+                    cours: "Ce cours vous introduit aux concepts de probabilités et de statistiques. Vous apprendrez à calculer des probabilités et à analyser des données statistiques.",
+                    video: "Cette vidéo explique les concepts de base des probabilités et montre comment appliquer les méthodes statistiques à des problèmes concrets.",
+                    simulation: "Cette simulation vous permet d'explorer les lois des probabilités et de visualiser les distributions statistiques.",
+                    exercices: "Ces exercices vous aideront à maîtriser les calculs de probabilités et l'analyse statistique.",
+                    quiz: "Ce quiz évaluera votre compréhension des concepts de probabilités et de statistiques.",
+                    geogebra: "Cette activité GeoGebra vous permet de visualiser différentes distributions de probabilités et leurs propriétés.",
+                    fiche: "Cette fiche de révision résume les formules et méthodes essentielles en probabilités et statistiques.",
+                    experience: "Cette expérience interactive vous permet d'explorer l'analyse statistique sur des jeux de données réels."
+                }
+            },
+            // LYCÉE - 1ère D - Physique
+            {
+                id: 36,
+                title: "Ondes et Vibrations",
+                description: "Étude des ondes mécaniques et de leurs propriétés.",
+                level: "lycee",
+                class: "1ère D",
+                subject: "physique",
+                type: "video",
+                duration: "1h 45min",
+                elements: {
+                    cours: "cours_ondes_vibrations_1ere_d.pdf",
+                    video: "video_propagation_ondes.mp4",
+                    simulation: "simulation_ondes_mecaniques",
+                    exercices: "exercices_ondes_vibrations.pdf",
+                    quiz: "quiz_ondes_vibrations",
+                    geogebra: "superposition_ondes.ggb",
+                    fiche: "fiche_revision_ondes_vibrations.pdf",
+                    experience: "laboratoire_ondes_virtuel"
+                },
+                introductions: {
+                    cours: "Ce cours vous présente les principes des ondes mécaniques et des vibrations. Vous étudierez la propagation des ondes et leurs propriétés caractéristiques.",
+                    video: "Cette vidéo illustre les phénomènes ondulatoires avec des expériences et des animations pour mieux comprendre le comportement des ondes.",
+                    simulation: "Cette simulation vous permet d'étudier la propagation des ondes et d'explorer des phénomènes comme l'interférence et la diffraction.",
+                    exercices: "Ces exercices vous aideront à appliquer les concepts des ondes pour résoudre des problèmes.",
+                    quiz: "Ce quiz évaluera votre compréhension des propriétés des ondes mécaniques.",
+                    geogebra: "Cette activité GeoGebra vous permet de visualiser la superposition d'ondes et les phénomènes d'interférence.",
+                    fiche: "Cette fiche de révision résume les lois essentielles des ondes mécaniques.",
+                    experience: "Ce laboratoire virtuel vous permet de réaliser des expériences sur les ondes et de mesurer leurs propriétés."
+                }
+            },
+
+            // LYCÉE - Tle A4 - Mathématiques
+            {
+                id: 27,
+                title: "Mathématiques Spécialité - Analyse Complexe",
+                description: "Étude des nombres complexes et de leurs applications en analyse.",
+                level: "lycee",
+                class: "Tle A4",
+                subject: "mathematiques",
+                type: "cours",
+                duration: "2h 15min",
+                elements: {
+                    cours: "cours_analyse_complexe_tle_a4.pdf",
+                    video: "video_nombres_complexes_applications.mp4",
+                    simulation: "simulation_analyse_complexe",
+                    exercices: "exercices_analyse_complexe.pdf",
+                    quiz: "quiz_analyse_complexe",
+                    geogebra: "nombres_complexes.ggb",
+                    fiche: "fiche_revision_analyse_complexe.pdf",
+                    experience: "exploration_analyse_complexe"
+                },
+                introductions: {
+                    cours: "Ce cours approfondit l'étude des nombres complexes et leurs applications en analyse mathématique. Vous étudierez les fonctions complexes et leurs propriétés.",
+                    video: "Cette vidéo explore les applications des nombres complexes en mathématiques et en physique, avec des exemples concrets et des démonstrations.",
+                    simulation: "Cette simulation interactive vous permet de visualiser les nombres complexes et de comprendre leurs propriétés géométriques.",
+                    exercices: "Ces exercices avancés vous aideront à maîtriser les techniques de l'analyse complexe.",
+                    quiz: "Ce quiz évaluera votre compréhension des nombres complexes et de leurs applications.",
+                    geogebra: "Cette activité GeoGebra vous permet d'explorer les propriétés géométriques des nombres complexes et des transformations du plan.",
+                    fiche: "Cette fiche de révision résume les théorèmes et méthodes essentiels de l'analyse complexe.",
+                    experience: "Cette expérience interactive vous permet d'explorer les applications des nombres complexes dans différents domaines des mathématiques."
+                }
+            },
+            // LYCÉE - Tle A4 - Physique
+            {
+                id: 28,
+                title: "Physique Spécialité - Mécanique des Solides",
+                description: "Étude du mouvement des solides et des lois de la dynamique.",
+                level: "lycee",
+                class: "Tle A4",
+                subject: "physique",
+                type: "video",
+                duration: "2h",
+                elements: {
+                    cours: "cours_mecanique_solides_tle_a4.pdf",
+                    video: "video_dynamique_solides.mp4",
+                    simulation: "simulation_mecanique_solides",
+                    exercices: "exercices_mecanique_solides.pdf",
+                    quiz: "quiz_mecanique_solides",
+                    geogebra: "rotation_solides.ggb",
+                    fiche: "fiche_revision_mecanique_solides.pdf",
+                    experience: "laboratoire_mecanique_solides"
+                },
+                introductions: {
+                    cours: "Ce cours approfondit l'étude de la mécanique avec un focus sur le mouvement des solides. Vous étudierez la rotation, les moments de force et l'énergie des systèmes mécaniques.",
+                    video: "Cette vidéo illustre les principes de la mécanique des solides avec des expériences et des animations 3D pour mieux comprendre les lois du mouvement rotationnel.",
+                    simulation: "Cette simulation vous permet d'étudier le mouvement des solides et de vérifier les lois de la dynamique rotationnelle.",
+                    exercices: "Ces exercices avancés vous aideront à appliquer les lois de la mécanique des solides pour résoudre des problèmes complexes.",
+                    quiz: "Ce quiz évaluera votre compréhension des principes de la mécanique des solides.",
+                    geogebra: "Cette activité GeoGebra vous permet d'explorer le mouvement rotationnel et de comprendre les concepts de moment d'inertie et de couple.",
+                    fiche: "Cette fiche de révision résume les lois essentielles de la mécanique des solides.",
+                    experience: "Ce laboratoire virtuel vous permet de réaliser des expériences avancées de mécanique et d'étudier le comportement des solides en rotation."
+                }
+            },
+
+            // LYCÉE - Tle C4 - Mathématiques
+            {
+                id: 37,
+                title: "Algèbre Linéaire Avancée",
+                description: "Étude approfondie des espaces vectoriels et applications linéaires.",
+                level: "lycee",
+                class: "Tle C4",
+                subject: "mathematiques",
+                type: "cours",
+                duration: "2h 10min",
+                elements: {
+                    cours: "cours_algebre_lineaire_tle_c4.pdf",
+                    video: "video_espaces_vectoriels.mp4",
+                    simulation: "simulation_algebre_lineaire",
+                    exercices: "exercices_algebre_lineaire.pdf",
+                    quiz: "quiz_algebre_lineaire",
+                    geogebra: "transformations_lineaires.ggb",
+                    fiche: "fiche_revision_algebre_lineaire.pdf",
+                    experience: "exploration_algebre_lineaire"
+                },
+                introductions: {
+                    cours: "Ce cours approfondit l'étude de l'algèbre linéaire avec les espaces vectoriels et les applications linéaires. Vous étudierez les bases, les dimensions et les transformations linéaires.",
+                    video: "Cette vidéo explique les concepts avancés de l'algèbre linéaire avec des exemples concrets et des applications en géométrie.",
+                    simulation: "Cette simulation interactive vous permet de visualiser les espaces vectoriels et de comprendre les transformations linéaires.",
+                    exercices: "Ces exercices avancés vous aideront à maîtriser les techniques de l'algèbre linéaire.",
+                    quiz: "Ce quiz évaluera votre compréhension des concepts de l'algèbre linéaire.",
+                    geogebra: "Cette activité GeoGebra vous permet d'explorer les transformations linéaires du plan et de l'espace.",
+                    fiche: "Cette fiche de révision résume les théorèmes et méthodes essentiels de l'algèbre linéaire.",
+                    experience: "Cette expérience interactive vous permet d'explorer les applications de l'algèbre linéaire dans différents domaines."
+                }
+            },
+            // LYCÉE - Tle C4 - Physique
+            {
+                id: 38,
+                title: "Physique Nucléaire Introduction",
+                description: "Introduction aux principes de la physique nucléaire et ses applications.",
+                level: "lycee",
+                class: "Tle C4",
+                subject: "physique",
+                type: "video",
+                duration: "2h 5min",
+                elements: {
+                    cours: "cours_physique_nucleaire_tle_c4.pdf",
+                    video: "video_reactions_nucleaires.mp4",
+                    simulation: "simulation_physique_nucleaire",
+                    exercices: "exercices_physique_nucleaire.pdf",
+                    quiz: "quiz_physique_nucleaire",
+                    geogebra: "modele_nucleaire.ggb",
+                    fiche: "fiche_revision_physique_nucleaire.pdf",
+                    experience: "laboratoire_nucleaire_virtuel"
+                },
+                introductions: {
+                    cours: "Ce cours vous introduit aux principes de la physique nucléaire. Vous étudierez la structure du noyau atomique, la radioactivité et les réactions nucléaires.",
+                    video: "Cette vidéo explore les phénomènes nucléaires avec des animations et des explications sur les applications de la physique nucléaire.",
+                    simulation: "Cette simulation vous permet d'étudier les réactions nucléaires et de comprendre les processus de désintégration radioactive.",
+                    exercices: "Ces exercices vous aideront à maîtriser les calculs liés à la physique nucléaire.",
+                    quiz: "Ce quiz évaluera votre compréhension des concepts de la physique nucléaire.",
+                    geogebra: "Cette activité GeoGebra vous permet de visualiser la structure du noyau atomique et les processus de désintégration.",
+                    fiche: "Cette fiche de révision résume les concepts essentiels de la physique nucléaire.",
+                    experience: "Ce laboratoire virtuel vous permet d'explorer les phénomènes nucléaires de façon sécurisée."
+                }
+            },
+
+            // LYCÉE - Tle D - Mathématiques
+            {
+                id: 39,
+                title: "Géométrie Différentielle",
+                description: "Introduction aux concepts de la géométrie différentielle.",
+                level: "lycee",
+                class: "Tle D",
+                subject: "mathematiques",
+                type: "cours",
+                duration: "2h 15min",
+                elements: {
+                    cours: "cours_geometrie_differentielle_tle_d.pdf",
+                    video: "video_courbes_surfaces.mp4",
+                    simulation: "simulation_geometrie_differentielle",
+                    exercices: "exercices_geometrie_differentielle.pdf",
+                    quiz: "quiz_geometrie_differentielle",
+                    geogebra: "courbes_parametriques.ggb",
+                    fiche: "fiche_revision_geometrie_differentielle.pdf",
+                    experience: "exploration_geometrie_differentielle"
+                },
+                introductions: {
+                    cours: "Ce cours vous introduit aux concepts de base de la géométrie différentielle. Vous étudierez les courbes et surfaces, ainsi que leurs propriétés différentielles.",
+                    video: "Cette vidéo explique les concepts de la géométrie différentielle avec des visualisations 3D et des exemples concrets.",
+                    simulation: "Cette simulation interactive vous permet d'explorer les propriétés des courbes et surfaces dans l'espace.",
+                    exercices: "Ces exercices avancés vous aideront à maîtriser les techniques de la géométrie différentielle.",
+                    quiz: "Ce quiz évaluera votre compréhension des concepts de la géométrie différentielle.",
+                    geogebra: "Cette activité GeoGebra vous permet de visualiser les courbes paramétrées et leurs propriétés.",
+                    fiche: "Cette fiche de révision résume les théorèmes et méthodes essentiels de la géométrie différentielle.",
+                    experience: "Cette expérience interactive vous permet d'explorer les applications de la géométrie différentielle."
+                }
+            },
+            // LYCÉE - Tle D - Physique
+            {
+                id: 40,
+                title: "Astrophysique Fondamentale",
+                description: "Introduction aux concepts de base de l'astrophysique.",
+                level: "lycee",
+                class: "Tle D",
+                subject: "physique",
+                type: "video",
+                duration: "2h 10min",
+                elements: {
+                    cours: "cours_astrophysique_tle_d.pdf",
+                    video: "video_systeme_solaire_etoiles.mp4",
+                    simulation: "simulation_astrophysique",
+                    exercices: "exercices_astrophysique.pdf",
+                    quiz: "quiz_astrophysique",
+                    geogebra: "mouvement_planetaires.ggb",
+                    fiche: "fiche_revision_astrophysique.pdf",
+                    experience: "observatoire_virtuel"
+                },
+                introductions: {
+                    cours: "Ce cours vous introduit aux concepts fondamentaux de l'astrophysique. Vous étudierez le système solaire, les étoiles et les galaxies.",
+                    video: "Cette vidéo explore l'univers avec des images spectaculaires et des explications sur les phénomènes astrophysiques.",
+                    simulation: "Cette simulation vous permet d'explorer le système solaire et d'étudier le mouvement des corps célestes.",
+                    exercices: "Ces exercices vous aideront à appliquer les concepts d'astrophysique pour résoudre des problèmes.",
+                    quiz: "Ce quiz évaluera votre compréhension des concepts de l'astrophysique.",
+                    geogebra: "Cette activité GeoGebra vous permet de visualiser les mouvements planétaires et les lois de Kepler.",
+                    fiche: "Cette fiche de révision résume les concepts essentiels de l'astrophysique.",
+                    experience: "Cet observatoire virtuel vous permet d'explorer le ciel nocturne et d'étudier les objets célestes."
+                }
+            }
+        ];
+
+        // Base de données simulée des utilisateurs avec le compte KOLA pré-configuré
+        let users = JSON.parse(localStorage.getItem('grenierScientifiqueUsers')) || [];
+        let currentUser = JSON.parse(localStorage.getItem('currentGrenierScientifiqueUser')) || null;
+
+        // Numéro WhatsApp pour l'inscription
+        const WHATSAPP_NUMBER = "+22892871605";
+
+        // Compte de démonstration pré-configuré
+        const DEMO_ACCOUNT = {
+            id: 1,
+            username: "KOLA",
+            name: "Utilisateur Démo",
+            email: "demo@grenier-scientifique.tg",
+            phone: "+22800000000",
+            level: "universite",
+            password: "KOLA1@",
+            active: true,
+            isAdmin: false,
+            registrationDate: new Date().toISOString()
+        };
+
+        // Initialisation de la page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Ajouter le compte de démonstration s'il n'existe pas déjà
+            initializeDemoAccount();
+            
+            setupEventListeners();
+            updateUI();
+            
+            // Si un utilisateur est déjà connecté, afficher le contenu
+            if (currentUser) {
+                showEducationalContent();
+            }
+            
+            // Configurer les liens WhatsApp
+            setupWhatsAppLinks();
+        });
+
+        // Afficher le formulaire d'ajout de leçon
+        function showAddLessonForm() {
+            document.getElementById('addLessonForm').style.display = 'block';
+            document.getElementById('addLessonForm').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Masquer le formulaire d'ajout de leçon
+        function hideAddLessonForm() {
+            document.getElementById('addLessonForm').style.display = 'none';
+            document.getElementById('newLessonForm').reset();
+        }
+
+        // Gestion du formulaire d'ajout de leçon
+        document.getElementById('newLessonForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Récupérer les données du formulaire
+            const lessonData = {
+                title: document.getElementById('lessonTitle').value,
+                level: document.getElementById('lessonLevel').value,
+                class: document.getElementById('lessonClass').value,
+                subject: document.getElementById('lessonSubject').value,
+                description: document.getElementById('lessonDescription').value,
+                duration: document.getElementById('lessonDuration').value,
+                links: {
+                    cours: document.getElementById('linkCours').value,
+                    video: document.getElementById('linkVideo').value,
+                    simulation: document.getElementById('linkSimulation').value,
+                    exercices: document.getElementById('linkExercices').value,
+                    quiz: document.getElementById('linkQuiz').value,
+                    geogebra: document.getElementById('linkGeogebra').value,
+                    fiche: document.getElementById('linkFiche').value,
+                    experience: document.getElementById('linkExperience').value
+                },
+                contributor: {
+                    name: document.getElementById('contributorName').value,
+                    email: document.getElementById('contributorEmail').value,
+                    phone: document.getElementById('contributorPhone').value
+                },
+                additionalNotes: document.getElementById('additionalNotes').value,
+                submissionDate: new Date().toLocaleDateString('fr-FR')
+            };
+
+            // Préparer le message WhatsApp
+            const levelText = {
+                'college': 'Collège',
+                'lycee': 'Lycée',
+                'universite': 'Université'
+            }[lessonData.level] || lessonData.level;
+
+            const subjectText = {
+                'mathematiques': 'Mathématiques',
+                'physique': 'Physique',
+                'chimie': 'Chimie',
+                'technologie': 'Technologie',
+                'svt': 'SVT',
+                'philosophie': 'Philosophie',
+                'francais': 'Français',
+                'anglais': 'Anglais',
+                'histoire': 'Histoire-Géographie'
+            }[lessonData.subject] || lessonData.subject;
+
+            let message = `📚 NOUVELLE PROPOSITION DE LEÇON - Grenier scientifique made in Togo
+
+🏫 INFORMATIONS GÉNÉRALES:
+Titre: ${lessonData.title}
+Niveau: ${levelText}
+Classe: ${lessonData.class}
+Matière: ${subjectText}
+Durée: ${lessonData.duration}
+
+📝 DESCRIPTION:
+${lessonData.description}
+
+🔗 LIENS DES RESSOURCES:`;
+
+            // Ajouter les liens non vides
+            const linkLabels = {
+                cours: '📄 Cours PDF',
+                video: '🎥 Vidéo explicative',
+                simulation: '🔬 Simulation interactive',
+                exercices: '📝 Exercices pratiques',
+                quiz: '❓ Quiz d\'évaluation',
+                geogebra: '📊 Activité GeoGebra',
+                fiche: '📋 Fiche de révision',
+                experience: '🧪 Expérience virtuelle'
+            };
+
+            Object.keys(lessonData.links).forEach(key => {
+                if (lessonData.links[key].trim() !== '') {
+                    message += `\n${linkLabels[key]}: ${lessonData.links[key]}`;
+                }
+            });
+
+            message += `
+
+👤 INFORMATIONS DU CONTRIBUTEUR:
+Nom: ${lessonData.contributor.name}
+Email: ${lessonData.contributor.email}
+Téléphone: ${lessonData.contributor.phone}
+
+📅 Date de soumission: ${lessonData.submissionDate}`;
+
+            if (lessonData.additionalNotes.trim() !== '') {
+                message += `\n\n💬 NOTES SUPPLÉMENTAIRES:\n${lessonData.additionalNotes}`;
+            }
+
+            const encodedMessage = encodeURIComponent(message);
+            const whatsappURL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`;
+            
+            // Ouvrir WhatsApp avec le message pré-rempli
+            window.open(whatsappURL, '_blank');
+            
+            // Afficher le message de confirmation
+            alert('✅ Votre proposition de leçon a été préparée pour envoi par WhatsApp. Le message a été ouvert dans WhatsApp. Veuillez le vérifier et l\'envoyer pour finaliser votre soumission.');
+            
+            // Réinitialiser le formulaire
+            hideAddLessonForm();
+        });
+
+        // Initialiser le compte de démonstration
+        function initializeDemoAccount() {
+            const existingDemoAccount = users.find(u => u.username === "KOLA");
+            if (!existingDemoAccount) {
+                users.push(DEMO_ACCOUNT);
+                localStorage.setItem('grenierScientifiqueUsers', JSON.stringify(users));
+            }
+        }
+
+        // Configuration des écouteurs d'événements
+        function setupEventListeners() {
+            // Boutons de modal
+            document.getElementById('loginBtn').addEventListener('click', () => openModal('loginModal'));
+            document.getElementById('registerBtn').addEventListener('click', () => openModal('registerModal'));
+            document.getElementById('addCourseBtn').addEventListener('click', () => showAddCourseInfo());
+            
+            // Fermeture des modals
+            document.querySelectorAll('.close-modal').forEach(button => {
+                button.addEventListener('click', closeModals);
+            });
+            
+            document.querySelector('.close-intro-modal').addEventListener('click', closeIntroModal);
+            
+            // Switch entre connexion et inscription
+            document.getElementById('switchToRegister').addEventListener('click', (e) => {
+                e.preventDefault();
+                closeModals();
+                openModal('registerModal');
+            });
+            
+            document.getElementById('switchToLogin').addEventListener('click', (e) => {
+                e.preventDefault();
+                closeModals();
+                openModal('loginModal');
+            });
+            
+            // Soumission des formulaires
+            document.getElementById('loginForm').addEventListener('submit', handleLogin);
+            document.getElementById('registerForm').addEventListener('submit', handleRegister);
+            
+            // Fermer les modals en cliquant à l'extérieur
+            document.querySelectorAll('.modal').forEach(modal => {
+                modal.addEventListener('click', (e) => {
+                    if (e.target === modal) closeModals();
+                });
+            });
+            
+            document.getElementById('introModal').addEventListener('click', (e) => {
+                if (e.target === document.getElementById('introModal')) closeIntroModal();
+            });
+        }
+
+        // Configurer les liens WhatsApp
+        function setupWhatsAppLinks() {
+            const whatsappLink = document.getElementById('whatsappLink');
+            const whatsappContact = document.getElementById('whatsappContact');
+            
+            const message = "Bonjour, je souhaite obtenir des informations sur Grenier scientifique made in Togo.";
+            const encodedMessage = encodeURIComponent(message);
+            const whatsappURL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`;
+            
+            if (whatsappLink) {
+                whatsappLink.href = whatsappURL;
+                whatsappLink.target = "_blank";
+            }
+            
+            if (whatsappContact) {
+                whatsappContact.href = whatsappURL;
+                whatsappContact.target = "_blank";
+            }
+        }
+
+        // Afficher le contenu éducatif
+        function showEducationalContent() {
+            // Afficher la section contenu
+            document.querySelector('.content-section').style.display = 'block';
+            
+            // Afficher le lien de navigation vers le contenu
+            document.getElementById('contentNavLink').style.display = 'block';
+            document.getElementById('footerContentLink').style.display = 'block';
+            
+            // Charger et afficher les ressources
+            displayResources(resources);
+            
+            // Masquer les sections de présentation protégées
+            document.querySelectorAll('.protected-section').forEach(section => {
+                if (!section.classList.contains('contact-section')) {
+                    section.style.display = 'none';
+                }
+            });
+        }
+
+        // Masquer le contenu éducatif
+        function hideEducationalContent() {
+            // Masquer la section contenu
+            document.querySelector('.content-section').style.display = 'none';
+            
+            // Masquer le lien de navigation vers le contenu
+            document.getElementById('contentNavLink').style.display = 'none';
+            document.getElementById('footerContentLink').style.display = 'none';
+            
+            // Afficher les sections de présentation protégées
+            document.querySelectorAll('.protected-section').forEach(section => {
+                section.style.display = 'block';
+            });
+        }
+
+        // Affichage des ressources regroupées par classe et matière
+        function displayResources(resourcesToShow) {
+            const container = document.getElementById('content-container');
+            container.innerHTML = '';
+            
+            if (resourcesToShow.length === 0) {
+                container.innerHTML = '<p style="text-align: center; padding: 2rem;">Aucune ressource trouvée.</p>';
+                return;
+            }
+            
+            // Grouper les ressources par niveau et classe
+            const groupedResources = groupResourcesByClass(resourcesToShow);
+            
+            // Générer l'interface pour chaque niveau
+            Object.keys(groupedResources).forEach(level => {
+                const levelGroup = groupedResources[level];
+                
+                Object.keys(levelGroup).forEach(classLevel => {
+                    const classGroup = levelGroup[classLevel];
+                    
+                    // Créer le conteneur pour la classe
+                    const classContainer = document.createElement('div');
+                    classContainer.className = 'class-group';
+                    
+                    // En-tête de la classe
+                    const classHeader = document.createElement('div');
+                    classHeader.className = 'class-header';
+                    classHeader.innerHTML = `
+                        <i class="fas fa-graduation-cap"></i>
+                        <h3>${level === 'college' ? 'Collège' : level === 'lycee' ? 'Lycée' : 'Université'} - ${classLevel}</h3>
+                    `;
+                    
+                    // Contenu de la classe
+                    const classContent = document.createElement('div');
+                    classContent.className = 'class-content';
+                    
+                    // Grouper les ressources par matière
+                    const subjects = groupResourcesBySubject(classGroup);
+                    
+                    Object.keys(subjects).forEach(subject => {
+                        const subjectSection = document.createElement('div');
+                        subjectSection.className = 'subject-section';
+                        
+                        const subjectTitle = document.createElement('h4');
+                        subjectTitle.className = 'subject-title';
+                        
+                        const subjectIcon = {
+                            'mathematiques': 'fas fa-calculator',
+                            'physique': 'fas fa-atom',
+                            'chimie': 'fas fa-flask',
+                            'technologie': 'fas fa-cogs',
+                            'svt': 'fas fa-dna',
+                            'philosophie': 'fas fa-brain',
+                            'francais': 'fas fa-book',
+                            'anglais': 'fas fa-language',
+                            'histoire': 'fas fa-monument'
+                        }[subject] || 'fas fa-book';
+                        
+                        const subjectText = {
+                            'mathematiques': 'Mathématiques',
+                            'physique': 'Physique',
+                            'chimie': 'Chimie',
+                            'technologie': 'Technologie',
+                            'svt': 'Sciences de la Vie et de la Terre',
+                            'philosophie': 'Philosophie',
+                            'francais': 'Français',
+                            'anglais': 'Anglais',
+                            'histoire': 'Histoire-Géographie'
+                        }[subject] || subject;
+                        
+                        subjectTitle.innerHTML = `
+                            <i class="${subjectIcon}"></i>
+                            ${subjectText}
+                        `;
+                        
+                        const lessonsGrid = document.createElement('div');
+                        lessonsGrid.className = 'lessons-grid';
+                        
+                        // Ajouter chaque leçon de cette matière
+                        subjects[subject].forEach(resource => {
+                            const lessonCard = createLessonCard(resource);
+                            lessonsGrid.appendChild(lessonCard);
+                        });
+                        
+                        subjectSection.appendChild(subjectTitle);
+                        subjectSection.appendChild(lessonsGrid);
+                        classContent.appendChild(subjectSection);
+                    });
+                    
+                    classContainer.appendChild(classHeader);
+                    classContainer.appendChild(classContent);
+                    container.appendChild(classContainer);
+                });
+            });
+        }
+
+        // Grouper les ressources par niveau et classe
+        function groupResourcesByClass(resources) {
+            const grouped = {};
+            
+            resources.forEach(resource => {
+                if (!grouped[resource.level]) {
+                    grouped[resource.level] = {};
+                }
+                
+                if (!grouped[resource.level][resource.class]) {
+                    grouped[resource.level][resource.class] = [];
+                }
+                
+                grouped[resource.level][resource.class].push(resource);
+            });
+            
+            return grouped;
+        }
+
+        // Grouper les ressources par matière
+        function groupResourcesBySubject(resources) {
+            const grouped = {};
+            
+            resources.forEach(resource => {
+                if (!grouped[resource.subject]) {
+                    grouped[resource.subject] = [];
+                }
+                
+                grouped[resource.subject].push(resource);
+            });
+            
+            return grouped;
+        }
+
+        // Créer une carte de leçon
+        function createLessonCard(resource) {
+            const card = document.createElement('div');
+            card.className = 'lesson-card';
+            
+            // Générer les boutons d'éléments de leçon
+            const elementsHTML = generateLessonElements(resource);
+            
+            card.innerHTML = `
+                <div class="lesson-header">
+                    <h4>${resource.title}</h4>
+                    <div class="lesson-meta">
+                        <span><i class="fas fa-clock"></i> ${resource.duration}</span>
+                        <span>${resource.type.charAt(0).toUpperCase() + resource.type.slice(1)}</span>
+                    </div>
+                </div>
+                <div class="lesson-description">
+                    ${resource.description}
+                </div>
+                <div class="lesson-elements">
+                    <small><strong>Éléments de la leçon :</strong></small>
+                    <div class="element-grid">
+                        ${elementsHTML}
+                    </div>
+                </div>
+                <div class="lesson-actions">
+                    <button class="btn btn-primary btn-sm" onclick="startLesson(${resource.id})">
+                        <i class="fas fa-play"></i> Démarrer
+                    </button>
+                    <button class="btn btn-warning btn-sm" onclick="showDownloadWarning()">
+                        <i class="fas fa-download"></i>
+                    </button>
+                </div>
+            `;
+            
+            return card;
+        }
+
+        // Générer les boutons d'éléments de leçon
+        function generateLessonElements(resource) {
+            const elements = resource.elements || {};
+            const elementButtons = [
+                { key: 'cours', icon: 'fas fa-file-pdf', label: 'Cours PDF', color: '#e74c3c' },
+                { key: 'video', icon: 'fas fa-video', label: 'Vidéo', color: '#3498db' },
+                { key: 'simulation', icon: 'fas fa-flask', label: 'Simulation', color: '#2ecc71' },
+                { key: 'exercices', icon: 'fas fa-tasks', label: 'Exercices', color: '#f39c12' },
+                { key: 'quiz', icon: 'fas fa-question-circle', label: 'Quiz', color: '#9b59b6' },
+                { key: 'geogebra', icon: 'fas fa-chart-line', label: 'GeoGebra', color: '#1abc9c' },
+                { key: 'fiche', icon: 'fas fa-file-alt', label: 'Fiche', color: '#34495e' },
+                { key: 'experience', icon: 'fas fa-microscope', label: 'Expérience', color: '#e67e22' }
+            ];
+            
+            return elementButtons.map(btn => {
+                if (elements[btn.key]) {
+                    return `
+                        <button class="element-btn" onclick="showElementIntroduction(${resource.id}, '${btn.key}')" 
+                                style="border-color: ${btn.color}">
+                            <i class="${btn.icon}" style="color: ${btn.color}"></i>
+                            <span>${btn.label}</span>
+                        </button>
+                    `;
+                }
+                return '';
+            }).join('');
+        }
+
+        // Afficher l'introduction d'un élément
+        function showElementIntroduction(resourceId, elementType) {
+            const resource = resources.find(r => r.id === resourceId);
+            if (resource && resource.introductions && resource.introductions[elementType]) {
+                const introduction = resource.introductions[elementType];
+                const elementNames = {
+                    'cours': 'Document de cours',
+                    'video': 'Vidéo explicative',
+                    'simulation': 'Simulation interactive',
+                    'exercices': 'Exercices pratiques',
+                    'quiz': 'Quiz d\'évaluation',
+                    'geogebra': 'Construction GeoGebra',
+                    'fiche': 'Fiche de révision',
+                    'experience': 'Expérience virtuelle'
+                };
+                
+                const elementName = elementNames[elementType] || elementType;
+                
+                document.getElementById('introModalTitle').textContent = `${elementName} - ${resource.title}`;
+                document.getElementById('introModalBody').innerHTML = `
+                    <h3>Introduction</h3>
+                    <p>${introduction}</p>
+                    <div style="margin-top: 1.5rem; display: flex; gap: 10px; justify-content: flex-end;">
+                        <button class="btn btn-outline" onclick="closeIntroModal()">
+                            <i class="fas fa-times"></i> Annuler
+                        </button>
+                        <button class="btn btn-primary" onclick="openLessonElement(${resourceId}, '${elementType}')">
+                            <i class="fas fa-play"></i> Commencer
+                        </button>
+                    </div>
+                `;
+                
+                document.getElementById('introModal').style.display = 'flex';
+            } else {
+                openLessonElement(resourceId, elementType);
+            }
+        }
+
+        // Fermer le modal d'introduction
+        function closeIntroModal() {
+            document.getElementById('introModal').style.display = 'none';
+        }
+
+        // Ouvrir un élément spécifique de la leçon
+        function openLessonElement(resourceId, elementType) {
+            const resource = resources.find(r => r.id === resourceId);
+            if (resource && resource.elements && resource.elements[elementType]) {
+                const element = resource.elements[elementType];
+                const elementNames = {
+                    'cours': 'Document de cours',
+                    'video': 'Vidéo explicative',
+                    'simulation': 'Simulation interactive',
+                    'exercices': 'Exercices pratiques',
+                    'quiz': 'Quiz d\'évaluation',
+                    'geogebra': 'Construction GeoGebra',
+                    'fiche': 'Fiche de révision',
+                    'experience': 'Expérience virtuelle'
+                };
+                
+                closeIntroModal();
+                alert(`Ouverture de l'élément: ${elementNames[elementType]}\n\nFichier: ${element}\n\nCet élément est maintenant accessible grâce à votre connexion.`);
+            }
+        }
+
+        // Démarrer une leçon complète
+        function startLesson(resourceId) {
+            const resource = resources.find(r => r.id === resourceId);
+            if (resource) {
+                alert(`Démarrage de la leçon: ${resource.title}\n\nVous avez maintenant accès à tous les éléments de cette leçon grâce à votre connexion.`);
+            }
+        }
+
+        // Filtrage des ressources
+        function filterContent(level = null) {
+            const levelFilter = level || document.getElementById('level-filter').value;
+            const classFilter = document.getElementById('class-filter').value;
+            const subjectFilter = document.getElementById('subject-filter').value;
+            const searchQuery = document.getElementById('search-input').value.toLowerCase();
+            
+            let filteredResources = resources.filter(resource => {
+                const matchesLevel = levelFilter === 'all' || resource.level === levelFilter;
+                const matchesClass = classFilter === 'all' || resource.class === classFilter;
+                const matchesSubject = subjectFilter === 'all' || resource.subject === subjectFilter;
+                const matchesSearch = resource.title.toLowerCase().includes(searchQuery) || 
+                                     resource.description.toLowerCase().includes(searchQuery);
+                
+                return matchesLevel && matchesClass && matchesSubject && matchesSearch;
+            });
+            
+            displayResources(filteredResources);
+        }
+
+        // Afficher message de connexion requise
+        function showLoginRequired() {
+            alert('🔒 Accès protégé\n\nVous devez vous connecter pour accéder au contenu de Grenier scientifique made in Togo.');
+            openModal('loginModal');
+        }
+
+        // Afficher info ajout de cours
+        function showAddCourseInfo() {
+            alert('📝 Ajouter un cours\n\nCette fonctionnalité permet de proposer de nouveaux contenus éducatifs. Contactez l\'administrateur pour plus d\'informations.');
+        }
+
+        // Avertissement de téléchargement
+        function showDownloadWarning() {
+            alert('⚠️ Téléchargement désactivé\n\nPour préserver les droits d\'auteur, le téléchargement des ressources n\'est pas autorisé. Vous pouvez consulter tous les documents en ligne.');
+        }
+
+        // Gestion des modals
+        function openModal(modalId) {
+            closeModals();
+            document.getElementById(modalId).style.display = 'flex';
+        }
+
+        function closeModals() {
+            document.querySelectorAll('.modal').forEach(modal => {
+                modal.style.display = 'none';
+            });
+            document.getElementById('loginAlert').style.display = 'none';
+            document.getElementById('registerSuccess').style.display = 'none';
+            document.getElementById('loginForm').reset();
+            document.getElementById('registerForm').reset();
+        }
+
+        // Gestion de la connexion
+        function handleLogin(e) {
+            e.preventDefault();
+            
+            const identifier = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            
+            // Rechercher l'utilisateur dans la base de données
+            const user = users.find(u => 
+                (u.email === identifier || u.username === identifier) && 
+                u.password === password
+            );
+            
+            if (user) {
+                if (user.active) {
+                    currentUser = user;
+                    localStorage.setItem('currentGrenierScientifiqueUser', JSON.stringify(currentUser));
+                    updateUI();
+                    closeModals();
+                    showEducationalContent();
+                    alert(`Bienvenue ${user.name} ! Vous avez maintenant accès à toutes les ressources de Grenier scientifique made in Togo.`);
+                } else {
+                    document.getElementById('loginAlert').style.display = 'block';
+                }
+            } else {
+                alert('Identifiant ou mot de passe incorrect. Veuillez vérifier vos identifiants ou créer un compte.');
+            }
+        }
+
+        // Gestion de l'inscription via WhatsApp
+        function handleRegister(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('registerName').value;
+            const email = document.getElementById('registerEmail').value;
+            const phone = document.getElementById('registerPhone').value;
+            const level = document.getElementById('registerLevel').value;
+            const password = document.getElementById('registerPassword').value;
+            const confirmPassword = document.getElementById('registerConfirmPassword').value;
+            
+            if (password !== confirmPassword) {
+                alert('Les mots de passe ne correspondent pas.');
+                return;
+            }
+            
+            // Préparer le message WhatsApp
+            const levelText = {
+                'college': 'Collège',
+                'lycee': 'Lycée',
+                'universite': 'Université'
+            }[level] || level;
+            
+            const message = `Nouvelle inscription - Grenier scientifique made in Togo
+
+Nom complet: ${name}
+Email: ${email}
+Téléphone: ${phone}
+Niveau: ${levelText}
+Date d'inscription: ${new Date().toLocaleDateString('fr-FR')}
+
+Merci de traiter cette inscription.`;
+            
+            const encodedMessage = encodeURIComponent(message);
+            const whatsappURL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`;
+            
+            // Ouvrir WhatsApp avec le message pré-rempli
+            window.open(whatsappURL, '_blank');
+            
+            // Afficher le message de succès
+            document.getElementById('registerSuccess').style.display = 'block';
+            document.getElementById('registerForm').reset();
+            
+            setTimeout(() => {
+                closeModals();
+                alert(`Votre demande d'inscription a été envoyée par WhatsApp. Nous vous contacterons dans les plus brefs délais pour activer votre compte.`);
+            }, 3000);
+        }
+
+        // Mise à jour de l'interface utilisateur
+        function updateUI() {
+            const loginBtn = document.getElementById('loginBtn');
+            const registerBtn = document.getElementById('registerBtn');
+            
+            if (currentUser) {
+                loginBtn.innerHTML = `<i class="fas fa-user"></i> ${currentUser.name.split(' ')[0]}`;
+                registerBtn.innerHTML = `<i class="fas fa-sign-out-alt"></i> Déconnexion`;
+                registerBtn.onclick = handleLogout;
+            } else {
+                loginBtn.innerHTML = `<i class="fas fa-sign-in-alt"></i> Connexion`;
+                registerBtn.innerHTML = `<i class="fas fa-user-plus"></i> Inscription`;
+                registerBtn.onclick = () => openModal('registerModal');
+            }
+        }
+
+        // Déconnexion
+        function handleLogout() {
+            currentUser = null;
+            localStorage.removeItem('currentGrenierScientifiqueUser');
+            updateUI();
+            hideEducationalContent();
+            alert('Vous avez été déconnecté. Le contenu est à nouveau protégé.');
+        }
+
+        // Animation simple au défilement
+        document.addEventListener('DOMContentLoaded', function() {
+            const levelCards = document.querySelectorAll('.level-card');
+            const featureCards = document.querySelectorAll('.feature-card');
+            
+            // Animation des cartes de niveau
+            levelCards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                
+                setTimeout(() => {
+                    card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, 300 * index);
+            });
+            
+            // Animation des cartes de fonctionnalités
+            setTimeout(() => {
+                featureCards.forEach((card, index) => {
+                    card.style.opacity = '0';
+                    card.style.transform = 'translateY(20px)';
+                    
+                    setTimeout(() => {
+                        card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0)';
+                    }, 200 * index);
+                });
+            }, 500);
+        });
+    </script>
+</body>
+</html>
